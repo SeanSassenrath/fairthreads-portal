@@ -1,0 +1,9 @@
+{
+  "name": "fairthreads-portal",
+  "version": "1.0.0",
+  "description": "Fairthreads portal for managing inventory.",
+  "main": "index.js",
+  "repository": "https://github.com/SeanSassenrath/fairthreads-portal",
+  "author": "Sean Sassenrath <sean.sassenrath@gmail.com>",
+  "license": "MIT"
+}
