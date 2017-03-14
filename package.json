@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Fairthreads portal for managing inventory.",
   "main": "index.js",
+  "scripts": {
+    "linter-setup": "node airbnb-linter-setup.js"
+  },
   "repository": "https://github.com/SeanSassenrath/fairthreads-portal",
   "author": "Sean Sassenrath <sean.sassenrath@gmail.com>",
   "license": "MIT",
@@ -19,6 +22,8 @@
     "babel-preset-latest": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "css-loader": "^0.27.3",
+    "eslint": "^3.17.1",
+    "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "postcss-css-variables": "^0.7.0",
