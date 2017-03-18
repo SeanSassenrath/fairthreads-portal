@@ -1,10 +1,11 @@
 import React, { Component, PropTypes} from 'react';
 import { render } from 'react-dom';
+import Page from '../../components/page/page';
 
-export class Categories extends Component {
-  render() {
-    return (
-      <div>Categories</div>
-    )
-  }
-}
+const Categories = props => (
+  <Page>
+    Categories
+  </Page>
+)
+
+export default Categories;
