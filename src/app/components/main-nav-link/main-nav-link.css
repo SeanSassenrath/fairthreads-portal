@@ -1,0 +1,23 @@
+.link {
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: uppercase;
+
+}
+
+.default {
+  composes: link;
+  opacity: .6;
+  
+  &:not(.active):hover {
+    opacity: .8;
+  }
+}
+
+.active {
+  composes: link;
+  opacity: 1;
+}
