@@ -5,7 +5,7 @@ const SubNav = props => {
   <div className={styles['component-container']}>
     <MetaCount />
     <div className={styles['functional-container']}>
-      <AddButton>Add Category</AddButton>
+      <ButtonAdd>Add Category</ButtonAdd>
       <SearchBar />
     </div>
   </div>

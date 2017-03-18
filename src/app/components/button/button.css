@@ -1,0 +1,23 @@
+.button {
+  background-color: black;
+  border-radius: 1px;
+  border-style: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 18px;
+
+  &:hover {
+    opacity: .8;
+  }
+}
+
+.button-add {
+  composes: button;
+  padding: 10px 18px 10px 14px;
+  &:before {
+    content: "+";
+    padding-right: 10px;
+    font-size: 16px;
+  }
+}
