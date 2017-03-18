@@ -17,7 +17,7 @@ export const ButtonAdd = props => {
   const buttonClass = classNames(props.className, styles['button-add']);
   return (
     <button {...props} className={buttonClass}>
-      {props.children}
+      <span>{props.children}</span>
     </button>
   )
 }
