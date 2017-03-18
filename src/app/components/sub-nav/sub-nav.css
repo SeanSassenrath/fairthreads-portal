@@ -1,0 +1,8 @@
+.component-container {
+  display: flex;
+}
+
+.functional-container {
+  display: flex;
+  justify-content: space-between;
+}
