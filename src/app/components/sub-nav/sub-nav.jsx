@@ -6,7 +6,7 @@ import styles from './sub-nav.css';
 
 const SubNav = props => (
   <div className={styles['component-container']}>
-    <MetaCount count={9} gender={'womens'} type={'categories'} className={styles['meta-count-container']}/>
+    <MetaCount count={9} gender={props.gender} type={props.type} className={styles['meta-count-container']}/>
     <div className={styles['functional-container']}>
       <div className={styles['button-container']}>
         <ButtonAdd>Add Category</ButtonAdd>
