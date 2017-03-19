@@ -13,12 +13,3 @@
   justify-content: space-between;
   width: 100%;
 }
-
-.button-container {
-  flex: 0 0 auto;
-}
-
-.search-bar-container {
-  flex: 0 1 450px;
-  text-align: right;
-}

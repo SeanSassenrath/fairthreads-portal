@@ -1,0 +1,10 @@
+@import '../../utils/variables.css';
+
+.component-container {
+  background-color: #CDC1FF;
+  border-radius: 2px;
+  color: #535254;
+  flex: 0 1 21%;
+  margin: 0px 9px 20px 0px;
+  padding: 18px;
+}

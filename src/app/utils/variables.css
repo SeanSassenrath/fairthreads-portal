@@ -1,0 +1,15 @@
+h2, p {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* SPACING */
+.m-top-small { margin-top: 5px; }
+
+.m-vert-small { margin: 10px 0; }
+.m-vert-medium { margin: 10px 0; }

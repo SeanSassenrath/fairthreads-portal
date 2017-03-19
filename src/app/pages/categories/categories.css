@@ -1,3 +1,29 @@
+@import '../../utils/variables.css';
+
 .content-container {
   display: flex;
+}
+
+.add-category {
+  flex: 0 0 auto;
+}
+
+.category-search {
+  flex: 0 1 450px;
+  margin-right: 10px;
+  text-align: right;
+  width: 500px;
+}
+
+.category-title-container {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-container {
+  margin-top: 15px;
+  p {
+    padding: 5px 0;
+  }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './side-nav.css';
 
 const SideNav = props => (
-  <div>
+  <div className={styles['component-container']}>
     {props.children}
   </div>
 )
