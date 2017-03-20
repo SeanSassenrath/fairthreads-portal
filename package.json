@@ -4,13 +4,14 @@
   "description": "Fairthreads portal for managing inventory.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --colors --inline",
+    "dev": "webpack-dev-server",
     "linter-setup": "node airbnb-linter-setup.js"
   },
   "repository": "https://github.com/SeanSassenrath/fairthreads-portal",
   "author": "Sean Sassenrath <sean.sassenrath@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "proxy-middleware": "^0.15.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^4.0.0",
