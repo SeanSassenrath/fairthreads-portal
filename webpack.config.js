@@ -16,7 +16,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
-    publicPath: '/'
   },
   module: {
     rules: [
@@ -78,10 +77,6 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
-    hot: true,
-    inline: true,
-    historyApiFallback: {
-      index: 'index.html'
-    }
-  },
+    historyApiFallback: true
+  }
 };

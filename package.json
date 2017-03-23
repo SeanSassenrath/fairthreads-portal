@@ -4,7 +4,7 @@
   "description": "Fairthreads portal for managing inventory.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --hot --colors --inline",
     "linter-setup": "node airbnb-linter-setup.js"
   },
   "repository": "https://github.com/SeanSassenrath/fairthreads-portal",

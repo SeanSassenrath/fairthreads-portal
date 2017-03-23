@@ -13,6 +13,7 @@ import Card from '../../components/card/card';
 import styles from './categories.css';
 
 const Categories = props => {
+  console.log('props', props);
   const gender = props.match.params.gender;
   const type = props.match.params.type;
 
