@@ -4,7 +4,7 @@
   "description": "Fairthreads portal for managing inventory.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --colors --inline",
+    "dev": "node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot",
     "linter-setup": "node airbnb-linter-setup.js"
   },
   "repository": "https://github.com/SeanSassenrath/fairthreads-portal",
@@ -19,8 +19,11 @@
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "redux": "^3.6.0",
+    "redux-logger": "^2.10.2",
     "redux-observable": "^0.14.1",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.17.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
