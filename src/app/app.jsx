@@ -11,7 +11,7 @@ const App = () => (
     <div className={styles}>
       <MainNav />
       <Route exact path='/dashboard' component={Dashboard} />
-      <Route path='/categories/:gender/:type' component={Categories} />
+      <Route path='/categories' component={Categories} />
     </div>
   </Router>
 )

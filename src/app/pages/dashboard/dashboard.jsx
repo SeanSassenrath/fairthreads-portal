@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 export class Dashboard extends Component {
   render() {
     return (
-      <div>Dashboard</div>
+      <div>Dashboardss</div>
     )
   }
 }

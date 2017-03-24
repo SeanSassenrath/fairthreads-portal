@@ -1,28 +1,36 @@
 const webpack = require('webpack');
+const { resolve } = require('path');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const VENDOR_LIBS = [
-  'react', 'react-dom',
-];
-
 module.exports = {
   devtool: 'eval',
-  entry: {
-    bundle: './src/index.js',
-    vendor: VENDOR_LIBS,
+  entry: 
+  {
+    bundle: [
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client',
+      './src/index.js'
+    ],
+    vendor: [
+        'react-hot-loader/patch',
+        'webpack-hot-middleware/client',
+      'react',
+      'react-dom',
+    ]
   },
   output: {
-    path: path.join(__dirname, 'dist'),
     filename: '[name].js',
+    path: resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loader: ['react-hot-loader', 'babel-loader'],
+        loader: ['babel-loader'],
       },
       {
         test: /\.css$/,
@@ -65,6 +73,8 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vendor', 'manifest'],
     }),
