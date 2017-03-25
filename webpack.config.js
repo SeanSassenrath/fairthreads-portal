@@ -79,7 +79,7 @@ module.exports = {
       name: ['vendor', 'manifest'],
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.tmpl.html',
+      template: './index.tmpl.html',
       filename: './index.html',
     }),
   ],
