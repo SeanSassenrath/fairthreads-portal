@@ -1,0 +1,16 @@
+@import '../../utils/variables.css';
+
+.content-container {
+  display: flex;
+}
+
+.refresh {
+  flex: 0 0 auto;
+}
+
+.product-search {
+  flex: 0 1 450px;
+  margin-right: 10px;
+  text-align: right;
+  width: 500px;
+}

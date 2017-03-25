@@ -3,7 +3,7 @@ const initialState = [
 ]
 
 const productsReducer = (state =initialState, action) => {
-  switch (key) {
+  switch (action.type) {
     default:
       return state;
   }

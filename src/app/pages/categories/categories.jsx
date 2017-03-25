@@ -6,7 +6,7 @@ import SideNav from '../../components/side-nav/side-nav';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
 import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-link';
 import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link';
-import { ButtonAdd}  from '../../components/button/button';
+import { ButtonAdd }  from '../../components/button/button';
 import SearchBar from '../../components/search-bar/search-bar';
 import MainContent from '../../components/main-content/main-content';
 import Card from '../../components/card/card';
