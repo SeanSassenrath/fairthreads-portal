@@ -8,13 +8,11 @@ import styles from './products-container.css';
 class ProductsContainer extends Component {
 
   componentDidMount() {
-    
   }
 
   render() {
-    console.log('productContainer', this.props)
     return (
-      <h1>Test</h1>
+      <h1 onClick={() => this.props.fetchProducts({ gender: this.props.match.params.gender, category: this.props.match.params.category })}>Test</h1>
     )
   }
 }
@@ -25,7 +23,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { fetchProducts: bindActionCreators(fetchProducts, dispatch) }
+  return { fetchProducts: bindActionCreators(fetchProducts(payload), dispatch) }
 }
 
 // Use withRouter to convert router context to props
