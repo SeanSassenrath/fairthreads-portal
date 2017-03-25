@@ -9,11 +9,11 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import MainNav from './components/main-nav/main-nav';
 import styles from './app.css';
 
+// Get the Redux store
 const store = configureStore();
 
 // Provider gives all children a reference to the store
 // Avoids passing the store reference manually as a prop to each child container
-
 const App = () => (
   <Provider store={store}>
     <Router>
