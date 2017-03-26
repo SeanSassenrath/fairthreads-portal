@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
+import { getProducts } from '../../reducers/root-reducer';
 import { fetchProducts } from '../../actions/product-actions';
 import ProductCard from '../../components/product-card/product-card';
 import styles from './products-container.css';
@@ -28,20 +29,21 @@ class ProductsContainer extends Component {
   }
 
   render() {
-    const { items } = this.props.products;
+    const { products } = this.props;
+    console.log('products conatiner props', this.props)
     return (
       <div className={styles['products-container']}>
-        { items.map((item, index) => (
+        {/*{ products.productsArray.items.map((item, index) => (
           <ProductCard item={item} key={index} />
-        ))}
+        ))}*/}
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {products: state.products};
-}
+const mapStateToProps = (state) => ({
+  products: getProducts(state)
+})
 
 const mapDispatchToProps = (dispatch) => {
   return { fetchProducts: bindActionCreators(fetchProducts(payload), dispatch) }
