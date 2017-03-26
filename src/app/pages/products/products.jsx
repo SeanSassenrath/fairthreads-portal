@@ -15,11 +15,11 @@ import styles from './products.css';
 const Products = props => {
   console.log('props', props);
   const gender = props.match.params.gender;
-  const type = props.match.params.type;
+  const category = props.match.params.category;
 
   return (
     <Page>
-      <SubNav gender={gender} type={type}>
+      <SubNav gender={gender} type={category}>
         <div className={styles.refresh}>
           <Button>Pull new products</Button>
         </div>
@@ -28,8 +28,8 @@ const Products = props => {
       <div className={styles['content-container']}>
         <SideNav>
           <SideNavSection>
-            <SideNavMainLink to={`/products/womens/${type}`}>Womens</SideNavMainLink>
-            <SideNavMainLink to={`/products/mens/${type}`}>Mens</SideNavMainLink>
+            <SideNavMainLink to={`/products/womens/${category}`}>Womens</SideNavMainLink>
+            <SideNavMainLink to={`/products/mens/${category}`}>Mens</SideNavMainLink>
           </SideNavSection>
           <SideNavSection>
             <SideNavMainLink to={`/products/${gender}/categories`}>Categories</SideNavMainLink>

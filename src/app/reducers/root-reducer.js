@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
-import productsReducer from './products-reducer';
+import products from './products-reducer';
 import { fetchProductsEpic } from '../actions/product-actions';
 
 export const rootEpic = combineEpics(
@@ -8,5 +8,5 @@ export const rootEpic = combineEpics(
 );
 
 export const rootReducer = combineReducers({
-  productsReducer
+  products
 });

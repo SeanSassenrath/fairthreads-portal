@@ -8,18 +8,34 @@ import styles from './products-container.css';
 class ProductsContainer extends Component {
 
   componentDidMount() {
+    const { fetchProducts } = this.props;
+    const { gender, category } = this.props.match.params;
+
+    console.log('--- Initial product fetch');
+    fetchProducts({ gender, category});
+  }
+
+  componentDidUpdate(prevProps) {
+    const { fetchProducts } = this.props;
+    const { gender, category } = this.props.match.params;
+    const prevParams = prevProps.match.params;
+
+    if (prevParams.gender !== gender || prevParams.category !== category) {
+      console.log('--- Fetching new products');
+      fetchProducts({ gender, category});
+    }
   }
 
   render() {
     return (
-      <h1 onClick={() => this.props.fetchProducts({ gender: this.props.match.params.gender, category: this.props.match.params.category })}>Test</h1>
+      <h1>Test</h1>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log('state', state.productsReducer);
-  return {products: state.productsReducer};
+  console.log('state', state.products);
+  return {products: state.products};
 }
 
 const mapDispatchToProps = (dispatch) => {
