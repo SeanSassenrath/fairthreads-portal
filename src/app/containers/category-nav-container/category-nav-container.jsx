@@ -38,6 +38,12 @@ class CategoryNavContainer extends Component {
               {type.details.name}
             </SideNavMainLink>
         ))}
+        { categories.types.subcategories
+          ? categories.types.subcategories.map((subcategory, index) => {
+            <SideNavSubLink to={`/products/${gender}/${type.details.name}/${subcategory.details.name}`} key={index}>
+              {subcategory.details.name}
+            </SideNavSubLink>})
+          : null }
       </SideNavSection>
     )
   }

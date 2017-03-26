@@ -21,7 +21,7 @@ const App = () => (
         <MainNav />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route path='/categories/:gender?/:category?' component={Categories} />
-        <Route path='/products/:gender?/:category?' component={Products} />
+        <Route path='/products/:gender?/:category?/:subcategory?' component={Products} />
       </div>
     </Router>
   </Provider>
