@@ -13,3 +13,9 @@ h2, p {
 
 .m-vert-small { margin: 10px 0; }
 .m-vert-medium { margin: 10px 0; }
+
+/* MEDIA QUERIES */
+@custom-media --larger-than-mobile (min-width: 480px);
+@custom-media --larger-than-tablet (min-width: 768px);
+@custom-media --larger-than-small-desktop (min-width: 992px);
+@custom-media --larger-than-large-desktop (min-width: 1260px);

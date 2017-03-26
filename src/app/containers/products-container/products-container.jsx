@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { fetchProducts } from '../../actions/product-actions';
+import ProductCard from '../../components/product-card/product-card';
 import styles from './products-container.css';
 
 class ProductsContainer extends Component {
@@ -27,14 +28,18 @@ class ProductsContainer extends Component {
   }
 
   render() {
+    const { items } = this.props.products;
     return (
-      <h1>Test</h1>
+      <div className={styles['products-container']}>
+        { items.map((item, index) => (
+          <ProductCard item={item} key={index} />
+        ))}
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log('state', state.products);
   return {products: state.products};
 }
 
