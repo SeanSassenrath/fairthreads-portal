@@ -10,6 +10,7 @@ import Button from '../../components/button/button';
 import SearchBar from '../../components/search-bar/search-bar';
 import MainContent from '../../components/main-content/main-content';
 import ProductsContainer from '../../containers/products-container/products-container';
+import CategoryNavContainer from '../../containers/category-nav-container/category-nav-container';
 import styles from './products.css';
 
 const Products = props => {
@@ -31,10 +32,7 @@ const Products = props => {
             <SideNavMainLink to={`/products/womens/${category}`}>Womens</SideNavMainLink>
             <SideNavMainLink to={`/products/mens/${category}`}>Mens</SideNavMainLink>
           </SideNavSection>
-          <SideNavSection>
-            <SideNavMainLink to={`/products/${gender}/categories`}>Categories</SideNavMainLink>
-            <SideNavMainLink to={`/products/${gender}/subcategories`}>Subcategories</SideNavMainLink>
-          </SideNavSection>
+          <CategoryNavContainer />
         </SideNav>
         <MainContent>
           <ProductsContainer />
