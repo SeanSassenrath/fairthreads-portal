@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore from './configure-store';
 import Categories from './pages/categories/categories';
 import Products from './pages/products/products';
+import EditProduct from './pages/edit-product/edit-product';
 import { Dashboard } from './pages/dashboard/dashboard';
 import MainNav from './components/main-nav/main-nav';
 import styles from './app.css';
@@ -22,6 +23,7 @@ const App = () => (
         <Route exact path='/dashboard' component={Dashboard} />
         <Route path='/categories/:gender?/:category?' component={Categories} />
         <Route path='/products/:gender?/:category?/:subcategory?' component={Products} />
+        <Route path='/edit/product/:id?/' component={EditProduct} />
       </div>
     </Router>
   </Provider>

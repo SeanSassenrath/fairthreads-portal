@@ -23,7 +23,7 @@ class ProductsContainer extends Component {
 
     if (prevParams.gender !== gender || prevParams.category !== category) {
       console.log('--- Fetching new products');
-      fetchProducts({ gender, category});
+      fetchProducts({ gender, category });
     }
   }
 

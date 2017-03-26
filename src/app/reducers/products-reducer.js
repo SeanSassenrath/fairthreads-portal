@@ -1,4 +1,4 @@
-import { set } from 'immutable-light';
+import { set, merge } from 'immutable-light';
 import { 
   FETCH_PRODUCTS,
   FETCH_PRODUCTS_FULFILLED
@@ -7,6 +7,19 @@ import {
 const initialState = {
   items: []
 };
+
+// const productsById = (state = {}, action) => {
+//   switch (action.type) {
+//     case 'RECEIVE_TODOS': // eslint-disable-line no-case-declarations
+//       const nextState = 
+//       action.payload.forEach(product => {
+//         nextState[todo.id] = todo;
+//       });
+//       return nextState;
+//     default:
+//       return state;
+//   }
+// };
 
 const products = (state = initialState, action) => {
   switch (action.type) {
