@@ -24,7 +24,7 @@ class CategoryNavContainer extends Component {
 
     if (prevParams.gender !== gender) {
       console.log('--- Fetching new categories');
-      fetchProducts({ gender });
+      fetchCategories({ gender });
     }
   }
 
