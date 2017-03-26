@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { set, merge } from 'immutable-light';
+import { set, merge, push } from 'immutable-light';
 import { 
   FETCH_PRODUCTS,
   FETCH_PRODUCTS_FULFILLED
@@ -14,33 +14,40 @@ const productsById = (state = {}, action) => {
       action.payload.forEach(product => {
         nextState[product._id] = product;
       });
-      console.log('nextState', nextState)
+      console.log('nextStateObj', nextState)
       return nextState;
     default:
       return state;
   }
 };
 
-const allProducts = (state = [], action) => {
+const allProductIds = (state = [], action) => {
   switch (action.type) {
-    case FETCH_PRODUCTS:
-      return state;
     case FETCH_PRODUCTS_FULFILLED:
-      return set(state, 'items', action.payload);
+      const nextState = [ ...state ];
+      action.payload.map(product => {
+        return nextState.push(product._id);
+      });
+      return nextState;
     default:
       return state;
   }
 }
 
 const products = combineReducers({
-  productsArray: allProducts,
+  allProductIds,
   productsById
 })
 
 export default products;
 
+const getAllProducts = (state) => {
+  state.allProductIds.map(id => state.productsById[id]);
+}
+
 export const getProducts = (state) => {
-  return state;
+  const allProducts = getAllProducts(state);
+  return allProducts;
 }
 
 // const products = (state = initialState, action) => {
