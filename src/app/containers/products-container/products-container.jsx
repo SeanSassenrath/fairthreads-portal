@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getAllProductsByGenderAndType } from '../../reducers/root-reducer';
+import { getProductsByGenderAndType } from '../../reducers/root-reducer';
 import { fetchProducts } from '../../actions/product-actions';
 import ProductCard from '../../components/product-card/product-card';
 import styles from './products-container.css';
@@ -33,9 +33,9 @@ class ProductsContainer extends Component {
     console.log('products conatiner props', this.props)
     return (
       <div className={styles['products-container']}>
-        {/*{ products.productsArray.items.map((item, index) => (
-          <ProductCard item={item} key={index} />
-        ))}*/}
+        { products.map((product, index) => (
+          <ProductCard product={product} key={index} />
+        ))}
       </div>
     )
   }
@@ -45,7 +45,7 @@ const mapStateToProps = (state, { match }) => {
   const { gender, category } = match.params;
   console.log('mapStateToProps gender', gender)
   console.log('mapStateToProps category', category)
-  return {products: getAllProductsByGenderAndType(state, gender, 'categories', category )}
+  return {products: getProductsByGenderAndType(state, gender, 'categories', category )}
 }
 
 const mapDispatchToProps = (dispatch) => {

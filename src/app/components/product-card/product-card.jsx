@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './product-card.css';
 
 const renderImgArea = props => {
-  const { images, css } = props.item;
+  const { images, css } = props.product;
 
   return (
     <div className={styles['image-container']}>
@@ -17,7 +17,7 @@ const renderImgArea = props => {
 }
 
 const ProductCard = props => {
-  const { brand, details, prices } = props.item;
+  const { brand, details, prices } = props.product;
   return (
     <div className={styles.container}>
       { renderImgArea(props) }

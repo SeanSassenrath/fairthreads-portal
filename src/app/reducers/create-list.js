@@ -4,11 +4,11 @@ import {
 } from '../constants/product-constants';
 
 
-const createList = (category) => {
-  // console.log('createList gender', gender)
+const createList = (category, gender) => {
+  console.log('createList gender', gender)
   console.log('createList category', category)
   return (state = [], action) => {
-    if (action.category !== category) {
+    if (action.category !== category || action.gender !== gender) {
       console.log('action', action)
       console.log('action.category doesnt equal category', action.category !== category);
       return state;
@@ -20,6 +20,14 @@ const createList = (category) => {
         return state;
     }
   }
+}
+
+export const createMensList = (category) => {
+  return createList(category, 'mens');
+}
+
+export const createWomensList = (category) => {
+  return createList(category, 'womens');
 }
 
 export default createList;

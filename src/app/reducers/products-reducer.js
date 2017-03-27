@@ -23,86 +23,35 @@ const productsById = (state = {}, action) => {
   }
 };
 
-// const allProductIds = (state = [], action) => {
-//   console.log('allProductIds is state here', state);
-//   switch (action.type) {
-//     case FETCH_PRODUCTS_FULFILLED:
-//       const nextState = [ ...state ];
-//       action.payload.map(product => {
-//         return nextState.push(product._id);
-//       });
-//       return nextState;
-//     default:
-//       return state;
-//   }
-// }
+const womensCategories = combineReducers({
+  tops: fromList.createWomensList('tops'),
+  bottoms: fromList.createWomensList('bottoms'),
+  outerwear: fromList.createWomensList('outerwear'),
+  accessories: fromList.createWomensList('accessories'),
+  shoes: fromList.createWomensList('shoes'),
+  dresses: fromList.createWomensList('dresses'),
 
-// const getAllProducts = (state) => {
-//   state.allProductIds.map(id => state.productsById[id]);
-// }
-
-const listByFilterType = combineReducers({
-  tops: createList('tops'),
-  bottoms: createList('bottoms')
 })
 
-const listByFilter = combineReducers({
-  categories: listByFilterType
+const mensCategories = combineReducers({
+  tops: fromList.createMensList('tops'),
+  bottoms: fromList.createMensList('bottoms'),
+  outerwear: fromList.createMensList('outerwear'),
+  accessories: fromList.createMensList('accessories'),
+  shoes: fromList.createMensList('shoes')
 })
 
-const listByGender = combineReducers({
-  womens: listByFilter,
-  mens: listByFilter,
-})
-
-export const getAllProductsByGenderAndType = (state, gender, type, filter) => {
-  const ids = fromList.getIds(state.listByGender[gender][type][filter]);
-  console.log('ids', ids);
+export const getProductsByGenderAndType = (state, gender, type, filter) => {
+  const capitalizeType = type.charAt(0).toUpperCase() + type.slice(1)
+  const genderAndType = gender + capitalizeType;
+  const ids = fromList.getIds(state[genderAndType][filter]);
   return ids.map(id => state.productsById[id]);
 }
 
 const products = combineReducers({
   productsById,
-  listByGender
+  womensCategories,
+  mensCategories
 })
 
 export default products;
-
-// const womensProducts = combineReducers({
-//   categories: idsByWomensCategory,
-//   subcategories: idsByWomensSubcategory
-// })
-
-
-// const products = (state = initialState, action) => {
-//   switch (action.type) {
-//     case FETCH_PRODUCTS:
-//       // console.log('Fetching products...')
-//       return state;
-//     case FETCH_PRODUCTS_FULFILLED:
-//       // console.log('Products received', action.payload);
-//       return set(state, 'items', action.payload);
-//     default:
-//       return state;
-//   }
-// }
-
-
-// const listByFilter = combineReducers({
-//   all: createList('all'),
-//   active: createList('active'),
-//   completed: createList('completed'),
-// });
-
-// const listByGender = combineReducers({
-
-// })
-
-// const listByCategory = combineReducers({
-
-// })
-
-// export const getProductsByGenderAndCategory = (state, filter) => {
-//   const ids = fromList.getIds(state.listByFilter[filter]);
-//   return ids.map(id => fromById.getTodo(state.byId, id));
-// };
