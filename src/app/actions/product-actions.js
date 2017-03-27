@@ -12,11 +12,16 @@ export const fetchProducts = payload => ({
   gender: payload.gender, 
   category: payload.category 
 });
-export const fetchProductsFulfilled = payload => ({ type: FETCH_PRODUCTS_FULFILLED, payload });
+export const fetchProductsFulfilled = payload => ({ 
+  type: FETCH_PRODUCTS_FULFILLED, 
+  response: payload.response,
+  gender: payload.gender,
+  category: payload.category
+});
 
 export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_PRODUCTS)
     .mergeMap(action =>
       ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category}`)
-        .map(response => fetchProductsFulfilled(response))
+        .map(response => fetchProductsFulfilled({response, gender: action.gender, category: action.category}))
     );

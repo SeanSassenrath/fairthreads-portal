@@ -15,6 +15,6 @@ export const rootReducer = combineReducers({
   categories
 });
 
-export const getProducts = (state) => (
-  ProductSelectors.getProducts(state.products)
+export const getAllProductsByGenderAndType = (state, gender, type, filter) => (
+  ProductSelectors.getAllProductsByGenderAndType(state.products, gender, type, filter)
 )

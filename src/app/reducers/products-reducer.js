@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { set, merge, push } from 'immutable-light';
+import createList, * as fromList from './create-list';
 import { 
   FETCH_PRODUCTS,
   FETCH_PRODUCTS_FULFILLED
@@ -11,7 +12,8 @@ const productsById = (state = {}, action) => {
       return state;
     case FETCH_PRODUCTS_FULFILLED:
       const nextState = { ...state };
-      action.payload.forEach(product => {
+      console.log('ugh action', action)
+      action.response.forEach(product => {
         nextState[product._id] = product;
       });
       console.log('nextStateObj', nextState)
@@ -21,34 +23,56 @@ const productsById = (state = {}, action) => {
   }
 };
 
-const allProductIds = (state = [], action) => {
-  switch (action.type) {
-    case FETCH_PRODUCTS_FULFILLED:
-      const nextState = [ ...state ];
-      action.payload.map(product => {
-        return nextState.push(product._id);
-      });
-      return nextState;
-    default:
-      return state;
-  }
+// const allProductIds = (state = [], action) => {
+//   console.log('allProductIds is state here', state);
+//   switch (action.type) {
+//     case FETCH_PRODUCTS_FULFILLED:
+//       const nextState = [ ...state ];
+//       action.payload.map(product => {
+//         return nextState.push(product._id);
+//       });
+//       return nextState;
+//     default:
+//       return state;
+//   }
+// }
+
+// const getAllProducts = (state) => {
+//   state.allProductIds.map(id => state.productsById[id]);
+// }
+
+const listByFilterType = combineReducers({
+  tops: createList('tops'),
+  bottoms: createList('bottoms')
+})
+
+const listByFilter = combineReducers({
+  categories: listByFilterType
+})
+
+const listByGender = combineReducers({
+  womens: listByFilter,
+  mens: listByFilter,
+})
+
+export const getAllProductsByGenderAndType = (state, gender, type, filter) => {
+  const ids = fromList.getIds(state.listByGender[gender][type][filter]);
+  console.log('ids', ids);
+  return ids.map(id => state.productsById[id]);
 }
 
 const products = combineReducers({
-  allProductIds,
-  productsById
+  productsById,
+  listByGender
 })
 
 export default products;
 
-const getAllProducts = (state) => {
-  state.allProductIds.map(id => state.productsById[id]);
-}
+// const womensProducts = combineReducers({
+//   categories: idsByWomensCategory,
+//   subcategories: idsByWomensSubcategory
+// })
 
-export const getProducts = (state) => {
-  const allProducts = getAllProducts(state);
-  return allProducts;
-}
 
 // const products = (state = initialState, action) => {
 //   switch (action.type) {
