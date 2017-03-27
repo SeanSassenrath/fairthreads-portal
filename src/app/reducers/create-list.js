@@ -5,12 +5,8 @@ import {
 
 
 const createList = (category, gender) => {
-  console.log('createList gender', gender)
-  console.log('createList category', category)
   return (state = [], action) => {
     if (action.category !== category || action.gender !== gender) {
-      console.log('action', action)
-      console.log('action.category doesnt equal category', action.category !== category);
       return state;
     }
     switch (action.type) {

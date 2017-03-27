@@ -12,8 +12,6 @@ class ProductsContainer extends Component {
   componentDidMount() {
     const { fetchProducts } = this.props;
     const { gender, category } = this.props.match.params;
-
-    console.log('--- Initial product fetch');
     fetchProducts({ gender, category});
   }
 
@@ -23,14 +21,12 @@ class ProductsContainer extends Component {
     const prevParams = prevProps.match.params;
 
     if (prevParams.gender !== gender || prevParams.category !== category) {
-      console.log('--- Fetching new products');
       fetchProducts({ gender, category });
     }
   }
 
   render() {
     const { products } = this.props;
-    console.log('products conatiner props', this.props)
     return (
       <div className={styles['products-container']}>
         { products.map((product, index) => (
@@ -43,8 +39,6 @@ class ProductsContainer extends Component {
 
 const mapStateToProps = (state, { match }) => {
   const { gender, category } = match.params;
-  console.log('mapStateToProps gender', gender)
-  console.log('mapStateToProps category', category)
   return {products: getProductsByGenderAndType(state, gender, 'categories', category )}
 }
 

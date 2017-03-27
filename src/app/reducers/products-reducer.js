@@ -12,11 +12,9 @@ const productsById = (state = {}, action) => {
       return state;
     case FETCH_PRODUCTS_FULFILLED:
       const nextState = { ...state };
-      console.log('ugh action', action)
       action.response.forEach(product => {
         nextState[product._id] = product;
       });
-      console.log('nextStateObj', nextState)
       return nextState;
     default:
       return state;
