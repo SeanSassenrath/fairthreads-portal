@@ -3,7 +3,9 @@ import { mergeMap } from 'rxjs';
 
 import { 
   FETCH_PRODUCTS,
-  FETCH_PRODUCTS_FULFILLED
+  FETCH_PRODUCTS_FULFILLED,
+  FETCH_PRODUCT,
+  FETCH_PRODUCT_FULFILLED,
 } from '../constants/product-constants';
 
 // http://localhost:9000/api/v1/products/?gender=womens
@@ -12,6 +14,7 @@ export const fetchProducts = payload => ({
   gender: payload.gender, 
   category: payload.category 
 });
+
 export const fetchProductsFulfilled = payload => ({ 
   type: FETCH_PRODUCTS_FULFILLED, 
   response: payload.response,
@@ -23,5 +26,22 @@ export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_PRODUCTS)
     .mergeMap(action =>
       ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category}`)
-        .map(response => fetchProductsFulfilled({response, gender: action.gender, category: action.category}))
+        .map(response => fetchProductsFulfilled({ response, gender: action.gender, category: action.category }))
+    );
+
+export const fetchProduct = id => ({
+  type: FETCH_PRODUCT,
+  id
+});
+
+export const fetchProductFulfilled = payload => ({
+  type: FETCH_PRODUCT_FULFILLED,
+  response: payload.response
+})
+
+export const fetchProductEpic = action$ => 
+  action$.ofType(FETCH_PRODUCT)
+    .mergeMap(action =>
+      ajax.getJSON(`http://localhost:9000/api/v1/products/${action.id}`)
+        .map(response => fetchProductFulfilled({ response }))
     );

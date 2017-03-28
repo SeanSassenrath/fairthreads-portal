@@ -8,6 +8,7 @@ import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-l
 import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link';
 import Button from '../../components/button/button';
 import CategoryNavContainer from '../../containers/category-nav-container/category-nav-container';
+import EditProductContainer from '../../containers/edit-product-container/edit-product-container';
 import MainContent from '../../components/main-content/main-content';
 import styles from './edit-product.css';
 
@@ -41,6 +42,7 @@ class EditProduct extends Component {
             <CategoryNavContainer />
           </SideNav>
           <MainContent>
+            <EditProductContainer />
           </MainContent>
         </div>
       </Page>

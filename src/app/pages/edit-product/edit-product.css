@@ -1,3 +1,7 @@
+.content-container {
+  display: flex;
+}
+
 .left-sub-nav-container {
   align-items: center;
   display: flex;

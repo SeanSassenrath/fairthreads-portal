@@ -3,7 +3,9 @@ import { set, merge, push } from 'immutable-light';
 import createList, * as fromList from './create-list';
 import { 
   FETCH_PRODUCTS,
-  FETCH_PRODUCTS_FULFILLED
+  FETCH_PRODUCTS_FULFILLED,
+  FETCH_PRODUCT,
+  FETCH_PRODUCT_FULFILLED
 } from '../constants/product-constants';
 
 const productsById = (state = {}, action) => {
@@ -20,6 +22,17 @@ const productsById = (state = {}, action) => {
       return state;
   }
 };
+
+const product = (state = {}, action) => {
+  switch (action.type) {
+    case FETCH_PRODUCT:
+      return state;
+    case FETCH_PRODUCT_FULFILLED:
+      return Object.assign({}, action.response);
+    default:
+      return state;
+  }
+}
 
 const womensCategories = combineReducers({
   tops: fromList.createWomensList('tops'),
@@ -46,7 +59,13 @@ export const getProductsByGenderAndType = (state, gender, type, filter) => {
   return ids.map(id => state.productsById[id]);
 }
 
+// export const getProductById = (state) => {
+//   console.log('stateee', state)
+//   return state;
+// }
+
 const products = combineReducers({
+  product,
   productsById,
   womensCategories,
   mensCategories

@@ -29,3 +29,4 @@ export const createWomensList = (category) => {
 export default createList;
 
 export const getIds = (state) => state;
+export const getId = (state, id) => state[id];
