@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 import { getProductById } from '../../reducers/root-reducer';
 import { fetchProduct } from '../../actions/product-actions';
 import ProductCard from '../../components/product-card/product-card';
+import Toggle from 'material-ui/Toggle';
+import TextField from 'material-ui/TextField';
 import styles from './edit-product-container.css';
 
 class EditProductContainer extends Component {
@@ -42,11 +44,37 @@ class EditProductContainer extends Component {
           <ProductCard product={product} />
           <div>
             <div className={styles['product-details']}>
-              <input type="text" placeholder={product.details.name} />
+              <TextField hintText={product.details.name} />
               <span>Brand: {product.brand.details.name}</span>
               <span>id: {product._id}</span>
               <span>Updated At: {updatedAt.toDateString()}</span>
               <span>Created At: {createdAt.toDateString()}</span>
+            </div>
+          </div>
+          <div className={styles['product-actions']}>
+            <div className={styles['toggle-container']}>
+              <span>Active:</span>
+              <div>
+                <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
+              </div>
+            </div>
+            <div className={styles['toggle-container']}>
+              <span>Stylist Pick:</span>
+              <div>
+                <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
+              </div>
+            </div>
+            <div className={styles['toggle-container']}>
+              <span>Featured:</span>
+              <div>
+                <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
+              </div>
+            </div>
+            <div className={styles['toggle-container']}>
+              <span>Img Cover:</span>
+              <div>
+                <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
+              </div>
             </div>
           </div>
         </div>

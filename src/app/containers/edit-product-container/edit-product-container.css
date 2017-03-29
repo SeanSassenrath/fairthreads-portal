@@ -23,3 +23,16 @@
     padding: 5px 0;
   }
 }
+
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 40px 0 40px;
+  width: 175px;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
