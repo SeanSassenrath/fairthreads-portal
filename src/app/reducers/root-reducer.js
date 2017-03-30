@@ -2,13 +2,14 @@ import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 import products, * as ProductSelectors from './products-reducer';
 import categories from './categories-reducer';
-import { fetchProductsEpic, fetchProductEpic } from '../actions/product-actions';
+import { fetchProductsEpic, fetchProductEpic, saveUpdatedProductEpic } from '../actions/product-actions';
 import { fetchCategoriesEpic } from '../actions/category-actions';
 
 export const rootEpic = combineEpics(
   fetchProductsEpic,
   fetchProductEpic,
-  fetchCategoriesEpic
+  fetchCategoriesEpic,
+  saveUpdatedProductEpic
 );
 
 export const rootReducer = combineReducers({

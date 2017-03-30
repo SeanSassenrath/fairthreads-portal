@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
-import { set, merge, push } from 'immutable-light';
+import { setIn, merge, push } from 'immutable-light';
 import createList, * as fromList from './create-list';
 import { 
   FETCH_PRODUCTS,
   FETCH_PRODUCTS_FULFILLED,
   FETCH_PRODUCT,
-  FETCH_PRODUCT_FULFILLED
+  FETCH_PRODUCT_FULFILLED,
+  UPDATE_PRODUCT_ACTIVE,
+  SAVE_UPDATED_PRODUCT,
+  SAVE_UPDATED_PRODUCT_FULFILLED
 } from '../constants/product-constants';
 
 const productsById = (state = {}, action) => {
@@ -29,6 +32,12 @@ const product = (state = {}, action) => {
       return state;
     case FETCH_PRODUCT_FULFILLED:
       return Object.assign({}, action.response);
+    case UPDATE_PRODUCT_ACTIVE:
+      return setIn(state, ['metadata', 'active'], !state.metadata.active)
+    case SAVE_UPDATED_PRODUCT:
+      return state;
+    case SAVE_UPDATED_PRODUCT_FULFILLED:
+      return state;
     default:
       return state;
   }

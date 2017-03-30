@@ -3,10 +3,11 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { getProductById } from '../../reducers/root-reducer';
-import { fetchProduct } from '../../actions/product-actions';
+import { fetchProduct, updateProductActive, saveUpdatedProduct } from '../../actions/product-actions';
 import ProductCard from '../../components/product-card/product-card';
 import Toggle from 'material-ui/Toggle';
 import TextField from 'material-ui/TextField';
+import { omit } from 'lodash';
 import styles from './edit-product-container.css';
 
 class EditProductContainer extends Component {
@@ -34,9 +35,10 @@ class EditProductContainer extends Component {
   }
 
   renderProduct() {
-    const { product } = this.props;
+    const { product, updateProductActive, saveUpdatedProduct } = this.props;
     const updatedAt = new Date(product.updatedAt);
     const createdAt = new Date(product.createdAt);
+    console.log('Propz', this.props)
 
     return (
       <div className={styles['edit-product-container']}>
@@ -55,7 +57,7 @@ class EditProductContainer extends Component {
             <div className={styles['toggle-container']}>
               <span>Active:</span>
               <div>
-                <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
+                <Toggle toggled={product.metadata.active} onToggle={updateProductActive} />
               </div>
             </div>
             <div className={styles['toggle-container']}>
@@ -76,6 +78,7 @@ class EditProductContainer extends Component {
                 <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
               </div>
             </div>
+            <button onClick={() => saveUpdatedProduct({id: product._id, product})}>save</button>
           </div>
         </div>
       </div>
@@ -94,16 +97,17 @@ class EditProductContainer extends Component {
 
 const mapStateToProps = (state, { match }) => {
   const x = getProductById(state);
-  console.log('mapStateToProps', x);
   return { product: getProductById(state) }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return { 
-    fetchProduct: bindActionCreators(fetchProduct(payload), dispatch)
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   console.log('here 2', updateProductActive);
+//   return { 
+//     fetchProduct: dispatch(fetchProduct(payload)),
+//     updateProductActive: dispatch(updateProductActive())
+//   }
+// }
 
 // Use withRouter to convert router context to props
 // Connect the Redux store to the EditProductContainer and pass in products state and actions
-export default withRouter(connect(mapStateToProps, { fetchProduct })(EditProductContainer));
+export default withRouter(connect(mapStateToProps, { fetchProduct, updateProductActive, saveUpdatedProduct })(EditProductContainer));
