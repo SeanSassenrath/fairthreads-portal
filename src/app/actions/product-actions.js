@@ -8,6 +8,7 @@ import {
   FETCH_PRODUCT,
   FETCH_PRODUCT_FULFILLED,
   UPDATE_PRODUCT_ACTIVE,
+  UPDATE_PRODUCT_IMG_FIT,
   SAVE_UPDATED_PRODUCT,
   SAVE_UPDATED_PRODUCT_FULFILLED,
 } from '../constants/product-constants';
@@ -52,6 +53,11 @@ export const fetchProductEpic = action$ =>
 
 export const updateProductActive = () => ({
   type: UPDATE_PRODUCT_ACTIVE,
+})
+
+export const updateProductImgFit = fit => ({
+  type: UPDATE_PRODUCT_IMG_FIT,
+  fit
 })
 
 export const saveUpdatedProduct = payload => ({

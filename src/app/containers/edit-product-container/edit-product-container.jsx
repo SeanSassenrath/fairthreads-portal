@@ -3,7 +3,13 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { getProductById } from '../../reducers/root-reducer';
-import { fetchProduct, updateProductActive, saveUpdatedProduct } from '../../actions/product-actions';
+import { 
+  fetchProduct, 
+  updateProductActive, 
+  updateProductImgFit, 
+  saveUpdatedProduct 
+} from '../../actions/product-actions';
+import autoBind from 'react-autobind';
 import ProductCard from '../../components/product-card/product-card';
 import Toggle from 'material-ui/Toggle';
 import TextField from 'material-ui/TextField';
@@ -14,7 +20,7 @@ class EditProductContainer extends Component {
 
   constructor(args) {
     super(args);
-    this.renderProduct = this.renderProduct.bind(this);
+    autoBind(this);
   }
 
   // Possibly need to fetch products incase not navigated to
@@ -33,6 +39,18 @@ class EditProductContainer extends Component {
       fetchProduct(id);
     }
   }
+
+  isObjectCover() {
+    return this.props.product.css.objectFit === 'cover';
+  }
+
+  setObjectFit() {
+    console.log(this.props);
+    const { product, updateProductImgFit } = this.props;
+    const objectFit = product.css.objectFit === 'contain' ? 'cover' : 'contain';
+    updateProductImgFit(objectFit);
+  }
+
 
   renderProduct() {
     const { product, updateProductActive, saveUpdatedProduct } = this.props;
@@ -76,7 +94,7 @@ class EditProductContainer extends Component {
               <div className={styles['toggle-container']}>
                 <span>Img Cover:</span>
                 <div>
-                  <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
+                 <Toggle toggled={this.isObjectCover()} onToggle={this.setObjectFit} />
                 </div>
               </div>
               <button onClick={() => saveUpdatedProduct({id: product._id, product})}>save</button>
@@ -109,5 +127,6 @@ export default withRouter(
   connect(mapStateToProps, { 
     fetchProduct, 
     updateProductActive, 
+    updateProductImgFit,
     saveUpdatedProduct 
   })(EditProductContainer));
