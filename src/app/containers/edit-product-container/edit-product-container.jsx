@@ -44,41 +44,44 @@ class EditProductContainer extends Component {
       <div className={styles['edit-product-container']}>
         <div className={styles['edit-product']}>
           <ProductCard product={product} />
-          <div>
-            <div className={styles['product-details']}>
+          <div className={styles['edit-product-details']}>
+
+            <div className={styles['product-metadata']}>
               <TextField hintText={product.details.name} />
               <span>Brand: {product.brand.details.name}</span>
               <span>id: {product._id}</span>
               <span>Updated At: {updatedAt.toDateString()}</span>
               <span>Created At: {createdAt.toDateString()}</span>
             </div>
-          </div>
-          <div className={styles['product-actions']}>
-            <div className={styles['toggle-container']}>
-              <span>Active:</span>
-              <div>
-                <Toggle toggled={product.metadata.active} onToggle={updateProductActive} />
+
+            <div className={styles['product-actions']}>
+              <div className={styles['toggle-container']}>
+                <span>Active:</span>
+                <div>
+                  <Toggle toggled={product.metadata.active} onToggle={updateProductActive} />
+                </div>
               </div>
-            </div>
-            <div className={styles['toggle-container']}>
-              <span>Stylist Pick:</span>
-              <div>
-                <Toggle disabled />
+              <div className={styles['toggle-container']}>
+                <span>Stylist Pick:</span>
+                <div>
+                  <Toggle disabled />
+                </div>
               </div>
-            </div>
-            <div className={styles['toggle-container']}>
-              <span>Featured:</span>
-              <div>
-                <Toggle disabled />
+              <div className={styles['toggle-container']}>
+                <span>Featured:</span>
+                <div>
+                  <Toggle disabled />
+                </div>
               </div>
-            </div>
-            <div className={styles['toggle-container']}>
-              <span>Img Cover:</span>
-              <div>
-                <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
+              <div className={styles['toggle-container']}>
+                <span>Img Cover:</span>
+                <div>
+                  <Toggle toggled={product.metadata.active} onToggle={() => (console.log('here'))} />
+                </div>
               </div>
+              <button onClick={() => saveUpdatedProduct({id: product._id, product})}>save</button>
             </div>
-            <button onClick={() => saveUpdatedProduct({id: product._id, product})}>save</button>
+
           </div>
         </div>
       </div>
