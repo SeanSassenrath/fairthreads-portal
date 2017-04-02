@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { withRouter } from 'react-router';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { getProductsByGenderAndType } from '../../reducers/root-reducer';
@@ -30,7 +30,9 @@ class ProductsContainer extends Component {
     return (
       <div className={styles['products-container']}>
         { products.map((product, index) => (
-          <ProductCard product={product} key={index} />
+          <Link to={`/edit/product/${product._id}`} className={styles['product-link']} key={index}>
+            <ProductCard product={product} />
+          </Link>
         ))}
       </div>
     )

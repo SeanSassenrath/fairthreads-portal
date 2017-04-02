@@ -8,6 +8,7 @@ import {
   FETCH_PRODUCT,
   FETCH_PRODUCT_FULFILLED,
   UPDATE_PRODUCT_ACTIVE,
+  UPDATE_PRODUCT_GENDER,
   UPDATE_PRODUCT_IMG_FIT,
   SAVE_UPDATED_PRODUCT,
   SAVE_UPDATED_PRODUCT_FULFILLED,
@@ -55,7 +56,12 @@ export const updateProductActive = () => ({
   type: UPDATE_PRODUCT_ACTIVE,
 })
 
-export const updateProductImgFit = fit => ({
+export const updateProductGender = gender => ({
+  type: UPDATE_PRODUCT_GENDER,
+  gender
+})
+
+export const updateProductObjectFit = fit => ({
   type: UPDATE_PRODUCT_IMG_FIT,
   fit
 })
@@ -74,6 +80,6 @@ export const saveUpdatedProductFulfilled = payload => ({
 export const saveUpdatedProductEpic = action$ =>
   action$.ofType(SAVE_UPDATED_PRODUCT)
     .mergeMap(action =>
-      ajax.put(`http://localhost:9000/api/v1/products/${action.id}`, JSON.stringify(omit(action.product, '_id', 'brand')), {'Content-Type': 'application/json'})
+      ajax.put(`http://localhost:9000/api/v1/products/${action.id}`, JSON.stringify(omit(action.product, '_id', 'brand', 'categories')), {'Content-Type': 'application/json'})
         .map(response => saveUpdatedProductFulfilled({response}))
     );

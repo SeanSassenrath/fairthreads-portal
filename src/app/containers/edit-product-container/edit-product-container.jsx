@@ -6,12 +6,15 @@ import { getProductById } from '../../reducers/root-reducer';
 import { 
   fetchProduct, 
   updateProductActive, 
-  updateProductImgFit, 
+  updateProductGender,
+  updateProductObjectFit, 
   saveUpdatedProduct 
 } from '../../actions/product-actions';
 import autoBind from 'react-autobind';
 import ProductCard from '../../components/product-card/product-card';
 import Toggle from 'material-ui/Toggle';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import { omit } from 'lodash';
 import styles from './edit-product-container.css';
@@ -40,15 +43,26 @@ class EditProductContainer extends Component {
     }
   }
 
+  setGender(event, index, value) {
+    const { product, updateProductGender } = this.props;
+    console.log('value', value)
+    console.log('product.details.gender', product.details.gender);
+    if (value !== product.details.gender) {
+      console.log('here');
+      updateProductGender(value);
+    }
+    return;
+  }
+
   isObjectCover() {
     return this.props.product.css.objectFit === 'cover';
   }
 
   setObjectFit() {
     console.log(this.props);
-    const { product, updateProductImgFit } = this.props;
+    const { product, updateProductObjectFit } = this.props;
     const objectFit = product.css.objectFit === 'contain' ? 'cover' : 'contain';
-    updateProductImgFit(objectFit);
+    updateProductObjectFit(objectFit);
   }
 
 
@@ -100,6 +114,15 @@ class EditProductContainer extends Component {
               <button onClick={() => saveUpdatedProduct({id: product._id, product})}>save</button>
             </div>
 
+            <div className={styles['product-actions']}>
+              <div>
+                <SelectField value={product.details.gender} onChange={this.setGender}>
+                  <MenuItem value='womens' primaryText='Womens' />
+                  <MenuItem value='mens' primaryText='Mens' />
+                </SelectField>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -127,6 +150,7 @@ export default withRouter(
   connect(mapStateToProps, { 
     fetchProduct, 
     updateProductActive, 
-    updateProductImgFit,
+    updateProductGender,
+    updateProductObjectFit,
     saveUpdatedProduct 
   })(EditProductContainer));
