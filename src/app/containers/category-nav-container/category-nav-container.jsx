@@ -33,7 +33,7 @@ class CategoryNavContainer extends Component {
     const { gender } = this.props.match.params;
     return (
       <SideNavSection>
-        { categories.types.map((type, index) => (
+        {/*{ categories.types.map((type, index) => (
             <SideNavMainLink to={`/products/${gender}/${type.details.name}`} key={index}>
               {type.details.name}
             </SideNavMainLink>
@@ -43,7 +43,7 @@ class CategoryNavContainer extends Component {
             <SideNavSubLink to={`/products/${gender}/${type.details.name}/${subcategory.details.name}`} key={index}>
               {subcategory.details.name}
             </SideNavSubLink>})
-          : null }
+          : null }*/}
       </SideNavSection>
     )
   }

@@ -8,8 +8,9 @@ import {
   updateProductActive, 
   updateProductGender,
   updateProductObjectFit, 
-  saveUpdatedProduct 
+  saveUpdatedProduct ,
 } from '../../actions/product-actions';
+import { fetchCategories } from '../../actions/category-actions';
 import autoBind from 'react-autobind';
 import ProductCard from '../../components/product-card/product-card';
 import Toggle from 'material-ui/Toggle';
@@ -34,9 +35,11 @@ class EditProductContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { fetchProduct } = this.props;
+    const { fetchProduct, fetchCategories, product } = this.props;
     const { id } = this.props.match.params;
     const prevParams = prevProps.match.params;
+
+    fetchCategories(product.details.gender);
 
     if (prevParams.id !== id) {
       fetchProduct(id);
@@ -123,6 +126,15 @@ class EditProductContainer extends Component {
               </div>
             </div>
 
+            <div className={styles['product-actions']}>
+              <div>
+                <SelectField value={product.details.gender} onChange={this.setGender}>
+                  <MenuItem value='womens' primaryText='Womens' />
+                  <MenuItem value='mens' primaryText='Mens' />
+                </SelectField>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -152,5 +164,6 @@ export default withRouter(
     updateProductActive, 
     updateProductGender,
     updateProductObjectFit,
-    saveUpdatedProduct 
+    saveUpdatedProduct,
+    fetchCategories
   })(EditProductContainer));

@@ -7,16 +7,16 @@ import {
 } from '../constants/category-constants';
 
 // http://localhost:9000/api/v1/categories/?gender=womens
-export const fetchCategories = payload => ({ 
+export const fetchCategories = gender => ({ 
   type: FETCH_CATEGORIES, 
-  gender: payload.gender, 
+  gender: gender, 
 });
 
-export const fetchCategoriesFulfilled = payload => ({ type: FETCH_CATEGORIES_FULFILLED, payload });
+export const fetchCategoriesFulfilled = (payload, gender) => ({ type: FETCH_CATEGORIES_FULFILLED, payload, gender });
 
 export const fetchCategoriesEpic = action$ =>
   action$.ofType(FETCH_CATEGORIES)
     .mergeMap(action =>
       ajax.getJSON(`http://localhost:9000/api/v1/categories?gender=${action.gender}`)
-        .map(response => fetchCategoriesFulfilled(response))
+        .map(response => fetchCategoriesFulfilled(response, action.gender))
     );
