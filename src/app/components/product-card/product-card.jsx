@@ -17,7 +17,6 @@ const renderImgArea = props => {
 }
 
 const ProductCard = props => {
-  console.log('ProductCard props', props)
   const { brand, details, prices } = props.product;
   return (
     <div className={styles.container}>

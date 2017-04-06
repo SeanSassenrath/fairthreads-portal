@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getProductById } from '../../reducers/root-reducer';
+import { getProductById, getCategoriesById } from '../../reducers/root-reducer';
 import { 
   fetchProduct, 
   updateProductActive, 
   updateProductGender,
   updateProductObjectFit, 
+  updateProductCategory,
   saveUpdatedProduct ,
 } from '../../actions/product-actions';
 import { fetchCategories } from '../../actions/category-actions';
@@ -17,7 +18,7 @@ import Toggle from 'material-ui/Toggle';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
-import { omit } from 'lodash';
+import { omit, toArray } from 'lodash';
 import styles from './edit-product-container.css';
 
 class EditProductContainer extends Component {
@@ -39,7 +40,7 @@ class EditProductContainer extends Component {
     const { id } = this.props.match.params;
     const prevParams = prevProps.match.params;
 
-    fetchCategories(product.details.gender);
+    if (prevProps.product.details !== this.props.product.details) { fetchCategories(product.details.gender); }
 
     if (prevParams.id !== id) {
       fetchProduct(id);
@@ -48,10 +49,7 @@ class EditProductContainer extends Component {
 
   setGender(event, index, value) {
     const { product, updateProductGender } = this.props;
-    console.log('value', value)
-    console.log('product.details.gender', product.details.gender);
     if (value !== product.details.gender) {
-      console.log('here');
       updateProductGender(value);
     }
     return;
@@ -62,18 +60,46 @@ class EditProductContainer extends Component {
   }
 
   setObjectFit() {
-    console.log(this.props);
     const { product, updateProductObjectFit } = this.props;
     const objectFit = product.css.objectFit === 'contain' ? 'cover' : 'contain';
     updateProductObjectFit(objectFit);
   }
 
+  renderCategorySelect() {
+    const { product, categories } = this.props;
+    const gender = product.details.gender;
+    const categoriesArray = toArray(categories);
+    const categoriesByGender = categoriesArray.filter(category => (
+      category.details.gender === gender || 'both'
+    ))
+
+    return (
+      <SelectField value={product.categories._id} onChange={this.setCategory}>
+        { categoriesByGender.map((category, i) => (
+          <MenuItem
+            value={category._id}
+            primaryText={category.details.name.charAt(0).toUpperCase() + category.details.name.slice(1)} 
+            key={i}
+          />
+        ))}
+      </SelectField>
+    )
+  }
+
+  setCategory(event, index, value) {
+    const { product, categories, updateProductCategory } = this.props;
+    const gender = product.details.gender;
+    const categoriesArray = toArray(categories);
+    if (value !== product.categories) {
+      updateProductCategory(categoriesArray[index]);
+    }
+    return;
+  }
 
   renderProduct() {
-    const { product, updateProductActive, saveUpdatedProduct } = this.props;
+    const { categories, product, updateProductActive, saveUpdatedProduct } = this.props;
     const updatedAt = new Date(product.updatedAt);
     const createdAt = new Date(product.createdAt);
-    console.log('Propz', this.props)
 
     return (
       <div className={styles['edit-product-container']}>
@@ -128,10 +154,7 @@ class EditProductContainer extends Component {
 
             <div className={styles['product-actions']}>
               <div>
-                <SelectField value={product.details.gender} onChange={this.setGender}>
-                  <MenuItem value='womens' primaryText='Womens' />
-                  <MenuItem value='mens' primaryText='Mens' />
-                </SelectField>
+                { this.renderCategorySelect() }
               </div>
             </div>
 
@@ -153,7 +176,10 @@ class EditProductContainer extends Component {
 
 const mapStateToProps = (state, { match }) => {
   const x = getProductById(state);
-  return { product: getProductById(state) }
+  return {
+    product: getProductById(state),
+    categories: getCategoriesById(state)
+  }
 }
 
 // Use withRouter to convert router context to props
@@ -164,6 +190,7 @@ export default withRouter(
     updateProductActive, 
     updateProductGender,
     updateProductObjectFit,
+    updateProductCategory,
     saveUpdatedProduct,
     fetchCategories
   })(EditProductContainer));

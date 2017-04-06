@@ -9,6 +9,7 @@ import {
   UPDATE_PRODUCT_ACTIVE,
   UPDATE_PRODUCT_GENDER,
   UPDATE_PRODUCT_IMG_FIT,
+  UPDATE_PRODUCT_CATEGORY,
   SAVE_UPDATED_PRODUCT,
   SAVE_UPDATED_PRODUCT_FULFILLED
 } from '../constants/product-constants';
@@ -40,6 +41,8 @@ const product = (state = {}, action) => {
       return setIn(state, ['details', 'gender'], action.gender)
     case UPDATE_PRODUCT_IMG_FIT:
       return setIn(state, ['css', 'objectFit'], action.fit);
+    case UPDATE_PRODUCT_CATEGORY:
+      return setIn(state, ['categories'], action.category)
     case SAVE_UPDATED_PRODUCT:
       return state;
     case SAVE_UPDATED_PRODUCT_FULFILLED:

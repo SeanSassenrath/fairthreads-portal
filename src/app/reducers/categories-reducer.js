@@ -48,4 +48,9 @@ const categories = combineReducers({
   categoriesByGender,
 })
 
+export const getCategoriesByGender = (state, gender) => {
+  const ids = fromList.getIds(state.categoriesByGender[gender]);
+  return ids.map(id => state.categoriesById[id]);
+}
+
 export default categories;
