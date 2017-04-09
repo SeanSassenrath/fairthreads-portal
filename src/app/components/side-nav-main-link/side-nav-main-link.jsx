@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './side-nav-main-link.css';
 
 const SideNavMainLink = props => (
-  <NavLink to={props.to} activeClassName={styles['active']} className={styles['default']}>
+  <NavLink to={props.to} activeClassName={styles['active']} className={props.isActive ? styles['active'] : styles['default']}>
     {props.children}
   </NavLink>
 );

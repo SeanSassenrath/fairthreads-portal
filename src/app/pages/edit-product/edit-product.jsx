@@ -15,6 +15,8 @@ import styles from './edit-product.css';
 class EditProduct extends Component {
 
   render() {
+    const { gender } = this.props.match.params;
+    console.log('gender', gender)
     return (
       <Page>
         <SubNav>
@@ -36,8 +38,18 @@ class EditProduct extends Component {
         <div className={styles['content-container']}>
           <SideNav>
             <SideNavSection>
-              <SideNavMainLink to={`/`}>Womens</SideNavMainLink>
-              <SideNavMainLink to={`/`}>Mens</SideNavMainLink>
+              <SideNavMainLink 
+                to={`/products/womens/tops`} 
+                isActive={gender === 'womens'}
+              >
+                Womens
+              </SideNavMainLink>
+              <SideNavMainLink 
+                to={`/products/mens/tops`}
+                isActive={gender === 'mens'}
+              >
+                Mens
+              </SideNavMainLink>
             </SideNavSection>
             <CategoryNavContainer />
           </SideNav>

@@ -9,5 +9,6 @@
 }
 
 .active {
+  composes: default;
   color: #A080ED;
 }

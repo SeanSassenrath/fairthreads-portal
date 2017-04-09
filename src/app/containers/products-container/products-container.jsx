@@ -30,8 +30,11 @@ class ProductsContainer extends Component {
     return (
       <div className={styles['products-container']}>
         { products.map((product, index) => (
-          <Link to={`/edit/product/${product._id}`} className={styles['product-link']} key={index}>
-            <ProductCard product={product} />
+          <Link 
+            to={`/edit/product/${product.details.gender}/${product.categories.details.name}/${product._id}`} 
+            className={styles['product-link']} 
+            key={index}>
+              <ProductCard product={product} />
           </Link>
         ))}
       </div>
