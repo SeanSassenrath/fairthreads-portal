@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import Page from '../../components/page/page';
-import SubNav from '../../components/sub-nav/sub-nav';
+import EditProductSubNav from '../../containers/edit-product-sub-nav/edit-product-sub-nav';
 import SideNav from '../../components/side-nav/side-nav';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
 import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-link';
@@ -19,22 +19,7 @@ class EditProduct extends Component {
     console.log('gender', gender)
     return (
       <Page>
-        <SubNav>
-          <div className={styles['left-sub-nav-container']}>
-            <Link to="/">
-              Back
-            </Link>
-            <div className={styles.refresh}>
-              <Button>Delete product</Button>
-            </div>
-            <div className={styles.refresh}>
-              <Button>Cancel changes</Button>
-            </div>
-          </div>
-          <div className={styles.refresh}>
-            <Button>Save changes</Button>
-          </div>
-        </SubNav>
+        <EditProductSubNav />
         <div className={styles['content-container']}>
           <SideNav>
             <SideNavSection>

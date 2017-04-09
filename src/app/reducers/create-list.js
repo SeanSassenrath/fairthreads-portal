@@ -39,7 +39,6 @@ export const createCategoryList = gender => {
     }
     switch (action.type) {
       case FETCH_CATEGORIES_FULFILLED:
-        console.log('( here )')
         return action.payload.map(cateogry => cateogry._id);
       default:
         return state;
