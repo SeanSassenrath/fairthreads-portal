@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router';
+import { getCategoriesByGender } from '../../reducers/root-reducer';
 import { fetchCategories } from '../../actions/category-actions';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
 import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-link';
@@ -13,8 +14,7 @@ class CategoryNavContainer extends Component {
     const { fetchCategories } = this.props;
     const { gender } = this.props.match.params;
 
-    console.log('--- Initial categories fetch');
-    fetchCategories({ gender });
+    fetchCategories(gender);
   }
 
   componentDidUpdate(prevProps) {
@@ -23,24 +23,24 @@ class CategoryNavContainer extends Component {
     const prevParams = prevProps.match.params;
 
     if (prevParams.gender !== gender) {
-      console.log('--- Fetching new categories');
-      fetchCategories({ gender });
+      fetchCategories(gender);
     }
   }
 
   render() {
     const { categories } = this.props;
     const { gender } = this.props.match.params;
+    console.log('-- props', this.props)
     return (
       <SideNavSection>
-        {/*{ categories.types.map((type, index) => (
-            <SideNavMainLink to={`/products/${gender}/${type.details.name}`} key={index}>
-              {type.details.name}
+        { categories.map((category, i) => (
+            <SideNavMainLink to={`/products/${gender}/${category.details.name}`} key={i}>
+              {category.details.name}
             </SideNavMainLink>
         ))}
-        { categories.types.subcategories
-          ? categories.types.subcategories.map((subcategory, index) => {
-            <SideNavSubLink to={`/products/${gender}/${type.details.name}/${subcategory.details.name}`} key={index}>
+        {/*{ categories.categorys.subcategories
+          ? categories.categorys.subcategories.map((subcategory, i) => {
+            <SideNavSubLink to={`/products/${gender}/${category.details.name}/${subcategory.details.name}`} key={i}>
               {subcategory.details.name}
             </SideNavSubLink>})
           : null }*/}
@@ -49,8 +49,9 @@ class CategoryNavContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { categories: state.categories };
+const mapStateToProps = (state, { match }) => {
+  const { gender } = match.params;
+  return { categories: getCategoriesByGender(state, gender) };
 }
 
 const mapDispatchToProps = (dispatch) => {

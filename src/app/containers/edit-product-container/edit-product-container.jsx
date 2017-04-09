@@ -174,7 +174,7 @@ class EditProductContainer extends Component {
   }
 }
 
-const mapStateToProps = (state, { match }) => {
+const mapStateToProps = (state) => {
   const x = getProductById(state);
   return {
     product: getProductById(state),
