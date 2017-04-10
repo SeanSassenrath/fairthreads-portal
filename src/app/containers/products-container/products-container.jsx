@@ -34,7 +34,7 @@ class ProductsContainer extends Component {
             to={`/edit/product/${product.details.gender}/${product.categories.details.name}/${product._id}`} 
             className={styles['product-link']} 
             key={index}>
-              <ProductCard product={product} />
+              <ProductCard product={product} isActive={product.metadata.active} />
           </Link>
         ))}
       </div>

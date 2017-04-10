@@ -140,7 +140,6 @@ class EditProductContainer extends Component {
                  <Toggle toggled={this.isObjectCover()} onToggle={this.setObjectFit} />
                 </div>
               </div>
-              <button onClick={() => saveUpdatedProduct({id: product._id, product})}>save</button>
             </div>
 
             <div className={styles['product-actions']}>

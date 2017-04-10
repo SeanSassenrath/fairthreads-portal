@@ -3,6 +3,7 @@
 .container {
   width: 48%;
   margin: 20px 0;
+  position: relative;
   @media (--larger-than-mobile) {
     max-width: 200px;
     margin: 30px 15px;
@@ -70,4 +71,11 @@
 
 span.old-price {
   opacity: .3;
+}
+
+.active-indicator {
+  border: 5px solid #00CC00;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
 }
