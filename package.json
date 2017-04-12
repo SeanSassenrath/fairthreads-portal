@@ -4,8 +4,11 @@
   "description": "Fairthreads portal for managing inventory.",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "node devServer.js",
-    "linter-setup": "node airbnb-linter-setup.js"
+    "linter-setup": "node airbnb-linter-setup.js",
+    "build": "webpack --config ./webpack.prod.config.js --progress",
+    "heroku-postbuild": "npm run build"
   },
   "repository": "https://github.com/SeanSassenrath/fairthreads-portal",
   "author": "Sean Sassenrath <sean.sassenrath@gmail.com>",
