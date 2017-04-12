@@ -8,6 +8,7 @@ import {
   FETCH_PRODUCT,
   FETCH_PRODUCT_FULFILLED,
   UPDATE_PRODUCT_ACTIVE,
+  UPDATE_PRODUCT_NAME,
   UPDATE_PRODUCT_GENDER,
   UPDATE_PRODUCT_IMG_FIT,
   UPDATE_PRODUCT_CATEGORY,
@@ -55,6 +56,11 @@ export const fetchProductEpic = action$ =>
 
 export const updateProductActive = () => ({
   type: UPDATE_PRODUCT_ACTIVE,
+})
+
+export const updateProductName = name => ({
+  type: UPDATE_PRODUCT_NAME,
+  name
 })
 
 export const updateProductGender = gender => ({

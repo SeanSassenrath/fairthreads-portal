@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux'
 import { getProductById, getCategoriesById } from '../../reducers/root-reducer';
 import { 
   fetchProduct, 
-  updateProductActive, 
+  updateProductActive,
+  updateProductName,
   updateProductGender,
   updateProductObjectFit, 
   updateProductCategory,
@@ -45,6 +46,10 @@ class EditProductContainer extends Component {
     if (prevParams.id !== id) {
       fetchProduct(id);
     }
+  }
+
+  setName(event, value) {
+    this.props.updateProductName(value);
   }
 
   setGender(event, index, value) {
@@ -108,7 +113,7 @@ class EditProductContainer extends Component {
           <div className={styles['edit-product-details']}>
 
             <div className={styles['product-metadata']}>
-              <TextField hintText={product.details.name} />
+              <TextField hintText={product.details.name} onChange={this.setName}/>
               <span>Brand: {product.brand.details.name}</span>
               <span>id: {product._id}</span>
               <span>Updated At: {updatedAt.toDateString()}</span>
@@ -186,7 +191,8 @@ const mapStateToProps = (state) => {
 export default withRouter(
   connect(mapStateToProps, { 
     fetchProduct, 
-    updateProductActive, 
+    updateProductActive,
+    updateProductName,
     updateProductGender,
     updateProductObjectFit,
     updateProductCategory,

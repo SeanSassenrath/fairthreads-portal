@@ -7,6 +7,7 @@ import {
   FETCH_PRODUCT,
   FETCH_PRODUCT_FULFILLED,
   UPDATE_PRODUCT_ACTIVE,
+  UPDATE_PRODUCT_NAME,
   UPDATE_PRODUCT_GENDER,
   UPDATE_PRODUCT_IMG_FIT,
   UPDATE_PRODUCT_CATEGORY,
@@ -37,6 +38,8 @@ const product = (state = {}, action) => {
       return Object.assign({}, action.response);
     case UPDATE_PRODUCT_ACTIVE:
       return setIn(state, ['metadata', 'active'], !state.metadata.active)
+    case UPDATE_PRODUCT_NAME:
+      return setIn(state, ['details', 'name'], action.name)
     case UPDATE_PRODUCT_GENDER:
       return setIn(state, ['details', 'gender'], action.gender)
     case UPDATE_PRODUCT_IMG_FIT:
