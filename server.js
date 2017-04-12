@@ -3,11 +3,17 @@ const app = express();
 const path = require('path');
 const port = (process.env.PORT || 8080);
 
-const indexPath = path.join(__dirname, './dist/index.html');
-const publicPath = express.static(path.join(__dirname, './dist'));
+  app.use(express.static('dist'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
+  });
 
-app.use('/dist', publicPath);
-app.get('*', function(_, res) { res.sendFile(indexPath) });
+const indexPath = path.join(__dirname, './dist/index.html');
+
+app.use(express.static('dist'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 app.listen(port, console.log(`Production server running on port ${port}`))
 
