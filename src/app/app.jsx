@@ -9,6 +9,7 @@ import Products from './pages/products/products';
 import EditProduct from './pages/edit-product/edit-product';
 import { Dashboard } from './pages/dashboard/dashboard';
 import MainNav from './components/main-nav/main-nav';
+import NotificationContainer from './containers/notification-container/notification-container';
 import styles from './app.css';
 
 // Get the Redux store
@@ -22,6 +23,7 @@ const App = () => (
       <Router>
         <div className={styles}>
           <MainNav />
+          <NotificationContainer />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route path='/categories/:gender?/:category?' component={Categories} />
           <Route path='/products/:gender?/:category?/:subcategory?' component={Products} />

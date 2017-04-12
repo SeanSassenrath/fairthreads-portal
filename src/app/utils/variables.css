@@ -3,6 +3,11 @@ h2, p, span {
   margin: 0;
 }
 
+/* COLORS */
+:root {
+--green-light-2: #a3f6a0; --green-light-1: #6ddb80; --green: #56bf67; --green-dark-1: #4fa95a; --green-dark-2: #418d46
+}
+
 .space-between {
   display: flex;
   justify-content: space-between;

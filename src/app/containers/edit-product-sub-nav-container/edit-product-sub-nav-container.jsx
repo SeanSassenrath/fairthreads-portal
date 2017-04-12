@@ -4,11 +4,12 @@ import { withRouter, Link } from 'react-router-dom';
 import autoBind from 'react-autobind';
 import { getProductById } from '../../reducers/root-reducer';
 import { saveUpdatedProduct } from '../../actions/product-actions';
+import { hideNotification } from '../../actions/notification-actions';
 import SubNav from '../../components/sub-nav/sub-nav';
 import Button from '../../components/button/button';
-import styles from './edit-product-sub-nav.css';
+import styles from './edit-product-sub-nav-container.css';
 
-class EditProductSubNav extends Component {
+class EditProductSubNavContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -21,8 +22,10 @@ class EditProductSubNav extends Component {
   }
 
   saveProductUpdate() {
-    const {product, saveUpdatedProduct} = this.props;
-    saveUpdatedProduct({id: product._id, product})
+    const { history, hideNotification, product, saveUpdatedProduct } = this.props;
+    saveUpdatedProduct({id: product._id, product});
+    setTimeout(() => hideNotification(), 3000);
+    history.goBack();
   }
 
   render() {
@@ -56,7 +59,8 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(
-  connect(mapStateToProps,{
-    saveUpdatedProduct
-  })(EditProductSubNav));
+  connect(mapStateToProps, {
+    saveUpdatedProduct,
+    hideNotification
+  })(EditProductSubNavContainer));
 

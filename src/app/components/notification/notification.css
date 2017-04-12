@@ -1,0 +1,21 @@
+@import '../../utils/variables.css';
+
+.component-container {
+  color: white;
+  padding: 15px 40px;
+}
+
+.hidden {
+  composes: component-container;
+  display: none;
+}
+
+.success {
+  composes: component-container;
+  background-color: var(--green-dark-1);
+}
+
+.error {
+  composes: component-container;
+  background-color: red;
+}

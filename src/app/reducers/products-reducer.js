@@ -46,7 +46,7 @@ const product = (state = {}, action) => {
     case SAVE_UPDATED_PRODUCT:
       return state;
     case SAVE_UPDATED_PRODUCT_FULFILLED:
-      return state;
+      return setIn(state, ['serverResponse'], action.response.response.message)
     default:
       return state;
   }
