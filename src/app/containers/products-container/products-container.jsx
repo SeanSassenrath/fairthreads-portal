@@ -7,21 +7,27 @@ import { fetchProducts } from '../../actions/product-actions';
 import ProductCard from '../../components/product-card/product-card';
 import styles from './products-container.css';
 
+const pageLength = 36;
+
 class ProductsContainer extends Component {
 
   componentDidMount() {
     const { fetchProducts } = this.props;
     const { gender, category } = this.props.match.params;
-    fetchProducts({ gender, category});
+    // Calculates product pagination based on the number of products available
+    const page = this.props.products.length / pageLength;
+    fetchProducts({ gender, category, page });
   }
 
   componentDidUpdate(prevProps) {
     const { fetchProducts } = this.props;
     const { gender, category } = this.props.match.params;
+    // Calculates product pagination based on the number of products available
+    const page = this.props.products.length / pageLength;
     const prevParams = prevProps.match.params;
 
     if (prevParams.gender !== gender || prevParams.category !== category) {
-      fetchProducts({ gender, category });
+      fetchProducts({ gender, category, page });
     }
   }
 
