@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+const Waypoint = require('react-waypoint');
+import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { getProductsByGenderAndType } from '../../reducers/root-reducer';
@@ -10,6 +12,11 @@ import styles from './products-container.css';
 const pageLength = 36;
 
 class ProductsContainer extends Component {
+
+  constructor(props) {
+    super(props)
+    autobind(this);
+  }
 
   componentDidMount() {
     const { fetchProducts } = this.props;
@@ -31,6 +38,15 @@ class ProductsContainer extends Component {
     }
   }
 
+  renderWaypoint() {
+    const { fetchProducts, products } = this.props;
+    const { gender, category } = this.props.match.params;
+    const page = (products.length / pageLength) + 1;
+    if (products.length > 0) {
+      return <Waypoint onEnter={() => fetchProducts({ gender, category, page })} />
+    }
+  }
+
   render() {
     const { products } = this.props;
     return (
@@ -43,6 +59,7 @@ class ProductsContainer extends Component {
               <ProductCard product={product} isActive={product.metadata.active} />
           </Link>
         ))}
+        { this.renderWaypoint() }
       </div>
     )
   }

@@ -12,7 +12,7 @@ const createList = (category, gender) => {
     }
     switch (action.type) {
       case FETCH_PRODUCTS_FULFILLED:
-        return action.response.map(product => product._id);
+        return state.concat(action.response.map(product => product._id));
       default:
         return state;
     }
