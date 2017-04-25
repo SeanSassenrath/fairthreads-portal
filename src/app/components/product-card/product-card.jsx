@@ -2,8 +2,13 @@ import React from 'react';
 import styles from './product-card.css';
 
 const renderImgArea = props => {
-  const { images, css } = props.product;
+  const { css, images, loading } = props.product;
 
+  if (loading) {
+    return (
+      <div className={styles['image-container-loading']} />
+    )
+  }
   return (
     <div className={styles['image-container']}>
       <img

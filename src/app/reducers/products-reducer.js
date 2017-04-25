@@ -33,9 +33,9 @@ const productsById = (state = {}, action) => {
 const product = (state = {}, action) => {
   switch (action.type) {
     case FETCH_PRODUCT:
-      return state;
+      return setIn(state, ['loading'], true);
     case FETCH_PRODUCT_FULFILLED:
-      return Object.assign({}, action.response);
+      return Object.assign({}, !state.loading, action.response);
     case UPDATE_PRODUCT_ACTIVE:
       return setIn(state, ['metadata', 'active'], !state.metadata.active)
     case UPDATE_PRODUCT_NAME:
@@ -56,6 +56,7 @@ const product = (state = {}, action) => {
 }
 
 const womensCategories = combineReducers({
+  all: fromList.createWomensList('all'),
   tops: fromList.createWomensList('tops'),
   bottoms: fromList.createWomensList('bottoms'),
   outerwear: fromList.createWomensList('outerwear'),
@@ -66,6 +67,7 @@ const womensCategories = combineReducers({
 })
 
 const mensCategories = combineReducers({
+  all: fromList.createMensList('all'),
   tops: fromList.createMensList('tops'),
   bottoms: fromList.createMensList('bottoms'),
   outerwear: fromList.createMensList('outerwear'),

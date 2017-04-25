@@ -21,6 +21,7 @@ class ProductsContainer extends Component {
   componentDidMount() {
     const { fetchProducts } = this.props;
     const { gender, category } = this.props.match.params;
+    console.log('category from params', category)
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
     fetchProducts({ gender, category, page });
@@ -53,7 +54,7 @@ class ProductsContainer extends Component {
       <div className={styles['products-container']}>
         { products.map((product, index) => (
           <Link 
-            to={`/edit/product/${product.details.gender}/${product.categories.details.name}/${product._id}`} 
+            to={`/edit/product/${product.details.gender}/${product.categories.details ? product.categories.details.name : null}/${product._id}`} 
             className={styles['product-link']} 
             key={index}>
               <ProductCard product={product} isActive={product.metadata.active} />

@@ -25,6 +25,11 @@
   }
 }
 
+.image-container-loading {
+  composes: image-container;
+  background-color: #DEDEE1;
+}
+
 .ellipsis {
   margin: 0 auto;
   overflow: hidden;

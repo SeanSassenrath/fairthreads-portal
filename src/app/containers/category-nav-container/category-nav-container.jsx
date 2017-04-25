@@ -32,6 +32,12 @@ class CategoryNavContainer extends Component {
     const { gender, category } = this.props.match.params;
     return (
       <SideNavSection>
+        <SideNavMainLink 
+          to={`/products/${gender}/all`} 
+          isActive={category === 'all'}
+        >
+          all
+        </SideNavMainLink>
         { categories.map((fetchedCategory, i) => (
             <SideNavMainLink 
               to={`/products/${gender}/${fetchedCategory.details.name}`} 
