@@ -1,6 +1,19 @@
 .left-sub-nav-container {
   align-items: center;
   display: flex;
-  flex: 0 0 400px;
   justify-content: space-between;
+  border: 1px solid lightblue;
+  max-width: 1060px;
+  width: 100%;
+}
+
+.meta-info-container {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    color: rgba(1, 1, 1, .3);
+    font-size: 14px;
+    padding: 10px;
+  }
 }

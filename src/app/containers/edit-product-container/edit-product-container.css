@@ -1,8 +1,5 @@
 .edit-product-container {
-  align-items: stretch;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  border: 1px solid lightblue;
   max-width: 1060px;
   width: 100%;
 }
@@ -39,4 +36,9 @@
   display: flex;
   justify-content: space-between;
   padding: 5px 0;
+}
+
+.save-button-container {
+  display: flex;
+  justify-content: flex-end;
 }

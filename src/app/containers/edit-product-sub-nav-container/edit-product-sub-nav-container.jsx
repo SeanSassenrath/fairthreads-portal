@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import autoBind from 'react-autobind';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
+import KeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import { getProductById } from '../../reducers/root-reducer';
 import { saveUpdatedProduct } from '../../actions/product-actions';
 import { hideNotification } from '../../actions/notification-actions';
@@ -21,31 +24,24 @@ class EditProductSubNavContainer extends Component {
     history.goBack();
   }
 
-  saveProductUpdate() {
-    const { history, hideNotification, product, saveUpdatedProduct } = this.props;
-    saveUpdatedProduct({id: product._id, product});
-    setTimeout(() => hideNotification(), 3000);
-    history.goBack();
-  }
-
   render() {
-    console.log('this.props', this.props);
-
+    const { product } = this.props;
+    const updatedAt = new Date(product.updatedAt);
+    const createdAt = new Date(product.createdAt);
     return (
       <SubNav>
         <div className={styles['left-sub-nav-container']}>
-          <Button onClick={this.goBack}>
-            Back
-          </Button>
-          <div>
-            <Button onClick={this.saveProductUpdate}>Save changes</Button>
+          <FlatButton
+            label="Back"
+            primary={true}
+            icon={<KeyboardArrowLeft />}
+            onClick={this.goBack}
+          />
+          <div className={styles['meta-info-container']}>
+            <span>id: {product._id}</span>
+            <span>Updated At: {updatedAt.toDateString()}</span>
+            <span>Created At: {createdAt.toDateString()}</span>
           </div>
-          <div>
-            <Button>Cancel changes</Button>
-          </div>
-        </div>
-        <div>
-          <Button>Delete product</Button>
         </div>
       </SubNav>
     )

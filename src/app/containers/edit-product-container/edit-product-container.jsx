@@ -12,8 +12,10 @@ import {
   updateProductCategory,
   saveUpdatedProduct ,
 } from '../../actions/product-actions';
+import { hideNotification } from '../../actions/notification-actions';
 import { fetchCategories } from '../../actions/category-actions';
 import autoBind from 'react-autobind';
+import Button from '../../components/button/button';
 import ProductCard from '../../components/product-card/product-card';
 import Toggle from 'material-ui/Toggle';
 import SelectField from 'material-ui/SelectField';
@@ -101,10 +103,15 @@ class EditProductContainer extends Component {
     return;
   }
 
+  saveProductUpdate() {
+    const { history, hideNotification, product, saveUpdatedProduct } = this.props;
+    saveUpdatedProduct({id: product._id, product});
+    setTimeout(() => hideNotification(), 3000);
+    history.goBack();
+  }
+
   renderProduct() {
     const { categories, product, updateProductActive, saveUpdatedProduct } = this.props;
-    const updatedAt = new Date(product.updatedAt);
-    const createdAt = new Date(product.createdAt);
 
     return (
       <div className={styles['edit-product-container']}>
@@ -114,10 +121,6 @@ class EditProductContainer extends Component {
 
             <div className={styles['product-metadata']}>
               <TextField hintText={product.details.name} onChange={this.setName}/>
-              <span>Brand: {product.brand.details.name}</span>
-              <span>id: {product._id}</span>
-              <span>Updated At: {updatedAt.toDateString()}</span>
-              <span>Created At: {createdAt.toDateString()}</span>
             </div>
 
             <div className={styles['product-actions']}>
@@ -163,6 +166,10 @@ class EditProductContainer extends Component {
             </div>
 
           </div>
+        </div>
+
+        <div className={styles['save-button-container']}>
+          <Button onClick={this.saveProductUpdate}>Save changes</Button>
         </div>
       </div>
     )
