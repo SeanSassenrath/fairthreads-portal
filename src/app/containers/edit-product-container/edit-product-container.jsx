@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getProductById, getCategoriesById } from '../../reducers/root-reducer';
+import { getProductById, getCategoriesById, getIsLoading } from '../../reducers/root-reducer';
 import { 
   fetchProduct, 
   updateProductActive,
@@ -36,6 +36,7 @@ class EditProductContainer extends Component {
     const { fetchProduct } = this.props;
     const { id } = this.props.match.params;
     fetchProduct(id);
+    // document.getElementById('test').focus();
   }
 
   componentDidUpdate(prevProps) {
@@ -111,65 +112,51 @@ class EditProductContainer extends Component {
   }
 
   renderProduct() {
-    const { categories, product, updateProductActive, saveUpdatedProduct } = this.props;
+    const { categories, isLoading, product, updateProductActive, saveUpdatedProduct } = this.props;
 
     return (
       <div className={styles['edit-product-container']}>
         <div className={styles['edit-product']}>
-          <ProductCard product={product} />
+          <ProductCard product={product} isLoading={isLoading} />
           <div className={styles['edit-product-details']}>
-
-            <div className={styles['product-metadata']}>
-              <TextField hintText={product.details.name} onChange={this.setName}/>
-            </div>
-
+            <TextField hintText={product.details.name} onChange={this.setName} className={styles['product-name']} tabIndex={1} />
             <div className={styles['product-actions']}>
               <div className={styles['toggle-container']}>
                 <span>Active:</span>
                 <div>
-                  <Toggle toggled={product.metadata.active} onToggle={updateProductActive} />
+                  <Toggle toggled={product.metadata.active} onToggle={updateProductActive} tabIndex={2} />
                 </div>
               </div>
               <div className={styles['toggle-container']}>
                 <span>Stylist Pick:</span>
                 <div>
-                  <Toggle disabled />
+                  <Toggle disabled tabIndex={3} />
                 </div>
               </div>
               <div className={styles['toggle-container']}>
                 <span>Featured:</span>
                 <div>
-                  <Toggle disabled />
+                  <Toggle disabled tabIndex={4} />
                 </div>
               </div>
               <div className={styles['toggle-container']}>
                 <span>Img Cover:</span>
                 <div>
-                 <Toggle toggled={this.isObjectCover()} onToggle={this.setObjectFit} />
+                 <Toggle toggled={this.isObjectCover()} onToggle={this.setObjectFit} tabIndex={5} />
                 </div>
               </div>
             </div>
 
-            <div className={styles['product-actions']}>
-              <div>
-                <SelectField value={product.details.gender} onChange={this.setGender}>
-                  <MenuItem value='womens' primaryText='Womens' />
-                  <MenuItem value='mens' primaryText='Mens' />
-                </SelectField>
-              </div>
-            </div>
-
-            <div className={styles['product-actions']}>
-              <div>
-                { this.renderCategorySelect() }
-              </div>
-            </div>
-
+            <SelectField value={product.details.gender} onChange={this.setGender} tabIndex={6}>
+              <MenuItem value='womens' primaryText='Womens' />
+              <MenuItem value='mens' primaryText='Mens' />
+            </SelectField>
+            { this.renderCategorySelect() }
           </div>
         </div>
 
         <div className={styles['save-button-container']}>
-          <Button onClick={this.saveProductUpdate}>Save changes</Button>
+          <Button onClick={this.saveProductUpdate} tabIndex={7}>Save changes</Button>
         </div>
       </div>
     )
@@ -189,7 +176,8 @@ const mapStateToProps = (state) => {
   const x = getProductById(state);
   return {
     product: getProductById(state),
-    categories: getCategoriesById(state)
+    categories: getCategoriesById(state),
+    isLoading: getIsLoading(state)
   }
 }
 

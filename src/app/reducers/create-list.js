@@ -7,9 +7,6 @@ import { FETCH_CATEGORIES_FULFILLED } from '../constants/category-constants';
 
 const createList = (category, gender) => {
   return (state = [], action) => {
-    console.log('cateogry', category);
-    console.log('action.category', action.category);
-    
     if (action.category !== category || action.gender !== gender) {
       return state;
     }

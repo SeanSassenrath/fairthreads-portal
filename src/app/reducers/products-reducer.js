@@ -32,10 +32,8 @@ const productsById = (state = {}, action) => {
 
 const product = (state = {}, action) => {
   switch (action.type) {
-    case FETCH_PRODUCT:
-      return setIn(state, ['loading'], true);
     case FETCH_PRODUCT_FULFILLED:
-      return Object.assign({}, !state.loading, action.response);
+      return Object.assign({}, !state.isLoading, action.response);
     case UPDATE_PRODUCT_ACTIVE:
       return setIn(state, ['metadata', 'active'], !state.metadata.active)
     case UPDATE_PRODUCT_NAME:
@@ -50,6 +48,21 @@ const product = (state = {}, action) => {
       return state;
     case SAVE_UPDATED_PRODUCT_FULFILLED:
       return setIn(state, ['serverResponse'], action.response.response.message)
+    default:
+      return state;
+  }
+}
+
+const loading = (state = {'isLoading': false}, action) => {
+  switch (action.type) {
+    case FETCH_PRODUCT:
+      return Object.assign({}, {'isLoading': true});
+    case FETCH_PRODUCT_FULFILLED:
+      return Object.assign({}, {'isLoading': false});
+    case FETCH_PRODUCTS:
+      return Object.assign({}, {'isLoading': true});
+    case FETCH_PRODUCTS_FULFILLED:
+      return Object.assign({}, {'isLoading': false});
     default:
       return state;
   }
@@ -82,12 +95,8 @@ export const getProductsByGenderAndType = (state, gender, type, filter) => {
   return ids.map(id => state.productsById[id]);
 }
 
-// export const getProductById = (state) => {
-//   console.log('stateee', state)
-//   return state;
-// }
-
 const products = combineReducers({
+  loading,
   product,
   productsById,
   womensCategories,

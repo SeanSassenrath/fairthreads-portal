@@ -4,7 +4,7 @@ const Waypoint = require('react-waypoint');
 import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getProductsByGenderAndType } from '../../reducers/root-reducer';
+import { getProductsByGenderAndType, getIsLoading } from '../../reducers/root-reducer';
 import { fetchProducts } from '../../actions/product-actions';
 import ProductCard from '../../components/product-card/product-card';
 import styles from './products-container.css';
@@ -49,7 +49,7 @@ class ProductsContainer extends Component {
   }
 
   render() {
-    const { products } = this.props;
+    const { products, isLoading } = this.props;
     return (
       <div className={styles['products-container']}>
         { products.map((product, index) => (
@@ -57,7 +57,7 @@ class ProductsContainer extends Component {
             to={`/edit/product/${product.details.gender}/${product.categories.details ? product.categories.details.name : null}/${product._id}`} 
             className={styles['product-link']} 
             key={index}>
-              <ProductCard product={product} isActive={product.metadata.active} />
+              <ProductCard product={product} isLoading={isLoading} isActive={product.metadata.active} />
           </Link>
         ))}
         { this.renderWaypoint() }
@@ -68,7 +68,10 @@ class ProductsContainer extends Component {
 
 const mapStateToProps = (state, { match }) => {
   const { gender, category } = match.params;
-  return {products: getProductsByGenderAndType(state, gender, 'categories', category )}
+  return {
+    products: getProductsByGenderAndType(state, gender, 'categories', category ),
+    isLoading: getIsLoading(state)
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

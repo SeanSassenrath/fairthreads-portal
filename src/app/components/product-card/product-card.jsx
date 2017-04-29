@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './product-card.css';
 
 const renderImgArea = props => {
-  const { css, images, loading } = props.product;
+  const { isLoading, product } = props;
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={styles['image-container-loading']} />
     )
@@ -12,8 +12,8 @@ const renderImgArea = props => {
   return (
     <div className={styles['image-container']}>
       <img
-        src={images.imageOriginal}
-        style={{ objectFit: css.objectFit }}
+        src={product.images.imageOriginal}
+        style={{ objectFit: product.css.objectFit }}
         role="presentation"
         className={styles.image}
       />

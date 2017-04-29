@@ -14,8 +14,8 @@ export const rootEpic = combineEpics(
 );
 
 export const rootReducer = combineReducers({
-  products,
   categories,
+  products,
   notification,
 });
 
@@ -35,4 +35,8 @@ export const getCategoriesById = (state) => (
 
 export const getNotification = (state) => (
   state.notification
+)
+
+export const getIsLoading = (state) => (
+  state.products.loading.isLoading
 )
