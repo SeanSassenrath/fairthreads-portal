@@ -50,12 +50,13 @@ class ProductsContainer extends Component {
 
   render() {
     const { products, isLoading } = this.props;
+
     return (
       <div className={styles['products-container']}>
         { products.map((product, index) => (
-          <Link 
-            to={`/edit/product/${product.details.gender}/${product.categories.details ? product.categories.details.name : null}/${product._id}`} 
-            className={styles['product-link']} 
+          <Link
+            to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 
+            className={styles['product-link']}
             key={index}>
               <ProductCard product={product} isLoading={isLoading} isActive={product.metadata.active} />
           </Link>
