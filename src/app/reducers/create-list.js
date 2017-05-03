@@ -1,8 +1,6 @@
-import { 
-  FETCH_PRODUCTS,
-  FETCH_PRODUCTS_FULFILLED
-} from '../constants/product-constants';
+import { FETCH_PRODUCTS, FETCH_PRODUCTS_FULFILLED } from '../constants/product-constants';
 import { FETCH_CATEGORIES_FULFILLED } from '../constants/category-constants';
+import { FETCH_BRANDS_FULFILLED } from '../constants/brand-constants';
 
 
 const createList = (category, gender) => {
@@ -40,6 +38,17 @@ export const createCategoryList = gender => {
     switch (action.type) {
       case FETCH_CATEGORIES_FULFILLED:
         return action.payload.map(cateogry => cateogry._id);
+      default:
+        return state;
+    }
+  }
+}
+
+export const createBrandList = () => {
+  return (state = [], action) => {
+    switch (action.type) {
+      case FETCH_BRANDS_FULFILLED:
+        return action.payload.map(brand => brand._id);
       default:
         return state;
     }

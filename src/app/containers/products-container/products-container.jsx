@@ -70,7 +70,7 @@ class ProductsContainer extends Component {
 const mapStateToProps = (state, { match }) => {
   const { gender, category } = match.params;
   return {
-    products: getProductsByGenderAndType(state, gender, 'categories', category ),
+    products: getProductsByGenderAndType(state, gender, 'categories', category),
     isLoading: getIsLoading(state)
   }
 }

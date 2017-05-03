@@ -7,6 +7,7 @@ import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-l
 import Button from '../../components/button/button';
 import MainContent from '../../components/main-content/main-content';
 import CategoryNavContainer from '../../containers/category-nav-container/category-nav-container';
+import BrandsContainer from '../../containers/brands-container/brands-container';
 import styles from './brands.css';
 
 const Brands = props => {
@@ -16,18 +17,9 @@ const Brands = props => {
 
   return (
     <Page>
-      <div className={styles['content-container']}>
-        <SideNav>
-          <SideNavSection>
-            <SideNavMainLink to={`/products/womens/${category}`}>Womens</SideNavMainLink>
-            <SideNavMainLink to={`/products/mens/${category}`}>Mens</SideNavMainLink>
-          </SideNavSection>
-          <CategoryNavContainer type={'brands'} />
-        </SideNav>
-        <MainContent>
-          Test
-        </MainContent>
-      </div>
+      <MainContent>
+        <BrandsContainer />
+      </MainContent>
     </Page>
   )
 }
