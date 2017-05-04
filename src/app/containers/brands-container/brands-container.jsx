@@ -6,6 +6,7 @@ import { getAllBrands } from '../../reducers/root-reducer';
 import { fetchBrands } from '../../actions/brand-actions';
 import ProductCard from '../../components/product-card/product-card';
 import styles from './brands-container.css';
+import TextField from 'material-ui/TextField';
 import {
   Table,
   TableBody,
@@ -20,11 +21,32 @@ class BrandsContainer extends Component {
   constructor(props) {
     super(props)
     autobind(this);
+    this.state = {
+      id: null,
+      name: null,
+      description: null,
+      image: null,
+    }
   }
 
   componentDidMount() {
     const { fetchBrands } = this.props;
     fetchBrands();
+  }
+
+  onCellClick(e) {
+    const { brands } = this.props;
+    const brand = brands[e];
+    this.setState({ 
+      id: brand._id,
+      name: brand.details.name,
+      description: brand.details.description,
+      image: brand.details.image
+    });
+  }
+
+  onChange(e) {
+    this.setState({ name: e.target.value })
   }
 
   renderTableRows() {
@@ -47,19 +69,50 @@ class BrandsContainer extends Component {
     const { brands } = this.props;
 
     return (
-      <div>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHeaderColumn>Brands</TableHeaderColumn>
-              <TableHeaderColumn># of Products</TableHeaderColumn>
-              <TableHeaderColumn>Last Updated</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            { this.renderTableRows() }
-          </TableBody>
-        </Table>
+      <div className={styles['brands']}>
+        <div className={styles['brands-table-container']}>
+          <div className={styles['brands-table']}>
+            <Table onCellClick={this.onCellClick}>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderColumn>Brands</TableHeaderColumn>
+                  <TableHeaderColumn># of Products</TableHeaderColumn>
+                  <TableHeaderColumn>Last Updated</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                { this.renderTableRows() }
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+        <div>
+          <div className={styles['brand-text-field-container']}>
+            <TextField
+              id="brand-name"
+              disabled={!this.state.name}
+              floatingLabelText="Brand name"
+              value={this.state.name || "Brand Name"}
+              onChange={this.onChange}
+            />
+          </div>
+          <div className={styles['brand-text-field-container']}>
+            <TextField
+              id="brand-image"
+              disabled={!this.state.name}
+              floatingLabelText="Brand image"
+              value={this.state.image}
+              hintText={"Brand image"}
+              onChange={this.onChange}
+            />
+          </div>
+          <textarea 
+            disabled={!this.state.name}
+            className={styles['brand-description']}
+          >
+            {this.state.description || "Brand description"}
+          </textarea>
+        </div>
       </div>
     )
   }

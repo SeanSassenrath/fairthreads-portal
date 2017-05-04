@@ -1,0 +1,22 @@
+.brands {
+  display: flex;
+}
+.brands-table-container {
+  flex: 0 1 650px;
+  padding-right: 100px;
+}
+.brands-table {
+  overflow: scroll;
+  height: calc(100vh - 200px);
+}
+
+.brand-text-field-container {
+  display: block;
+  margin-bottom: 10px;
+}
+.brand-description {
+  display: block;
+  height: 150px;
+  margin-top: 40px;
+  width: 100%;
+}
