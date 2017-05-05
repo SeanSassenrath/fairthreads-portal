@@ -3,7 +3,10 @@ import { mergeMap } from 'rxjs';
 
 import { 
   FETCH_BRANDS,
-  FETCH_BRANDS_FULFILLED
+  FETCH_BRANDS_FULFILLED,
+  SAVE_UPDATED_BRAND,
+  SAVE_UPDATED_BRAND_FULFILLED,
+
 } from '../constants/brand-constants';
 
 export const fetchBrands = ()=> ({ 
@@ -18,3 +21,29 @@ export const fetchBrandsEpic = action$ =>
       ajax.getJSON(`http://localhost:9000/api/v1/brands`)
         .map(response => fetchBrandsFulfilled(response))
     );
+
+// Save updated brand
+
+export const saveUpdatedBrand = payload => ({
+  type: SAVE_UPDATED_BRAND,
+  brand: payload.brand,
+  id: payload.id
+})
+
+export const saveUpdatedBrandEpic = action$ =>
+  action$.ofType(SAVE_UPDATED_BRAND)
+    .mergeMap(action =>
+      ajax
+        .put(`http://localhost:9000/api/v1/brands/${action.id}`,
+          JSON.stringify(Object.assign(
+            {}, 
+            {'details': action.brand.details},
+            {'metadata': action.brand.metadata})), 
+        {'Content-Type': 'application/json'})
+        .map(response => saveUpdatedBrandFulfilled({response}))
+  );
+
+export const saveUpdatedBrandFulfilled = payload => ({
+  type: SAVE_UPDATED_BRAND_FULFILLED,
+  response: payload.response
+})

@@ -6,10 +6,11 @@ import brands, * as BrandSelectors from './brands-reducer';
 import notification from './notification-reducer';
 import { fetchProductsEpic, fetchProductEpic, saveUpdatedProductEpic } from '../actions/product-actions';
 import { fetchCategoriesEpic } from '../actions/category-actions';
-import { fetchBrandsEpic } from '../actions/brand-actions';
+import { fetchBrandsEpic, saveUpdatedBrandEpic } from '../actions/brand-actions';
 
 export const rootEpic = combineEpics(
   fetchBrandsEpic,
+  saveUpdatedBrandEpic,
   fetchCategoriesEpic,
   fetchProductsEpic,
   fetchProductEpic,

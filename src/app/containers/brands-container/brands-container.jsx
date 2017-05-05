@@ -3,8 +3,8 @@ import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllBrands } from '../../reducers/root-reducer';
-import { fetchBrands } from '../../actions/brand-actions';
-import ProductCard from '../../components/product-card/product-card';
+import { fetchBrands, saveUpdatedBrand } from '../../actions/brand-actions';
+import Button from '../../components/button/button';
 import styles from './brands-container.css';
 import TextField from 'material-ui/TextField';
 import {
@@ -15,6 +15,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import { omit } from 'lodash';
 
 class BrandsContainer extends Component {
 
@@ -45,8 +46,11 @@ class BrandsContainer extends Component {
     });
   }
 
-  onChange(e) {
-    this.setState({ name: e.target.value })
+  onChange(type, e) {
+    const changes = {};
+    changes[type] = e.target.value;
+    const newState = Object.assign(this.state, changes);
+    this.setState(newState)
   }
 
   renderTableRows() {
@@ -66,7 +70,7 @@ class BrandsContainer extends Component {
   }
 
   render() {
-    const { brands } = this.props;
+    const { brands, saveUpdatedBrand } = this.props;
 
     return (
       <div className={styles['brands']}>
@@ -93,7 +97,7 @@ class BrandsContainer extends Component {
               disabled={!this.state.name}
               floatingLabelText="Brand name"
               value={this.state.name || "Brand Name"}
-              onChange={this.onChange}
+              onChange={e => this.onChange('name', e)}
             />
           </div>
           <div className={styles['brand-text-field-container']}>
@@ -101,17 +105,24 @@ class BrandsContainer extends Component {
               id="brand-image"
               disabled={!this.state.name}
               floatingLabelText="Brand image"
-              value={this.state.image}
-              hintText={"Brand image"}
+              value={this.state.image || ""}
               onChange={this.onChange}
             />
           </div>
-          <textarea 
-            disabled={!this.state.name}
-            className={styles['brand-description']}
-          >
-            {this.state.description || "Brand description"}
-          </textarea>
+          <div>
+            <textarea 
+              disabled={!this.state.name}
+              className={styles['brand-description']}
+              value={this.state.description || "Brand description"}
+              onChange={e => this.onChange('description', e)}
+            />
+          </div>
+          <Button onClick={() => saveUpdatedBrand({ id: this.state.id, brand: { details: omit(this.state, 'id') } })}>
+            Save
+          </Button>
+          <a href="#">
+            Cancel
+          </a>
         </div>
       </div>
     )
@@ -127,4 +138,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 // Connect the Redux store to the ProductsContainer and pass in products state and actions
-export default connect(mapStateToProps, { fetchBrands })(BrandsContainer);
+export default connect(mapStateToProps, { fetchBrands, saveUpdatedBrand })(BrandsContainer);
