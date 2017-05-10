@@ -16,7 +16,7 @@ const MainNav = () => (
         <MainNavLink to='/categories/womens/categories'>Categories</MainNavLink>
       </li>
       <li>
-        <MainNavLink to='/brands/womens/all'>Brands</MainNavLink>
+        <MainNavLink to='/brands'>Brands</MainNavLink>
       </li>
     </ul>
   </nav>

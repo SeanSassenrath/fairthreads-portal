@@ -12,8 +12,10 @@ import {
   UPDATE_PRODUCT_GENDER,
   UPDATE_PRODUCT_IMG_FIT,
   UPDATE_PRODUCT_CATEGORY,
+  UPDATE_PRODUCT_BY_ID_ACTIVE,
   SAVE_UPDATED_PRODUCT,
   SAVE_UPDATED_PRODUCT_FULFILLED,
+  SET_PRODUCT,
 } from '../constants/product-constants';
 
 // http://localhost:9000/api/v1/products/?gender=womens
@@ -55,8 +57,14 @@ export const fetchProductEpic = action$ =>
         .map(response => fetchProductFulfilled({ response }))
     );
 
-export const updateProductActive = () => ({
+export const updateProductByIdActive = productId => ({
+  type:  UPDATE_PRODUCT_BY_ID_ACTIVE,
+  productId
+})
+
+export const updateProductActive = (productId) => ({
   type: UPDATE_PRODUCT_ACTIVE,
+  productId
 })
 
 export const updateProductName = name => ({

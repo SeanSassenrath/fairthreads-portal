@@ -37,7 +37,7 @@ class BrandsContainer extends Component {
 
   onCellClick(e) {
     const { brands } = this.props;
-    const brand = brands[e];
+    const brand = brands[e.target.value];
     this.setState({ 
       id: brand._id,
       name: brand.details.name,
@@ -46,7 +46,11 @@ class BrandsContainer extends Component {
     });
   }
 
-  onChange(type, e) {
+  onSaveUpdatedBrand() {
+    this.props.saveUpdatedBrand({ id: this.state.id, brand: { details: omit(this.state, 'id') } });
+  }
+
+  updateBrandField(type, e) {
     const changes = {};
     changes[type] = e.target.value;
     const newState = Object.assign(this.state, changes);
@@ -59,15 +63,18 @@ class BrandsContainer extends Component {
       brands.map(({details, products, updatedAt}, i) => {
         const updatedAtFormatted = new Date(updatedAt);
         return (
-          <TableRow key={i}>
-            <TableRowColumn>{details.name}</TableRowColumn>
-            <TableRowColumn>{products.length}</TableRowColumn>
-            <TableRowColumn>{updatedAtFormatted.toDateString()}</TableRowColumn>
-          </TableRow>
+          <div key={i}>
+            <label>
+              <input value={i} type="radio" name="test" onChange={this.onCellClick} />
+              {details.name}
+            </label>
+          </div>
         )
       })
     )
   }
+
+  saveUpdatedBrand
 
   render() {
     const { brands, saveUpdatedBrand } = this.props;
@@ -76,18 +83,7 @@ class BrandsContainer extends Component {
       <div className={styles['brands']}>
         <div className={styles['brands-table-container']}>
           <div className={styles['brands-table']}>
-            <Table onCellClick={this.onCellClick}>
-              <TableHeader>
-                <TableRow>
-                  <TableHeaderColumn>Brands</TableHeaderColumn>
-                  <TableHeaderColumn># of Products</TableHeaderColumn>
-                  <TableHeaderColumn>Last Updated</TableHeaderColumn>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                { this.renderTableRows() }
-              </TableBody>
-            </Table>
+            { this.renderTableRows() }
           </div>
         </div>
         <div>
@@ -97,7 +93,7 @@ class BrandsContainer extends Component {
               disabled={!this.state.name}
               floatingLabelText="Brand name"
               value={this.state.name || "Brand Name"}
-              onChange={e => this.onChange('name', e)}
+              onChange={e => this.updateBrandField('name', e)}
             />
           </div>
           <div className={styles['brand-text-field-container']}>
@@ -106,7 +102,7 @@ class BrandsContainer extends Component {
               disabled={!this.state.name}
               floatingLabelText="Brand image"
               value={this.state.image || ""}
-              onChange={this.onChange}
+              onChange={e => this.updateBrandField('image', e)}
             />
           </div>
           <div>
@@ -114,10 +110,10 @@ class BrandsContainer extends Component {
               disabled={!this.state.name}
               className={styles['brand-description']}
               value={this.state.description || "Brand description"}
-              onChange={e => this.onChange('description', e)}
+              onChange={e => this.updateBrandField('description', e)}
             />
           </div>
-          <Button onClick={() => saveUpdatedBrand({ id: this.state.id, brand: { details: omit(this.state, 'id') } })}>
+          <Button onClick={this.onSaveUpdatedBrand}>
             Save
           </Button>
           <a href="#">

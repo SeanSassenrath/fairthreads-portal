@@ -11,6 +11,7 @@ import {
   UPDATE_PRODUCT_GENDER,
   UPDATE_PRODUCT_IMG_FIT,
   UPDATE_PRODUCT_CATEGORY,
+  UPDATE_PRODUCT_BY_ID_ACTIVE,
   SAVE_UPDATED_PRODUCT,
   SAVE_UPDATED_PRODUCT_FULFILLED
 } from '../constants/product-constants';
@@ -25,6 +26,8 @@ const productsById = (state = {}, action) => {
         nextState[product._id] = product;
       });
       return nextState;
+    case UPDATE_PRODUCT_BY_ID_ACTIVE:
+      return setIn(state, [action.productId, 'metadata', 'active'], !!state[action.productId].metadata.active)
     default:
       return state;
   }

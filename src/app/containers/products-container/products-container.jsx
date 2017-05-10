@@ -5,7 +5,7 @@ import autobind from 'react-autobind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { getProductsByGenderAndType, getIsLoading } from '../../reducers/root-reducer';
-import { fetchProducts } from '../../actions/product-actions';
+import { fetchProducts, updateProductByIdActive, saveUpdatedProduct } from '../../actions/product-actions';
 import ProductCard from '../../components/product-card/product-card';
 import styles from './products-container.css';
 
@@ -39,6 +39,14 @@ class ProductsContainer extends Component {
     }
   }
 
+  updateProductActive(product, e) {
+    e.preventDefault();
+    const updatedProduct = product;
+    updatedProduct.metadata.active = !product.metadata.active;
+    this.props.saveUpdatedProduct({product: updatedProduct, id: updatedProduct._id});
+    this.props.updateProductByIdActive(product._id);
+  }
+
   renderWaypoint() {
     const { fetchProducts, products } = this.props;
     const { gender, category } = this.props.match.params;
@@ -54,12 +62,19 @@ class ProductsContainer extends Component {
     return (
       <div className={styles['products-container']}>
         { products.map((product, index) => (
-          <Link
-            to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 
-            className={styles['product-link']}
-            key={index}>
+          <div className={styles['product-container']} key={index}>
+            <a 
+              href="#" 
+              className={product.metadata.active ? styles['product-active'] : styles['product-inactive']} 
+              onClick={(e) => this.updateProductActive(product, e)}
+            />
+            <Link
+              to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 
+              className={styles['product-link']}
+            >
               <ProductCard product={product} isLoading={isLoading} isActive={product.metadata.active} />
-          </Link>
+            </Link>
+          </div>
         ))}
         { this.renderWaypoint() }
       </div>
@@ -81,4 +96,4 @@ const mapDispatchToProps = (dispatch) => {
 
 // Use withRouter to convert router context to props
 // Connect the Redux store to the ProductsContainer and pass in products state and actions
-export default withRouter(connect(mapStateToProps, { fetchProducts })(ProductsContainer));
+export default withRouter(connect(mapStateToProps, { fetchProducts, updateProductByIdActive, saveUpdatedProduct })(ProductsContainer));

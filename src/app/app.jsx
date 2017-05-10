@@ -27,7 +27,7 @@ const App = () => (
           <NotificationContainer />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route path='/categories/:gender?/:category?' component={Categories} />
-          <Route path='/brands/:gender?/:category?' component={Brands} />
+          <Route path='/brands' component={Brands} />
           <Route path='/products/:gender?/:category?/:subcategory?' component={Products} />
           <Route path='/edit/product/:gender?/:category?/:id?' component={EditProduct} />
         </div>
