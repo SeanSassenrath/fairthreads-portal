@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux'
 import { getProductsByGenderAndType, getIsLoading } from '../../reducers/root-reducer';
 import { fetchProducts, updateProductByIdActive, saveUpdatedProduct } from '../../actions/product-actions';
 import ProductCard from '../../components/product-card/product-card';
+import Checkbox from '../../components/checkbox/checkbox';
 import styles from './products-container.css';
 
 const pageLength = 36;
@@ -63,11 +64,12 @@ class ProductsContainer extends Component {
       <div className={styles['products-container']}>
         { products.map((product, index) => (
           <div className={styles['product-container']} key={index}>
-            <a 
-              href="#" 
-              className={product.metadata.active ? styles['product-active'] : styles['product-inactive']} 
-              onClick={(e) => this.updateProductActive(product, e)}
-            />
+            <Checkbox 
+              checked={product.metadata.active}
+              onChange={(e) => this.updateProductActive(product, e)}
+            >
+              Test
+            </Checkbox>
             <Link
               to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 
               className={styles['product-link']}
