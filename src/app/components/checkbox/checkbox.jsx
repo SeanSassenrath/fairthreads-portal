@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './checkbox.css';
 
-
-
 class Checkbox extends Component {
-  componentDidMount() {
-    console.log("here", this._checkbox)
+  propTypes = {
+    onChange: PropTypes.func,
+    checked: PropTypes.bool,
   }
 
   render() {
