@@ -28,7 +28,6 @@ const ProductCard = props => {
     <div className={styles.container}>
       { renderImgArea(props) }
       <div>
-        { isActive ? <div className={styles['active-indicator']} /> : null }
         <span className={styles.brand}>{brand.details.name}</span>
         <span className={styles.name}>{details.name}</span>
         {prices.salePrice

@@ -68,7 +68,7 @@ class ProductsContainer extends Component {
               checked={product.metadata.active}
               onChange={(e) => this.updateProductActive(product, e)}
             >
-              Test
+              Active
             </Checkbox>
             <Link
               to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 

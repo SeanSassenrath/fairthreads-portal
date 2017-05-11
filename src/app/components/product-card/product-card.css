@@ -77,11 +77,3 @@
 span.old-price {
   opacity: .3;
 }
-
-.active-indicator {
-  border: 5px solid var(--green-light-1);
-  border-radius: 50%;
-  left: 20px;
-  position: absolute;
-  top: 20px;
-}
