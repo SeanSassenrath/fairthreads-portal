@@ -6,6 +6,7 @@ class Checkbox extends Component {
   static propTypes = {
     onChange: PropTypes.func,
     checked: PropTypes.bool,
+    // add disabled
   }
 
   constructor(props) {

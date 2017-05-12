@@ -63,19 +63,21 @@ class ProductsContainer extends Component {
     return (
       <div className={styles['products-container']}>
         { products.map((product, index) => (
-          <div className={styles['product-container']} key={index}>
+          <div>
             <Checkbox 
-              checked={product.metadata.active}
-              onChange={(e) => this.updateProductActive(product, e)}
+                checked={product.metadata.active}
+                onChange={(e) => this.updateProductActive(product, e)}
             >
               Active
             </Checkbox>
-            <Link
-              to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 
-              className={styles['product-link']}
-            >
-              <ProductCard product={product} isLoading={isLoading} isActive={product.metadata.active} />
-            </Link>
+            <div className={styles['product-container']} key={index}>
+              <Link
+                to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 
+                className={styles['product-link']}
+              >
+                <ProductCard product={product} isLoading={isLoading} isActive={product.metadata.active} />
+              </Link>
+            </div>
           </div>
         ))}
         { this.renderWaypoint() }

@@ -1,4 +1,7 @@
+@import '../../utils/variables.css';
+
 .checkbox {
+  display: inline-flex;
   position: relative;
 }
 
@@ -25,10 +28,10 @@ label:before {
 
 input:checked + label:before {
   content: "";
-  border: 2px solid green;
+  border: 2px solid var(--green-dark-1);
   border-radius: 2px;
-  background-color: green;
-  height: 17px;
+  background-color: var(--green-dark-1);
+  height: 15px;
   position: absolute;
   width: 17px;
   left: 0;
@@ -42,7 +45,7 @@ input:checked + label:after {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   width: 3px;
-  height: 8px;
+  height: 7px;
   left: 8px;
   top: 4px;
 }
