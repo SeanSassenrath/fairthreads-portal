@@ -63,14 +63,14 @@ class ProductsContainer extends Component {
     return (
       <div className={styles['products-container']}>
         { products.map((product, index) => (
-          <div>
+          <div className={styles['product-container']}>
             <Checkbox 
                 checked={product.metadata.active}
                 onChange={(e) => this.updateProductActive(product, e)}
             >
               Active
             </Checkbox>
-            <div className={styles['product-container']} key={index}>
+            <div className={styles['product']} key={index}>
               <Link
                 to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 
                 className={styles['product-link']}
