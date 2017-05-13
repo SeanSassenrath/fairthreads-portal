@@ -24,10 +24,10 @@ export const fetchBrandsEpic = action$ =>
 
 // Save updated brand
 
-export const saveUpdatedBrand = payload => ({
+export const saveUpdatedBrand = ({brand, id}) => ({
   type: SAVE_UPDATED_BRAND,
-  brand: payload.brand,
-  id: payload.id
+  brand,
+  id
 })
 
 export const saveUpdatedBrandEpic = action$ =>
@@ -43,7 +43,7 @@ export const saveUpdatedBrandEpic = action$ =>
         .map(response => saveUpdatedBrandFulfilled({response}))
   );
 
-export const saveUpdatedBrandFulfilled = payload => ({
+export const saveUpdatedBrandFulfilled = ({response}) => ({
   type: SAVE_UPDATED_BRAND_FULFILLED,
-  response: payload.response
+  response
 })
