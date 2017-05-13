@@ -19,24 +19,24 @@ import {
 } from '../constants/product-constants';
 
 // http://localhost:9000/api/v1/products/?gender=womens
-export const fetchProducts = payload => ({ 
+export const fetchProducts = ({category, gender, page}) => ({ 
   type: FETCH_PRODUCTS, 
-  category: payload.category,
-  gender: payload.gender, 
-  page: payload.page
+  category,
+  gender, 
+  page
 });
 
-export const fetchProductsFulfilled = payload => ({ 
+export const fetchProductsFulfilled = ({response, gender, category}) => ({ 
   type: FETCH_PRODUCTS_FULFILLED, 
-  response: payload.response,
-  gender: payload.gender,
-  category: payload.category
+  response,
+  gender,
+  category
 });
 
 export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_PRODUCTS)
     .mergeMap(action => 
-      ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category === 'all' ? '' : action.category}&page=${action.page}&search=${action.search || ''}`)
+      ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category}&page=${action.page}&search=${action.search || ''}`)
         .map(response => fetchProductsFulfilled({ response, gender: action.gender, category: action.category }))
     );
 
@@ -45,9 +45,9 @@ export const fetchProduct = id => ({
   id
 });
 
-export const fetchProductFulfilled = payload => ({
+export const fetchProductFulfilled = ({response}) => ({
   type: FETCH_PRODUCT_FULFILLED,
-  response: payload.response
+  response
 })
 
 export const fetchProductEpic = action$ => 
@@ -62,7 +62,7 @@ export const updateProductByIdActive = productId => ({
   productId
 })
 
-export const updateProductActive = (productId) => ({
+export const updateProductActive = productId => ({
   type: UPDATE_PRODUCT_ACTIVE,
   productId
 })
@@ -95,9 +95,9 @@ export const saveUpdatedProduct = ({product, id, category, gender}) => ({
   gender: gender
 })
 
-export const saveUpdatedProductFulfilled = payload => ({
+export const saveUpdatedProductFulfilled = ({response}) => ({
   type: SAVE_UPDATED_PRODUCT_FULFILLED,
-  response: payload.response
+  response
 })
 
 export const saveUpdatedProductEpic = action$ =>
