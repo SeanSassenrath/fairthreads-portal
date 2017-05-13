@@ -39,12 +39,12 @@ class EditProductContainer extends Component {
     // document.getElementById('test').focus();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate({products, match}) {
     const { fetchProduct, fetchCategories, product } = this.props;
-    const { id } = this.props.match.params;
-    const prevParams = prevProps.match.params;
+    const { id, gender } = this.props.match.params;
+    const prevParams = match.params;
 
-    if (prevProps.product.details !== this.props.product.details) { fetchCategories(product.details.gender); }
+    if (product.details !== this.props.product.details) { fetchCategories(gender); }
 
     if (prevParams.id !== id) {
       fetchProduct(id);
@@ -77,12 +77,13 @@ class EditProductContainer extends Component {
     const { product, categories } = this.props;
     const gender = product.details.gender;
     const categoriesArray = toArray(categories);
+    const categoryId = product.categories ? product.categories._id : null;
     const categoriesByGender = categoriesArray.filter(category => (
       category.details.gender === gender || 'both'
     ))
 
     return (
-      <SelectField value={product.categories._id} onChange={this.setCategory}>
+      <SelectField value={categoryId} onChange={this.setCategory}>
         { categoriesByGender.map((category, i) => (
           <MenuItem
             value={category._id}
@@ -105,9 +106,11 @@ class EditProductContainer extends Component {
   }
 
   saveProductUpdate() {
+    let { gender, category } = this.props.match.params;
+    if (category === 'null') { category = 'uncategorized' }
     const { history, hideNotification, product, saveUpdatedProduct } = this.props;
-    saveUpdatedProduct({id: product._id, product});
-    setTimeout(() => hideNotification(), 3000);
+    saveUpdatedProduct({id: product._id, product, gender, category });
+    // setTimeout(() => hideNotification(), 3000);
     history.goBack();
   }
 

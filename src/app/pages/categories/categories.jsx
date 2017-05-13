@@ -1,7 +1,6 @@
 import React, { Component, PropTypes} from 'react';
 import { render } from 'react-dom';
 import Page from '../../components/page/page';
-import SubNav from '../../components/sub-nav/sub-nav';
 import SideNav from '../../components/side-nav/side-nav';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
 import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-link';
@@ -19,12 +18,6 @@ const Categories = props => {
 
   return (
     <Page>
-      <SubNav gender={gender} type={type}>
-        <div className={styles['add-category']}>
-          <ButtonAdd>Add Category</ButtonAdd>
-        </div>
-        <SearchBar placeholder="Search" className={styles['category-search']} />
-      </SubNav>
       <div className={styles['content-container']}>
         <SideNav>
           <SideNavSection>

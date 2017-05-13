@@ -38,6 +38,12 @@ class CategoryNavContainer extends Component {
         >
           all
         </SideNavMainLink>
+        <SideNavMainLink 
+          to={`/products/${gender}/uncategorized`} 
+          isActive={category === 'uncategorized'}
+        >
+          uncategorized
+        </SideNavMainLink>
         { categories.map((fetchedCategory, i) => (
             <SideNavMainLink 
               to={`/${type}/${gender}/${fetchedCategory.details.name}`} 

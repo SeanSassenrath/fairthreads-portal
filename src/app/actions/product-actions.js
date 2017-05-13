@@ -35,7 +35,7 @@ export const fetchProductsFulfilled = payload => ({
 
 export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_PRODUCTS)
-    .mergeMap(action =>
+    .mergeMap(action => 
       ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category === 'all' ? '' : action.category}&page=${action.page}&search=${action.search || ''}`)
         .map(response => fetchProductsFulfilled({ response, gender: action.gender, category: action.category }))
     );
@@ -87,10 +87,12 @@ export const updateProductCategory = category => ({
   category
 })
 
-export const saveUpdatedProduct = payload => ({
+export const saveUpdatedProduct = ({product, id, category, gender}) => ({
   type: SAVE_UPDATED_PRODUCT,
-  product: payload.product,
-  id: payload.id
+  product: product,
+  id: id,
+  category: category,
+  gender: gender
 })
 
 export const saveUpdatedProductFulfilled = payload => ({

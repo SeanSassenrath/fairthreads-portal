@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { setIn, merge, push } from 'immutable-light';
-import createList, * as fromList from './create-list';
+import * as fromList from './create-list';
 import { 
   FETCH_PRODUCTS,
   FETCH_PRODUCTS_FULFILLED,
@@ -48,7 +48,7 @@ const product = (state = {}, action) => {
     case UPDATE_PRODUCT_CATEGORY:
       return setIn(state, ['categories'], action.category)
     case SAVE_UPDATED_PRODUCT:
-      return state;
+      return state = {};
     case SAVE_UPDATED_PRODUCT_FULFILLED:
       return setIn(state, ['serverResponse'], action.response.response.message)
     default:
@@ -73,17 +73,18 @@ const loading = (state = {'isLoading': false}, action) => {
 
 const womensCategories = combineReducers({
   all: fromList.createWomensList('all'),
+  uncategorized: fromList.createWomensList('uncategorized'),
   tops: fromList.createWomensList('tops'),
   bottoms: fromList.createWomensList('bottoms'),
   outerwear: fromList.createWomensList('outerwear'),
   accessories: fromList.createWomensList('accessories'),
   shoes: fromList.createWomensList('shoes'),
   dresses: fromList.createWomensList('dresses'),
-
 })
 
 const mensCategories = combineReducers({
   all: fromList.createMensList('all'),
+  uncategorized: fromList.createMensList('uncategorized'),
   tops: fromList.createMensList('tops'),
   bottoms: fromList.createMensList('bottoms'),
   outerwear: fromList.createMensList('outerwear'),

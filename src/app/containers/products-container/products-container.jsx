@@ -20,9 +20,8 @@ class ProductsContainer extends Component {
   }
 
   componentDidMount() {
-    const { fetchProducts } = this.props;
-    const { gender, category } = this.props.match.params;
-    console.log('category from params', category)
+    const { fetchProducts, products } = this.props;
+    let { gender, category } = this.props.match.params;
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
     fetchProducts({ gender, category, page });
@@ -30,7 +29,7 @@ class ProductsContainer extends Component {
 
   componentDidUpdate(prevProps) {
     const { fetchProducts } = this.props;
-    const { gender, category } = this.props.match.params;
+    let { gender, category } = this.props.match.params;
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
     const prevParams = prevProps.match.params;
@@ -44,7 +43,10 @@ class ProductsContainer extends Component {
     e.preventDefault();
     const updatedProduct = product;
     updatedProduct.metadata.active = !product.metadata.active;
-    this.props.saveUpdatedProduct({product: updatedProduct, id: updatedProduct._id});
+    this.props.saveUpdatedProduct({
+      product: updatedProduct, 
+      id: updatedProduct._id,
+    });
     this.props.updateProductByIdActive(product._id);
   }
 
@@ -62,18 +64,21 @@ class ProductsContainer extends Component {
 
     return (
       <div className={styles['products-container']}>
-        { products.map((product, index) => (
-          <div className={styles['product-container']}>
+        { products.map((product, i) => (
+          <div className={styles['product-container']} key={i}>
             <Checkbox 
                 checked={product.metadata.active}
                 onChange={(e) => this.updateProductActive(product, e)}
             >
               Active
             </Checkbox>
-            <div className={styles['product']} key={index}>
+            <div className={styles['product']}>
               <Link
-                to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details ? product.categories.details.name : null}/${product._id}`} 
                 className={styles['product-link']}
+                to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details 
+                  ? product.categories.details.name 
+                  : null}/${product._id}`
+                } 
               >
                 <ProductCard product={product} isLoading={isLoading} isActive={product.metadata.active} />
               </Link>

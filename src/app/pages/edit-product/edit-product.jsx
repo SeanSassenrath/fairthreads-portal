@@ -16,7 +16,6 @@ class EditProduct extends Component {
 
   render() {
     const { gender } = this.props.match.params;
-    console.log('gender', gender)
     return (
       <Page>
         <EditProductSubNavContainer />
