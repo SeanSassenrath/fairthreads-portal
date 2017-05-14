@@ -9,9 +9,7 @@ import {
 
 } from '../constants/brand-constants';
 
-export const fetchBrands = ()=> ({ 
-  type: FETCH_BRANDS, 
-});
+export const fetchBrands = () => ({ type: FETCH_BRANDS });
 
 export const fetchBrandsFulfilled = payload => ({ type: FETCH_BRANDS_FULFILLED, payload });
 
@@ -21,8 +19,6 @@ export const fetchBrandsEpic = action$ =>
       ajax.getJSON(`http://localhost:9000/api/v1/brands`)
         .map(response => fetchBrandsFulfilled(response))
     );
-
-// Save updated brand
 
 export const saveUpdatedBrand = ({brand, id}) => ({
   type: SAVE_UPDATED_BRAND,

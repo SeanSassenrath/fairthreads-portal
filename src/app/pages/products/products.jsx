@@ -13,7 +13,6 @@ import CategoryNavContainer from '../../containers/category-nav-container/catego
 import styles from './products.css';
 
 const Products = props => {
-  console.log('props', props);
   const gender = props.match.params.gender;
   const category = props.match.params.category;
 

@@ -1,6 +1,7 @@
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { mergeMap } from 'rxjs';
 import { omit } from 'lodash';
+import { hideNotification } from './notification-actions';
 
 import { 
   FETCH_PRODUCTS,
@@ -36,7 +37,7 @@ export const fetchProductsFulfilled = ({response, gender, category}) => ({
 export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_PRODUCTS)
     .mergeMap(action => 
-      ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category}&page=${action.page}&search=${action.search || ''}`)
+      ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category === 'all' ? '' : action.category}&page=${action.page}&search=${action.search || ''}`)
         .map(response => fetchProductsFulfilled({ response, gender: action.gender, category: action.category }))
     );
 

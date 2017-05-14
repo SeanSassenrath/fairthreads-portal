@@ -53,7 +53,7 @@ class ProductsContainer extends Component {
   renderWaypoint() {
     const { fetchProducts, products } = this.props;
     const { gender, category } = this.props.match.params;
-    const page = (products.length / pageLength) + 1;
+    const page = Math.ceil(products.length / pageLength) + 1;
     if (products.length > 0) {
       return <Waypoint onEnter={() => fetchProducts({ gender, category, page })} />
     }
