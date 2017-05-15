@@ -7,6 +7,7 @@ import notification from './notification-reducer';
 import { fetchProductsEpic, fetchProductEpic, saveUpdatedProductEpic } from '../actions/product-actions';
 import { fetchCategoriesEpic } from '../actions/category-actions';
 import { fetchBrandsEpic, saveUpdatedBrandEpic } from '../actions/brand-actions';
+import { pullProductsEpic } from '../actions/dashboard-actions';
 
 export const rootEpic = combineEpics(
   fetchBrandsEpic,
@@ -15,6 +16,7 @@ export const rootEpic = combineEpics(
   fetchProductsEpic,
   fetchProductEpic,
   saveUpdatedProductEpic,
+  pullProductsEpic,
 );
 
 export const rootReducer = combineReducers({

@@ -1,10 +1,15 @@
 import React, { Component, PropTypes} from 'react';
-import { render } from 'react-dom';
+import Page from '../../components/page/page';
+import PullProducts from '../../containers/pull-products-container/pull-products-container';
 
 export class Dashboard extends Component {
   render() {
     return (
-      <div>Dashboardss</div>
+      <Page>
+        <PullProducts>
+          Pull Products
+        </PullProducts>
+      </Page>
     )
   }
 }

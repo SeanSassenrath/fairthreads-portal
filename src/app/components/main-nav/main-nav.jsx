@@ -13,10 +13,10 @@ const MainNav = () => (
         <MainNavLink to='/products/womens/tops'>Products</MainNavLink>
       </li>
       <li>
-        <MainNavLink to='/categories/womens/categories'>Categories</MainNavLink>
+        <MainNavLink to='/brands'>Brands</MainNavLink>
       </li>
       <li>
-        <MainNavLink to='/brands'>Brands</MainNavLink>
+        {/* <MainNavLink to='/categories/womens/categories'>Categories</MainNavLink> */}
       </li>
     </ul>
   </nav>
