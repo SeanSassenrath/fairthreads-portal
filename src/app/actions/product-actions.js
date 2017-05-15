@@ -96,9 +96,10 @@ export const saveUpdatedProduct = ({product, id, category, gender}) => ({
   gender: gender
 })
 
-export const saveUpdatedProductFulfilled = ({response}) => ({
+export const saveUpdatedProductFulfilled = (status, { message }) => ({
   type: SAVE_UPDATED_PRODUCT_FULFILLED,
-  response
+  status,
+  message
 })
 
 export const saveUpdatedProductEpic = action$ =>
@@ -113,5 +114,5 @@ export const saveUpdatedProductEpic = action$ =>
             {'details': action.product.details},
             {'metadata': action.product.metadata})), 
         {'Content-Type': 'application/json'})
-        .map(response => saveUpdatedProductFulfilled({response}))
+        .map(({ status, response }) => saveUpdatedProductFulfilled(status, response))
     );

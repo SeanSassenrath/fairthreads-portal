@@ -11,11 +11,11 @@ export const pullProducts = () => ({
   type: PULL_PRODUCTS
 });
 
-export const pullProductsFulfilled = (payload) => ({ type: PULL_PRODUCTS_FULFILLED, payload });
+export const pullProductsFulfilled = (status, { message }) => ({ type: PULL_PRODUCTS_FULFILLED, status, message });
 
 export const pullProductsEpic = action$ =>
   action$.ofType(PULL_PRODUCTS)
     .mergeMap(action =>
-      ajax.getJSON(`http://localhost:9000/api/v1/dashboard/pull-products`)
-        .map(response => pullProductsFulfilled(response))
+      ajax.get(`http://localhost:9000/api/v1/dashboard/pull-products`)
+        .map(({ status, response }) => pullProductsFulfilled(status, response))
     );
