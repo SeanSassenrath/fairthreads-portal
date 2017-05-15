@@ -99,10 +99,12 @@ const mapStateToProps = (state, { match }) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return { fetchProducts: bindActionCreators(fetchProducts(payload), dispatch) }
-}
-
 // Use withRouter to convert router context to props
 // Connect the Redux store to the ProductsContainer and pass in products state and actions
-export default withRouter(connect(mapStateToProps, { fetchProducts, updateProductByIdActive, saveUpdatedProduct })(ProductsContainer));
+export default withRouter(
+  connect(
+    mapStateToProps, 
+    { fetchProducts, 
+      updateProductByIdActive, 
+      saveUpdatedProduct 
+    })(ProductsContainer));

@@ -13,7 +13,6 @@ import {
   UPDATE_PRODUCT_CATEGORY,
   UPDATE_PRODUCT_BY_ID_ACTIVE,
   SAVE_UPDATED_PRODUCT,
-  SAVE_UPDATED_PRODUCT_FULFILLED
 } from '../constants/product-constants';
 
 const productsById = (state = {}, action) => {

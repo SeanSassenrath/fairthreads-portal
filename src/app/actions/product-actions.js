@@ -1,7 +1,7 @@
 import { ajax } from 'rxjs/observable/dom/ajax';
-import { mergeMap } from 'rxjs';
+import { mergeMap, debounceTime } from 'rxjs';
 import { omit } from 'lodash';
-import { hideNotification } from './notification-actions';
+import { showNotification } from './notification-actions';
 
 import { 
   FETCH_PRODUCTS,
@@ -96,23 +96,19 @@ export const saveUpdatedProduct = ({product, id, category, gender}) => ({
   gender: gender
 })
 
-export const saveUpdatedProductFulfilled = (status, { message }) => ({
-  type: SAVE_UPDATED_PRODUCT_FULFILLED,
-  status,
-  message
-})
-
 export const saveUpdatedProductEpic = action$ =>
   action$.ofType(SAVE_UPDATED_PRODUCT)
-    .mergeMap(action =>
+    .debounceTime(500)
+    .mergeMap(({id, product}) =>
       ajax
-        .put(`http://localhost:9000/api/v1/products/${action.id}`,
+        .put(`http://localhost:9000/api/v1/products/${id}`,
           JSON.stringify(Object.assign(
             {}, 
-            {'categories': action.product.categories._id}, 
-            {'css': action.product.css},
-            {'details': action.product.details},
-            {'metadata': action.product.metadata})), 
+            { categories: product.categories._id }, 
+            { css: product.css},
+            { details: product.details },
+            { metadata: product.metadata }
+          )), 
         {'Content-Type': 'application/json'})
-        .map(({ status, response }) => saveUpdatedProductFulfilled(status, response))
+        .map(({ status, response }) => showNotification(status, response))
     );

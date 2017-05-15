@@ -129,9 +129,5 @@ const mapStateToProps = (state) => {
   return { brands: getAllBrands(state) }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return { fetchBrands: bindActionCreators(fetchBrands(payload), dispatch) }
-}
-
 // Connect the Redux store to the ProductsContainer and pass in products state and actions
 export default connect(mapStateToProps, { fetchBrands, saveUpdatedBrand })(BrandsContainer);

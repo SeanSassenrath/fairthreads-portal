@@ -1,3 +1,4 @@
+import { showNotification } from './notification-actions';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { mergeMap } from 'rxjs';
 
@@ -15,7 +16,8 @@ export const pullProductsFulfilled = (status, { message }) => ({ type: PULL_PROD
 
 export const pullProductsEpic = action$ =>
   action$.ofType(PULL_PRODUCTS)
+    .debounceTime(500)
     .mergeMap(action =>
       ajax.get(`http://localhost:9000/api/v1/dashboard/pull-products`)
-        .map(({ status, response }) => pullProductsFulfilled(status, response))
+        .map(({ status, response }) => showNotification(status, response))
     );

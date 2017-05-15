@@ -70,9 +70,5 @@ const mapStateToProps = (state, { match }) => {
   return { categories: getCategoriesByGender(state, gender) };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return { fetchCategories: bindActionCreators(fetchCategories(payload), dispatch) }
-}
-
 export default withRouter(connect(mapStateToProps, { fetchCategories })(CategoryNavContainer));
 
