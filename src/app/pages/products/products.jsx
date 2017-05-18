@@ -8,7 +8,7 @@ import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link
 import Button from '../../components/button/button';
 import SearchBar from '../../components/search-bar/search-bar';
 import MainContent from '../../components/main-content/main-content';
-import ProductsContainer from '../../containers/products-container/products-container';
+import { ProductListContainer } from '../../containers/products-container/products-container';
 import CategoryNavContainer from '../../containers/category-nav-container/category-nav-container';
 import styles from './products.css';
 
@@ -27,7 +27,7 @@ const Products = props => {
           <CategoryNavContainer type={'products'} />
         </SideNav>
         <MainContent>
-          <ProductsContainer />
+          <ProductListContainer />
         </MainContent>
       </div>
     </Page>
