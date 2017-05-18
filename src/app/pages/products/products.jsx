@@ -8,7 +8,7 @@ import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link
 import Button from '../../components/button/button';
 import SearchBar from '../../components/search-bar/search-bar';
 import MainContent from '../../components/main-content/main-content';
-import { ProductListContainer } from '../../containers/products-container/products-container';
+import { ProductListContainer } from '../../containers/product-list-container/product-list-container';
 import CategoryNavContainer from '../../containers/category-nav-container/category-nav-container';
 import styles from './products.css';
 
