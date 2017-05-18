@@ -1,18 +1,20 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import styles from './notification.css';
 
-export default class Notification extends Component {
+const propTypes = {
+  notification: PropTypes.object
+}
 
-  render() {
-    const { display, error, message } = this.props;
-    const notificationStateStyles = !error ? styles['success'] : styles['error'];
-    const className = display ? notificationStateStyles : styles['hidden'];
+export const Notification = ({ notification }) => {
 
-    return (
-      <div className={className}>
-        <span>{ message }</span>
-      </div>
-    )
-  }
+  const { display, error, message } = notification;
+  const notificationStateStyles = !error ? styles['success'] : styles['error'];
+  const className = display ? notificationStateStyles : styles['hidden'];
+
+  return (
+    <div className={className}>
+      <span>{ message }</span>
+    </div>
+  )
 }

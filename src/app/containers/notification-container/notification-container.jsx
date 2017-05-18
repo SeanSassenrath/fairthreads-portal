@@ -1,24 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getNotification } from '../../reducers/root-reducer';
-import Notification from '../../components/notification/notification';
-
-const NotificationContainer = (props) => {
-  return (
-  <Notification 
-    message={props.notification.message}
-    error={props.notification.error}
-    display={props.notification.display}
-  />
-  )
-}
+import { Notification } from '../../components/notification/notification';
 
 const mapStateToProps = (state) => {
   return {
-    notification: getNotification(state),
+   notification: getNotification(state)
   }
 }
 
-export default connect(
+export const NotificationContainer = connect(
   mapStateToProps, {}
-)(NotificationContainer);
+)(Notification);

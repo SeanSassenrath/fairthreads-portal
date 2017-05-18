@@ -10,7 +10,7 @@ import EditProduct from './pages/edit-product/edit-product';
 import Brands from './pages/brands/brands';
 import { Dashboard } from './pages/dashboard/dashboard';
 import MainNav from './components/main-nav/main-nav';
-import NotificationContainer from './containers/notification-container/notification-container';
+import { NotificationContainer } from './containers/notification-container/notification-container';
 import styles from './app.css';
 
 // Get the Redux store
