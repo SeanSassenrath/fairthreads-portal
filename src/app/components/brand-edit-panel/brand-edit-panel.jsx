@@ -31,11 +31,13 @@ export const BrandEditPanel = ({ name, image, description, updateBrandField, onS
         onChange={e => updateBrandField('description', e)}
       />
     </div>
-    <Button onClick={onSaveUpdatedBrand}>
-      Save
-    </Button>
-    <a href="#">
-      Cancel
-    </a>
+    <div className={styles['buttons-container']}>
+      <Button onClick={onSaveUpdatedBrand}>
+        Save
+      </Button>
+      <a href="#">
+        Cancel
+      </a>
+    </div>
   </div>
 )
