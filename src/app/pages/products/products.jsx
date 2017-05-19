@@ -10,6 +10,7 @@ import SearchBar from '../../components/search-bar/search-bar';
 import MainContent from '../../components/main-content/main-content';
 import { ProductListContainer } from '../../containers/product-list-container/product-list-container';
 import CategoryNavContainer from '../../containers/category-nav-container/category-nav-container';
+import { NewSubNav } from '../../components/new-sub-nav/new-sub-nav';
 import styles from './products.css';
 
 const Products = props => {
@@ -27,6 +28,7 @@ const Products = props => {
           <CategoryNavContainer type={'products'} />
         </SideNav>
         <MainContent>
+          <NewSubNav />
           <ProductListContainer />
         </MainContent>
       </div>
