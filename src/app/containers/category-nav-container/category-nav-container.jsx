@@ -7,7 +7,6 @@ import { fetchCategories } from '../../actions/category-actions';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
 import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-link';
 import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link';
-import styles from './category-nav-container.css';
 
 class CategoryNavContainer extends Component {
   componentDidMount() {

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getAllBrands } from '../../reducers/root-reducer';
 import { fetchBrands, saveUpdatedBrand } from '../../actions/brand-actions';
 import { BrandsEdit } from '../../components/brands-edit/brands-edit';
-import styles from './brands-container.css';
 
 const mapStateToProps = (state) => {
   return { brands: getAllBrands(state) }
