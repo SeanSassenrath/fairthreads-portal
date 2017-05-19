@@ -1,0 +1,10 @@
+.brands-list-container {
+  border: 1px solid red;
+  flex: 0 1 500px;
+  min-width: 500px;
+  padding-right: 100px;
+}
+.brands-list {
+  overflow: scroll;
+  height: calc(100vh - 200px);
+}

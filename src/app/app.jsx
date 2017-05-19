@@ -7,7 +7,7 @@ import configureStore from './configure-store';
 import Categories from './pages/categories/categories';
 import Products from './pages/products/products';
 import EditProduct from './pages/edit-product/edit-product';
-import Brands from './pages/brands/brands';
+import { Brands } from './pages/brands/brands';
 import { Dashboard } from './pages/dashboard/dashboard';
 import MainNav from './components/main-nav/main-nav';
 import { NotificationContainer } from './containers/notification-container/notification-container';

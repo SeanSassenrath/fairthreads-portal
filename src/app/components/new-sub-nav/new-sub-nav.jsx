@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-import style from './new-sub-nav.css';
+import styles from './new-sub-nav.css';
 
 export class NewSubNav extends Component {
 
   render() {
     return (
-      <div className={style['sub-nav-container']}>
+      <div className={styles['sub-nav-container']}>
         <DropDownMenu value={1} onChange={() => {}}>
           <MenuItem value={1} primaryText="Designer" />
           <MenuItem value={2} primaryText="Every Night" />

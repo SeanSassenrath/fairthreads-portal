@@ -1,0 +1,13 @@
+.brand-edit-panel {
+  border: 1px solid purple;
+  padding: 0 20px;
+}
+.brand-text-field-container {
+  display: block;
+  margin-bottom: 10px;
+}
+.brand-description {
+  height: 150px;
+  margin-top: 40px;
+  width: 100%;
+}
