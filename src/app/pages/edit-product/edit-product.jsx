@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import Page from '../../components/page/page';
-import EditProductSubNavContainer from '../../containers/edit-product-sub-nav-container/edit-product-sub-nav-container';
+import { EditProductSubNavContainer } from '../../containers/edit-product-sub-nav-container/edit-product-sub-nav-container';
 import SideNav from '../../components/side-nav/side-nav';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
 import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-link';
