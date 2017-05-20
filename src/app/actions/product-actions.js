@@ -17,6 +17,8 @@ import {
   SAVE_UPDATED_PRODUCT,
   SAVE_UPDATED_PRODUCT_FULFILLED,
   SET_PRODUCT,
+  FETCH_BRANDS_BY_PRODUCTS,
+  FETCH_BRANDS_BY_PRODUCTS_FULFILLED
 } from '../constants/product-constants';
 
 // http://localhost:9000/api/v1/products/?gender=womens
@@ -111,4 +113,22 @@ export const saveUpdatedProductEpic = action$ =>
           )), 
         {'Content-Type': 'application/json'})
         .map(({ status, response }) => showNotification(status, response))
+    );
+
+export const fetchBrandsByProducts = (category, gender) => ({
+  type: FETCH_BRANDS_BY_PRODUCTS,
+  category,
+  gender
+})
+  
+export const fetchBrandsByProductsFulfilled = ({response}) => ({
+  type: FETCH_BRANDS_BY_PRODUCTS_FULFILLED,
+  response
+})
+
+export const fetchBrandsByProductsEpic = action$ => 
+  action$.ofType(FETCH_BRANDS_BY_PRODUCTS)
+    .mergeMap(({ category, gender }) =>
+      ajax.getJSON(`http://localhost:9000/api/v1/products/brand-list?category=${category}&gender=${gender}`)
+        .map(response => fetchBrandsByProductsFulfilled({ response }))
     );

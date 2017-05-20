@@ -13,7 +13,21 @@ import {
   UPDATE_PRODUCT_CATEGORY,
   UPDATE_PRODUCT_BY_ID_ACTIVE,
   SAVE_UPDATED_PRODUCT,
+  FETCH_BRANDS_BY_PRODUCTS,
+  FETCH_BRANDS_BY_PRODUCTS_FULFILLED
 } from '../constants/product-constants';
+
+const brands = (state = [], action) => {
+  switch (action.type) {
+    case FETCH_BRANDS_BY_PRODUCTS:
+      return state;
+    case FETCH_BRANDS_BY_PRODUCTS_FULFILLED:
+      const newState = action.response.brands;
+      return newState;
+    default:
+      return state;
+  }
+}
 
 const productsById = (state = {}, action) => {
   switch (action.type) {
@@ -101,7 +115,8 @@ const products = combineReducers({
   product,
   productsById,
   womensCategories,
-  mensCategories
+  mensCategories,
+  brands
 })
 
 export default products;

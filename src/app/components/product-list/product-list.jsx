@@ -23,15 +23,16 @@ export class ProductList extends Component {
   }
 
   componentDidMount() {
-    const { fetchProducts, products } = this.props;
+    const { fetchProducts, fetchBrandsByProducts, products } = this.props;
     let { gender, category } = this.props.match.params;
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
     fetchProducts({ gender, category, page });
+    fetchBrandsByProducts(category, gender);
   }
 
   componentDidUpdate(prevProps) {
-    const { fetchProducts } = this.props;
+    const { fetchProducts, fetchBrandsByProducts } = this.props;
     let { gender, category } = this.props.match.params;
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
@@ -39,6 +40,7 @@ export class ProductList extends Component {
 
     if (prevParams.gender !== gender || prevParams.category !== category) {
       fetchProducts({ gender, category, page });
+      fetchBrandsByProducts(category, gender);
     }
   }
 

@@ -4,7 +4,12 @@ import products, * as ProductSelectors from './products-reducer';
 import categories, * as CategorySelectors from './categories-reducer';
 import brands, * as BrandSelectors from './brands-reducer';
 import notification from './notification-reducer';
-import { fetchProductsEpic, fetchProductEpic, saveUpdatedProductEpic } from '../actions/product-actions';
+import { 
+  fetchProductsEpic, 
+  fetchProductEpic, 
+  saveUpdatedProductEpic,
+  fetchBrandsByProductsEpic
+} from '../actions/product-actions';
 import { fetchCategoriesEpic } from '../actions/category-actions';
 import { fetchBrandsEpic, saveUpdatedBrandEpic } from '../actions/brand-actions';
 import { pullProductsEpic } from '../actions/dashboard-actions';
@@ -19,6 +24,7 @@ export const rootEpic = combineEpics(
   saveUpdatedProductEpic,
   pullProductsEpic,
   notificationEpic,
+  fetchBrandsByProductsEpic
 );
 
 export const rootReducer = combineReducers({

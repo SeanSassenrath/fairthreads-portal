@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProductsByGenderAndType, getIsLoading } from '../../reducers/root-reducer';
-import { fetchProducts, updateProductByIdActive, saveUpdatedProduct } from '../../actions/product-actions';
+import { fetchProducts, updateProductByIdActive, saveUpdatedProduct, fetchBrandsByProducts } from '../../actions/product-actions';
 import { ProductList } from '../../components/product-list/product-list';
 
 const mapStateToProps = (state, { match }) => {
@@ -14,8 +14,9 @@ const mapStateToProps = (state, { match }) => {
 }
 
 export const ProductListContainer = withRouter(connect(
-  mapStateToProps, 
-  { fetchProducts, 
+  mapStateToProps, {
+    fetchProducts, 
+    fetchBrandsByProducts,
     updateProductByIdActive, 
     saveUpdatedProduct 
   })(ProductList)
