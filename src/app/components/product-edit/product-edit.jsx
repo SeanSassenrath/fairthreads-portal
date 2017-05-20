@@ -19,7 +19,7 @@ export class ProductEdit extends Component {
     saveUpdatedProduct: PropTypes.func,
     history: PropTypes.object,
     product: PropTypes.object,
-    categories: PropTypes.array
+    categories: PropTypes.object
   }
 
   constructor(args) {

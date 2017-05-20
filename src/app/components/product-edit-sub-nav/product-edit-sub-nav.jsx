@@ -10,11 +10,11 @@ const propTypes = {
   product: PropTypes.object
 }
 
-const goBack = ({ history }) => {
+const goBack = history => {
   history.goBack();
 }
 
-export const ProductEditSubNav = ({ product }) => {
+export const ProductEditSubNav = ({ product, history }) => {
   const updatedAt = new Date(product.updatedAt);
   const createdAt = new Date(product.createdAt);
   return (
@@ -24,7 +24,7 @@ export const ProductEditSubNav = ({ product }) => {
           label="Back"
           primary={true}
           icon={<KeyboardArrowLeft />}
-          onClick={this.goBack}
+          onClick={() => goBack(history)}
         />
         <div className={styles['meta-info-container']}>
           <span>id: {product._id}</span>
