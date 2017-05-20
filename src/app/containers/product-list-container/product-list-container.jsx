@@ -1,14 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProductsByGenderAndType, getIsLoading } from '../../reducers/root-reducer';
-import { fetchProducts, updateProductByIdActive, saveUpdatedProduct, fetchBrandsByProducts } from '../../actions/product-actions';
+import { getProductsByGenderAndType, getIsLoading, getBrandsByProducts } from '../../reducers/root-reducer';
+import { 
+  fetchProducts, 
+  updateProductByIdActive, 
+  saveUpdatedProduct, 
+  fetchBrandsByProducts
+} from '../../actions/product-actions';
 import { ProductList } from '../../components/product-list/product-list';
 
 const mapStateToProps = (state, { match }) => {
   const { gender, category } = match.params;
   return {
     products: getProductsByGenderAndType(state, gender, 'categories', category),
+    brands: getBrandsByProducts(state),
     isLoading: getIsLoading(state)
   }
 }

@@ -40,6 +40,9 @@ export const getProductsByGenderAndType = (state, gender, type, filter) => (
 export const getProductById = (state) => (
   state.products.product
 )
+export const getBrandsByProducts = (state) => (
+  state.products.brands
+)
 
 export const getAllBrands = (state) => (
   BrandSelectors.getAllBrands(state.brands)
