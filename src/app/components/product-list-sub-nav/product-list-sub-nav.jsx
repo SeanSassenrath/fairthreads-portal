@@ -26,6 +26,7 @@ export class ProductListSubNav extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log('this.props', this.props)
     const { fetchBrandsByProducts } = this.props;
     let { gender, category } = this.props.match.params;
     const prevParams = prevProps.match.params;
@@ -36,6 +37,8 @@ export class ProductListSubNav extends Component {
   }
 
   onBrandFilterChange(event, index, value) {
+    console.log('this.props', this.props)
+    this.props.history.push({ search: `?brand=${value}`})
     this.setState({ brandFilter: value });
   }
 
@@ -47,7 +50,7 @@ export class ProductListSubNav extends Component {
         <DropDownMenu maxHeight={300} value={this.state.brandFilter} onChange={this.onBrandFilterChange}>
           <MenuItem value={'all'} primaryText={'Designers'} />
           { brands.map((brand, i) => (
-              <MenuItem value={brand} primaryText={brand} key={i} />
+              <MenuItem value={brand.id} primaryText={brand.name} key={i} />
           ))}
         </DropDownMenu>
         <DropDownMenu value={1} onChange={() => {}}>

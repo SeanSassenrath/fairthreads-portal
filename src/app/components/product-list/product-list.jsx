@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import autobind from 'react-autobind';
+import queryString from 'query-string';
 import Checkbox from '../checkbox/checkbox';
 import ProductCard from '../product-card/product-card';
 import styles from './product-list.css';
@@ -23,33 +24,35 @@ export class ProductList extends Component {
   }
 
   componentDidMount() {
-    const { fetchProducts, fetchBrandsByProducts, products } = this.props;
+    const { fetchProducts, products } = this.props;
+    const { brand } = queryString.parse(this.props.location.search);
     let { gender, category } = this.props.match.params;
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
-    fetchProducts({ gender, category, page });
-    fetchBrandsByProducts(category, gender);
+    fetchProducts({ gender, category, page, brand });
   }
 
   componentDidUpdate(prevProps) {
-    const { fetchProducts, fetchBrandsByProducts } = this.props;
+    const prevSearch = queryString.parse(prevProps.location.search).brand;
+    const currentSearch = queryString.parse(this.props.location.search).brand;
+    const { fetchProducts } = this.props;
     let { gender, category } = this.props.match.params;
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
     const prevParams = prevProps.match.params;
 
-    if (prevParams.gender !== gender || prevParams.category !== category) {
-      fetchProducts({ gender, category, page });
-      fetchBrandsByProducts(category, gender);
+    if (prevParams.gender !== gender || prevParams.category !== category || prevSearch !== currentSearch) {
+      fetchProducts({ gender, category, page, currentSearch });
     }
   }
 
   renderWaypoint() {
     const { fetchProducts, products } = this.props;
+    const { brand } = queryString.parse(this.props.location.search);
     const { gender, category } = this.props.match.params;
     const page = Math.ceil(products.length / pageLength) + 1;
     if (products.length > 0) {
-      return <Waypoint onEnter={() => fetchProducts({ gender, category, page })} />
+      return <Waypoint onEnter={() => fetchProducts({ gender, category, page, brand })} />
     }
   }
 

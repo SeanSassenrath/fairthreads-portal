@@ -22,11 +22,12 @@ import {
 } from '../constants/product-constants';
 
 // http://localhost:9000/api/v1/products/?gender=womens
-export const fetchProducts = ({category, gender, page}) => ({ 
+export const fetchProducts = ({category, gender, page, brand}) => ({ 
   type: FETCH_PRODUCTS, 
   category,
   gender, 
-  page
+  page,
+  brand
 });
 
 export const fetchProductsFulfilled = ({response, gender, category}) => ({ 
@@ -39,7 +40,7 @@ export const fetchProductsFulfilled = ({response, gender, category}) => ({
 export const fetchProductsEpic = action$ =>
   action$.ofType(FETCH_PRODUCTS)
     .mergeMap(action => 
-      ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category === 'all' ? '' : action.category}&page=${action.page}&search=${action.search || ''}`)
+      ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category === 'all' ? '' : action.category}&page=${action.page}&search=${action.search || ''}&brand=${action.brand ? action.brand : ''}`)
         .map(response => fetchProductsFulfilled({ response, gender: action.gender, category: action.category }))
     );
 

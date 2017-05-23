@@ -104,6 +104,8 @@ const mensCategories = combineReducers({
 })
 
 export const getProductsByGenderAndType = (state, gender, type, filter) => {
+  console.log('type', type)
+  console.log('filter', filter)
   const capitalizeType = type.charAt(0).toUpperCase() + type.slice(1)
   const genderAndType = gender + capitalizeType;
   const ids = fromList.getIds(state[genderAndType][filter]);
