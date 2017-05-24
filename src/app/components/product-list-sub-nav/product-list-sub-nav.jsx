@@ -9,7 +9,8 @@ export class ProductListSubNav extends Component {
 
   static propTypes = {
     brands: PropTypes.array,
-    fetchBrandsByProducts: PropTypes.func
+    fetchBrandsByProducts: PropTypes.func,
+    fetchProducts: PropTypes.func
   }
 
   constructor(props) {
@@ -38,6 +39,8 @@ export class ProductListSubNav extends Component {
   }
 
   onBrandFilterChange(event, index, value) {
+    const { fetchProducts, history } = this.props; 
+    const { gender } = this.props.match.params;
     const searchParams = queryString.parse(this.props.location.search);
     searchParams.brand = value;
     this.props.history.push({ search: queryString.stringify(searchParams)})

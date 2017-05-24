@@ -8,7 +8,8 @@ import {
   fetchProductsEpic, 
   fetchProductEpic, 
   saveUpdatedProductEpic,
-  fetchBrandsByProductsEpic
+  fetchBrandsByProductsEpic,
+  filterProductsByCategoryEpic
 } from '../actions/product-actions';
 import { fetchCategoriesEpic } from '../actions/category-actions';
 import { fetchBrandsEpic, saveUpdatedBrandEpic } from '../actions/brand-actions';
@@ -24,7 +25,8 @@ export const rootEpic = combineEpics(
   saveUpdatedProductEpic,
   pullProductsEpic,
   notificationEpic,
-  fetchBrandsByProductsEpic
+  fetchBrandsByProductsEpic,
+  filterProductsByCategoryEpic
 );
 
 export const rootReducer = combineReducers({
@@ -34,9 +36,9 @@ export const rootReducer = combineReducers({
   notification,
 });
 
-export const getProductsByGenderAndType = (state, gender, type, filter) => (
-  ProductSelectors.getProductsByGenderAndType(state.products, gender, type, filter)
-)
+// export const getProductsByGenderAndType = (state, gender, type, filter) => (
+//   ProductSelectors.getProductsByGenderAndType(state.products, gender, type, filter)
+// )
 export const getProductById = (state) => (
   state.products.product
 )

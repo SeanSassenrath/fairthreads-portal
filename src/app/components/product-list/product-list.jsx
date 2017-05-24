@@ -35,26 +35,23 @@ export class ProductList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const prevSearch = queryString.parse(prevProps.location.search).brand;
-    const currentSearch = queryString.parse(this.props.location.search).brand;
     const { fetchProducts } = this.props;
-    let { gender, category } = this.props.match.params;
+    const currentSearch = queryString.parse(this.props.location.search);
+    let { gender } = this.props.match.params;
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
-    const prevParams = prevProps.match.params;
-
-    // if (prevParams.gender !== gender || prevParams.category !== category || prevSearch !== currentSearch) {
-    //   fetchProducts({ gender, category, page, currentSearch });
-    // }
+    if (prevProps.location.search !== this.props.location.search) {
+      fetchProducts(gender, currentSearch.category, currentSearch.brand, page );
+    }
   }
 
   renderWaypoint() {
     const { fetchProducts, products } = this.props;
-    const { brand } = queryString.parse(this.props.location.search);
-    const { gender, category } = this.props.match.params;
+    const currentSearch = queryString.parse(this.props.location.search);
+    const { gender } = this.props.match.params;
     const page = Math.ceil(products.length / pageLength) + 1;
     if (products.length > 0) {
-      return <Waypoint onEnter={() => fetchProducts({ gender, category, page, brand })} />
+      return <Waypoint onEnter={() => fetchProducts(gender, currentSearch.category, currentSearch.brand, page)} />
     }
   }
 

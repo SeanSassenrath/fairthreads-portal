@@ -18,8 +18,25 @@ import {
   SAVE_UPDATED_PRODUCT_FULFILLED,
   SET_PRODUCT,
   FETCH_BRANDS_BY_PRODUCTS,
-  FETCH_BRANDS_BY_PRODUCTS_FULFILLED
+  FETCH_BRANDS_BY_PRODUCTS_FULFILLED,
+  PRODUCT_CATEGORY_FILTER
 } from '../constants/product-constants';
+
+// FILTER PRODUCTS BY CATEGORY
+export const filterProductsByCategory = (gender, category, brand, page) => ({ 
+  type: PRODUCT_CATEGORY_FILTER, 
+  gender, 
+  category,
+  brand,
+  page
+});
+
+export const filterProductsByCategoryEpic = action$ => 
+  action$.ofType(PRODUCT_CATEGORY_FILTER)
+    .mergeMap(action => 
+      ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category === 'all' ? '' : action.category}&page=${action.page}&search=${action.search || ''}&brand=${action.brand ? action.brand : ''}`)
+        .map(response => fetchProductsFulfilled({ response, gender: action.gender, category: action.category }))
+    );
 
 
 // FETCH PRODUCTS

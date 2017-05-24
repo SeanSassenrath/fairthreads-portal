@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router';
+import autobind from 'react-autobind';
+import queryString from 'query-string';
 import { getCategoriesByGender } from '../../reducers/root-reducer';
 import { fetchCategories } from '../../actions/category-actions';
 import { fetchProducts } from '../../actions/product-actions';
@@ -10,6 +12,11 @@ import { SideNavMainLinkWithRouter } from '../../components/side-nav-main-link/s
 import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link';
 
 class CategoryNavContainer extends Component {
+  constructor(props) {
+    super(props);
+    autobind(this);
+  }
+
   componentDidMount() {
     const { fetchCategories } = this.props;
     const { gender } = this.props.match.params;
@@ -24,6 +31,19 @@ class CategoryNavContainer extends Component {
 
     if (prevParams.gender !== gender) {
       fetchCategories(gender);
+    }
+  }
+
+  onCategoryFilterChange(event) {
+    event.preventDefault();
+    const { fetchProducts, history, products } = this.props; 
+    const { gender } = this.props.match.params;
+    const { id } = event.target;
+    const searchParams = queryString.parse(this.props.location.search);
+    
+    if (!!id) {
+      searchParams.category = id;
+      history.push({ search: queryString.stringify(searchParams)})
     }
   }
 
@@ -49,7 +69,8 @@ class CategoryNavContainer extends Component {
             <SideNavMainLinkWithRouter 
               id={fetchedCategory.details.name}
               fetchProducts={fetchProducts}
-              key={i} 
+              key={i}
+              onClick={this.onCategoryFilterChange}
             >
               {fetchedCategory.details.name}
             </SideNavMainLinkWithRouter>

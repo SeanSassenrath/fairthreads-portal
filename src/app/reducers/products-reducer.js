@@ -14,7 +14,8 @@ import {
   UPDATE_PRODUCT_BY_ID_ACTIVE,
   SAVE_UPDATED_PRODUCT,
   FETCH_BRANDS_BY_PRODUCTS,
-  FETCH_BRANDS_BY_PRODUCTS_FULFILLED
+  FETCH_BRANDS_BY_PRODUCTS_FULFILLED,
+  PRODUCT_CATEGORY_FILTER
 } from '../constants/product-constants';
 
 const brands = (state = [], action) => {
@@ -82,6 +83,36 @@ const loading = (state = {'isLoading': false}, action) => {
   }
 }
 
+const productList = (state = [], action) => {
+  switch (action.type) {
+    case FETCH_PRODUCTS_FULFILLED:
+      return state.concat(action.response.map(product => product._id));
+    case SAVE_UPDATED_PRODUCT:
+      for(let i = 0; i < state.length; i++) {
+        if (state[i] === action.id) {
+          return state
+            .slice(0, i)
+            .concat(state.slice(i + 1));
+        }
+      }
+    default:
+      return state;
+  }
+}
+
+const productFilters = (state = {}, action) => {
+  switch (action.type) {
+    case FETCH_PRODUCTS:
+      return Object.assign({}, {
+        gender: action.gender,
+        category: action.category,
+        brand: action.brand
+      });
+    default:
+      return state;
+    }
+  }
+
 const womensCategories = combineReducers({
   all: fromList.createWomensList('all'),
   uncategorized: fromList.createWomensList('uncategorized'),
@@ -104,21 +135,20 @@ const mensCategories = combineReducers({
 })
 
 // type = categories, filter = tops
-export const getProductsByGenderAndType = (state, gender, type, filter) => {
-  const capitalizeType = type.charAt(0).toUpperCase() + type.slice(1)
-  const genderAndType = gender + capitalizeType;
-  // state womensCategories tops
-  const ids = fromList.getIds(state[genderAndType][filter]);
-  return ids.map(id => state.productsById[id]);
-}
+// export const getProductsByGenderAndType = (state, gender, type, filter) => {
+//   const capitalizeType = type.charAt(0).toUpperCase() + type.slice(1)
+//   const genderAndType = gender + capitalizeType;
+//   const ids = fromList.getIds(state[genderAndType][filter]);
+//   return ids.map(id => state.productsById[id]);
+// }
 
 const products = combineReducers({
   loading,
   product,
   productsById,
-  womensCategories,
-  mensCategories,
-  brands
+  productList,
+  brands,
+  productFilters
 })
 
 export default products;

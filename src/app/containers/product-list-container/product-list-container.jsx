@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProductsByGenderAndType, getIsLoading, getBrandsByProducts } from '../../reducers/root-reducer';
+import { getIsLoading, getBrandsByProducts } from '../../reducers/root-reducer';
 import { 
   fetchProducts, 
   updateProductByIdActive, 
@@ -9,12 +9,12 @@ import {
   fetchBrandsByProducts
 } from '../../actions/product-actions';
 import { ProductList } from '../../components/product-list/product-list';
-import { getProductsByBrand } from '../../selectors/product-selectors';
+import { getFilteredProducts } from '../../selectors/product-selectors';
 
 const mapStateToProps = (state, { match }) => {
   const { gender, category } = match.params;
   return {
-    products: getProductsByGenderAndType(state, gender, 'categories', category),
+    products: getFilteredProducts(state),
     brands: getBrandsByProducts(state),
     isLoading: getIsLoading(state)
   }

@@ -1,23 +1,41 @@
 import { createSelector } from 'reselect';
 
-const getGender = state => state.gender;
-const getProducts = state => state.products;
-const getCategory = state => state.category;
-const getBrand = state => state.brand;
+const getProducts = state => state.products.productList;
+const getProductsById = state => state.products.productsById;
+const getGender = state => state.products.productFilters.gender;
+const getCategory = state => state.products.productFilters.category;
+const getBrand = state => state.products.productFilters.brand;
 
-const getProductsByGender = state => createSelector(
-  getGender,
-  (products, gender) => products.filter(product => product.details.gender === gender)
+const getProductsByGender = createSelector(
+  [getProducts, getProductsById, getGender],
+  (products, productsById, gender) => products.filter(product => productsById[product].details.gender === gender)
 )
 
-const getProductsByCategory = state => createSelector(
-  getProductsByGender,
-  getCategory,
-  (products, category) => products.filter(product => product.categories.details.name === category)
+const getProductsByCategory = createSelector(
+  [getProductsByGender, getProductsById, getCategory],
+  (products, productsById, category) => {
+    if (category) {
+      return products.filter(product => {
+        if (productsById[product].categories) {
+          return productsById[product].categories.details.name === category
+        }
+      })
+    }
+    return products
+  }
 )
 
-export const getProductsByBrand = state => createSelector(
-  getProductsByCategory,
-  getBrand,
-  (products, brand) => products.filter(product => product.brand.metadata.id === brand)
+const getProductsByBrand = createSelector(
+  [getProductsByCategory, getProductsById, getBrand],
+  (products, productsById, brand) => {
+    if (brand) {
+      return products.filter(product => productsById[product].brand.metadata.id === brand)
+    }
+    return products
+  }
+)
+
+export const getFilteredProducts = createSelector(
+  [getProductsByBrand, getProductsById],
+  (products, productsById) => products.map(product => productsById[product])
 )
