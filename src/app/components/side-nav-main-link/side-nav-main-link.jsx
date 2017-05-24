@@ -1,11 +1,36 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { Component, PropTypes } from 'react';
+import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 import styles from './side-nav-main-link.css';
 
-const SideNavMainLink = props => (
-  <NavLink to={props.to} activeClassName={styles['active']} className={props.isActive ? styles['active'] : styles['default']}>
-    {props.children}
-  </NavLink>
-);
+class SideNavMainLink extends Component {
 
-export default SideNavMainLink;
+  constructor() {
+    super();
+    this.onCategoryFilterChange = this.onCategoryFilterChange.bind(this);
+  }
+
+  onCategoryFilterChange(event) {
+    event.preventDefault();
+    const { id } = event.target;
+    const searchParams = queryString.parse(this.props.location.search);
+    searchParams.category = id;
+    this.props.history.push({ search: queryString.stringify(searchParams)})
+  }
+
+  render() {
+    const { isActive, id, children, value } = this.props;
+    return (
+      <a href="#" 
+        id={id} 
+        activeClassName={styles['active']} 
+        onClick={this.onCategoryFilterChange} 
+        className={isActive ? styles['active'] : styles['default']}
+      >
+        {children}
+      </a>
+    )
+  }
+}
+
+export const SideNavMainLinkWithRouter = withRouter(SideNavMainLink);

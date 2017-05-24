@@ -9,6 +9,7 @@ import {
   fetchBrandsByProducts
 } from '../../actions/product-actions';
 import { ProductList } from '../../components/product-list/product-list';
+import { getProductsByBrand } from '../../selectors/product-selectors';
 
 const mapStateToProps = (state, { match }) => {
   const { gender, category } = match.params;

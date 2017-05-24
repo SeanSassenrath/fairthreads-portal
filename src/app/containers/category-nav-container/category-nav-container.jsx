@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import { getCategoriesByGender } from '../../reducers/root-reducer';
 import { fetchCategories } from '../../actions/category-actions';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
-import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-link';
+import { SideNavMainLinkWithRouter } from '../../components/side-nav-main-link/side-nav-main-link';
 import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link';
 
 class CategoryNavContainer extends Component {
@@ -31,12 +31,12 @@ class CategoryNavContainer extends Component {
     const { gender, category } = this.props.match.params;
     return (
       <SideNavSection>
-        <SideNavMainLink 
-          to={`/products/${gender}/all`} 
+        <SideNavMainLinkWithRouter 
+          value={gender}
           isActive={category === 'all'}
         >
           all
-        </SideNavMainLink>
+        </SideNavMainLinkWithRouter>
         { /*<SideNavMainLink 
           to={`/products/${gender}/uncategorized`} 
           isActive={category === 'uncategorized'}
@@ -45,13 +45,12 @@ class CategoryNavContainer extends Component {
         </SideNavMainLink>
         */}
         { categories.map((fetchedCategory, i) => (
-            <SideNavMainLink 
-              to={`/${type}/${gender}/${fetchedCategory.details.name}`} 
+            <SideNavMainLinkWithRouter 
+              id={fetchedCategory.details.name}
               key={i} 
-              isActive={fetchedCategory.details.name === category}
             >
               {fetchedCategory.details.name}
-            </SideNavMainLink>
+            </SideNavMainLinkWithRouter>
         ))}
         {/*{ categories.categorys.subcategories
           ? categories.categorys.subcategories.map((subcategory, i) => {

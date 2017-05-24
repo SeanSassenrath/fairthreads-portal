@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'react-autobind';
+import queryString from 'query-string';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import styles from './product-list-sub-nav.css';
@@ -37,8 +38,9 @@ export class ProductListSubNav extends Component {
   }
 
   onBrandFilterChange(event, index, value) {
-    console.log('this.props', this.props)
-    this.props.history.push({ search: `?brand=${value}`})
+    const searchParams = queryString.parse(this.props.location.search);
+    searchParams.brand = value;
+    this.props.history.push({ search: queryString.stringify(searchParams)})
     this.setState({ brandFilter: value });
   }
 

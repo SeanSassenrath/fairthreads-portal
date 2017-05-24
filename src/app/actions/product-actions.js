@@ -21,7 +21,8 @@ import {
   FETCH_BRANDS_BY_PRODUCTS_FULFILLED
 } from '../constants/product-constants';
 
-// http://localhost:9000/api/v1/products/?gender=womens
+
+// FETCH PRODUCTS
 export const fetchProducts = ({category, gender, page, brand}) => ({ 
   type: FETCH_PRODUCTS, 
   category,
@@ -44,6 +45,7 @@ export const fetchProductsEpic = action$ =>
         .map(response => fetchProductsFulfilled({ response, gender: action.gender, category: action.category }))
     );
 
+// FETCH PRODUCT
 export const fetchProduct = id => ({
   type: FETCH_PRODUCT,
   id
@@ -61,6 +63,7 @@ export const fetchProductEpic = action$ =>
         .map(response => fetchProductFulfilled({ response }))
     );
 
+// UPDATE PRODUCT
 export const updateProductByIdActive = productId => ({
   type:  UPDATE_PRODUCT_BY_ID_ACTIVE,
   productId
@@ -91,6 +94,7 @@ export const updateProductCategory = category => ({
   category
 })
 
+// SAVE UPDATED PRODUCT
 export const saveUpdatedProduct = ({product, id, category, gender}) => ({
   type: SAVE_UPDATED_PRODUCT,
   product: product,
@@ -116,6 +120,7 @@ export const saveUpdatedProductEpic = action$ =>
         .map(({ status, response }) => showNotification(status, response))
     );
 
+// FETCH BRANDS BY PRODUCT CATEGORY
 export const fetchBrandsByProducts = (category, gender) => ({
   type: FETCH_BRANDS_BY_PRODUCTS,
   category,
