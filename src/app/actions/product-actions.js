@@ -23,12 +23,12 @@ import {
 
 
 // FETCH PRODUCTS
-export const fetchProducts = ({category, gender, page, brand}) => ({ 
+export const fetchProducts = (gender, category, brand, page) => ({ 
   type: FETCH_PRODUCTS, 
-  category,
   gender, 
-  page,
-  brand
+  category,
+  brand,
+  page
 });
 
 export const fetchProductsFulfilled = ({response, gender, category}) => ({ 
@@ -38,7 +38,7 @@ export const fetchProductsFulfilled = ({response, gender, category}) => ({
   category
 });
 
-export const fetchProductsEpic = action$ =>
+export const fetchProductsEpic = action$ => 
   action$.ofType(FETCH_PRODUCTS)
     .mergeMap(action => 
       ajax.getJSON(`http://localhost:9000/api/v1/products?gender=${action.gender}&category=${action.category === 'all' ? '' : action.category}&page=${action.page}&search=${action.search || ''}&brand=${action.brand ? action.brand : ''}`)

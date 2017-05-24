@@ -12,10 +12,14 @@ class SideNavMainLink extends Component {
 
   onCategoryFilterChange(event) {
     event.preventDefault();
+    const { fetchProducts, history, products } = this.props; 
+    const { gender } = this.props.match.params;
     const { id } = event.target;
     const searchParams = queryString.parse(this.props.location.search);
     searchParams.category = id;
-    this.props.history.push({ search: queryString.stringify(searchParams)})
+    history.push({ search: queryString.stringify(searchParams)})
+    // const page = products.length / pageLength;
+    fetchProducts(gender, searchParams.category, searchParams.brand, 0);
   }
 
   render() {

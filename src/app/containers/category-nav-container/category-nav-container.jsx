@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router';
 import { getCategoriesByGender } from '../../reducers/root-reducer';
 import { fetchCategories } from '../../actions/category-actions';
+import { fetchProducts } from '../../actions/product-actions';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
 import { SideNavMainLinkWithRouter } from '../../components/side-nav-main-link/side-nav-main-link';
 import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link';
@@ -27,7 +28,7 @@ class CategoryNavContainer extends Component {
   }
 
   render() {
-    const { categories, type} = this.props;
+    const { categories, fetchProducts, type} = this.props;
     const { gender, category } = this.props.match.params;
     return (
       <SideNavSection>
@@ -47,6 +48,7 @@ class CategoryNavContainer extends Component {
         { categories.map((fetchedCategory, i) => (
             <SideNavMainLinkWithRouter 
               id={fetchedCategory.details.name}
+              fetchProducts={fetchProducts}
               key={i} 
             >
               {fetchedCategory.details.name}
@@ -68,5 +70,5 @@ const mapStateToProps = (state, { match }) => {
   return { categories: getCategoriesByGender(state, gender) };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchCategories })(CategoryNavContainer));
+export default withRouter(connect(mapStateToProps, { fetchCategories, fetchProducts })(CategoryNavContainer));
 

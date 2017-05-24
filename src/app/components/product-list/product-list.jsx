@@ -24,12 +24,14 @@ export class ProductList extends Component {
   }
 
   componentDidMount() {
-    const { fetchProducts, products } = this.props;
-    const { brand } = queryString.parse(this.props.location.search);
-    let { gender, category } = this.props.match.params;
+    const { fetchProducts, history, products } = this.props; 
+    const { gender } = this.props.match.params;
+    const searchParams = queryString.parse(this.props.location.search);
+    // const page = products.length / pageLength;
+    fetchProducts(gender, searchParams.category, searchParams.brand, 0);
+
     // Calculates product pagination based on the number of products available
-    const page = this.props.products.length / pageLength;
-    fetchProducts({ gender, category, page, brand });
+    // const page = this.props.products.length / pageLength;
   }
 
   componentDidUpdate(prevProps) {
@@ -41,9 +43,9 @@ export class ProductList extends Component {
     const page = this.props.products.length / pageLength;
     const prevParams = prevProps.match.params;
 
-    if (prevParams.gender !== gender || prevParams.category !== category || prevSearch !== currentSearch) {
-      fetchProducts({ gender, category, page, currentSearch });
-    }
+    // if (prevParams.gender !== gender || prevParams.category !== category || prevSearch !== currentSearch) {
+    //   fetchProducts({ gender, category, page, currentSearch });
+    // }
   }
 
   renderWaypoint() {
