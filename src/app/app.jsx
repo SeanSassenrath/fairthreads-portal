@@ -28,7 +28,7 @@ const App = () => (
           <Route exact path='/dashboard' component={Dashboard} />
           <Route path='/categories/:gender?/:category?' component={Categories} />
           <Route path='/brands' component={Brands} />
-          <Route path='/products/:gender?/:category?/:subcategory?' component={Products} />
+          <Route path='/products/:gender?' component={Products} />
           <Route path='/edit/product/:gender?/:category?/:id?' component={EditProduct} />
         </div>
       </Router>

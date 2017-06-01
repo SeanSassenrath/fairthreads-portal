@@ -15,15 +15,16 @@ import styles from './products.css';
 
 const Products = props => {
   const gender = props.match.params.gender;
-  const category = props.match.params.category;
+  const { search } = props.location;
+  console.log('props here', props)
 
   return (
     <Page>
       <div className={styles['content-container']}>
         <SideNav>
           <SideNavSection>
-            <SideNavMainLinkWithRouter to={`/products/womens/${category}`}>Womens</SideNavMainLinkWithRouter>
-            <SideNavMainLinkWithRouter to={`/products/mens/${category}`}>Mens</SideNavMainLinkWithRouter>
+            <SideNavMainLinkWithRouter to={`/products/womens${search}`}>Womens</SideNavMainLinkWithRouter>
+            <SideNavMainLinkWithRouter to={`/products/mens${search}`}>Mens</SideNavMainLinkWithRouter>
           </SideNavSection>
           <CategoryNavContainer type={'products'} />
         </SideNav>

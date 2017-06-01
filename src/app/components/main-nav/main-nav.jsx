@@ -10,7 +10,7 @@ const MainNav = () => (
         <MainNavLink to='/dashboard'>Dashboard</MainNavLink>
       </li>
       <li>
-        <MainNavLink to='/products/womens/tops'>Products</MainNavLink>
+        <MainNavLink to='/products/womens?category='>Products</MainNavLink>
       </li>
       <li>
         <MainNavLink to='/brands'>Brands</MainNavLink>
