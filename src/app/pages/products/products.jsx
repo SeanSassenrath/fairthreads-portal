@@ -23,8 +23,18 @@ const Products = props => {
       <div className={styles['content-container']}>
         <SideNav>
           <SideNavSection>
-            <SideNavMainLinkWithRouter to={`/products/womens${search}`}>Womens</SideNavMainLinkWithRouter>
-            <SideNavMainLinkWithRouter to={`/products/mens${search}`}>Mens</SideNavMainLinkWithRouter>
+            <SideNavMainLinkWithRouter 
+              to={`/products/womens${search}`}
+              isActive={gender === 'womens'}
+            >
+              Womens
+            </SideNavMainLinkWithRouter>
+            <SideNavMainLinkWithRouter 
+              to={`/products/mens${search}`}
+              isActive={gender === 'mens'}
+            >
+              Mens
+            </SideNavMainLinkWithRouter>
           </SideNavSection>
           <CategoryNavContainer type={'products'} />
         </SideNav>
