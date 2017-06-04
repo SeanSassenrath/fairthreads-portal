@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -25,11 +25,14 @@ const App = () => (
         <div className={styles}>
           <MainNav />
           <NotificationContainer />
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route path='/categories/:gender?/:category?' component={Categories} />
-          <Route path='/brands' component={Brands} />
-          <Route path='/products/:gender?' component={Products} />
-          <Route path='/edit/product/:gender?/:category?/:id?' component={EditProduct} />
+          <Switch>
+            <Route exact path='/dashboard' component={Dashboard} />
+            <Route path='/categories/:gender?/:category?' component={Categories} />
+            <Route path='/brands' component={Brands} />
+            <Route path='/products/:gender?' component={Products} />
+            <Route path='/edit/product/:gender?/:category?/:id?' component={EditProduct} />
+            <Redirect from="/" to="/dashboard" />
+          </Switch>
         </div>
       </Router>
     </MuiThemeProvider>
