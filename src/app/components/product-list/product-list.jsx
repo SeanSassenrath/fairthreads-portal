@@ -40,7 +40,7 @@ export class ProductList extends Component {
     let { gender } = this.props.match.params;
     // Calculates product pagination based on the number of products available
     const page = this.props.products.length / pageLength;
-    if (prevProps.location.search !== this.props.location.search) {
+    if (prevProps.location.search !== this.props.location.search || prevProps.match.params.gender !== gender) {
       fetchProducts(gender, currentSearch.category, currentSearch.brand, page );
     }
   }
