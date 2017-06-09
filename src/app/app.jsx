@@ -30,7 +30,7 @@ const App = () => (
             <Route path='/categories/:gender?/:category?' component={Categories} />
             <Route path='/brands' component={Brands} />
             <Route path='/products/:gender?' component={Products} />
-            <Route path='/edit/product/:gender?/:category?/:id?' component={EditProduct} />
+            <Route path='/edit/product/:gender?/:id?' component={EditProduct} />
             <Redirect from="/" to="/dashboard" />
           </Switch>
         </div>

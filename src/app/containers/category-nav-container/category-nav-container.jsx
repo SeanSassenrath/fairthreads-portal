@@ -43,7 +43,7 @@ class CategoryNavContainer extends Component {
     
     if (!!id) {
       searchParams.category = id;
-      history.push({ search: queryString.stringify(searchParams)})
+      history.push({ pathname: `/products/${gender}`, search: queryString.stringify(searchParams) })
     }
   }
 

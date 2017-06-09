@@ -83,9 +83,7 @@ export class ProductList extends Component {
             <div className={styles['product']}>
               <Link
                 className={styles['product-link']}
-                to={`/edit/product/${product.details.gender}/${product.categories !== null && product.categories.details 
-                  ? product.categories.details.name 
-                  : null}/${product._id}`
+                to={`/edit/product/${product.details.gender}/${product._id}`
                 } 
               >
                 <ProductCard product={product} isLoading={isLoading} isActive={product.metadata.active} />

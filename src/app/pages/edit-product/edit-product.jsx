@@ -4,7 +4,7 @@ import Page from '../../components/page/page';
 import { EditProductSubNavContainer } from '../../containers/edit-product-sub-nav-container/edit-product-sub-nav-container';
 import SideNav from '../../components/side-nav/side-nav';
 import SideNavSection from '../../components/side-nav-section/side-nav-section';
-import SideNavMainLink from '../../components/side-nav-main-link/side-nav-main-link';
+import { SideNavMainLinkWithRouter } from '../../components/side-nav-main-link/side-nav-main-link';
 import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link';
 import Button from '../../components/button/button';
 import CategoryNavContainer from '../../containers/category-nav-container/category-nav-container';
@@ -22,18 +22,18 @@ class EditProduct extends Component {
         <div className={styles['content-container']}>
           <SideNav>
             <SideNavSection>
-              <SideNavMainLink 
+              <SideNavMainLinkWithRouter 
                 to={`/products/womens/tops`} 
                 isActive={gender === 'womens'}
               >
                 Womens
-              </SideNavMainLink>
-              <SideNavMainLink 
+              </SideNavMainLinkWithRouter>
+              <SideNavMainLinkWithRouter 
                 to={`/products/mens/tops`}
                 isActive={gender === 'mens'}
               >
                 Mens
-              </SideNavMainLink>
+              </SideNavMainLinkWithRouter>
             </SideNavSection>
             <CategoryNavContainer />
           </SideNav>
