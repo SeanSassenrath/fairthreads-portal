@@ -14,14 +14,15 @@ const getProductsByGender = createSelector(
 const getProductsByCategory = createSelector(
   [getProductsByGender, getProductsById, getCategory],
   (products, productsById, category) => {
-    if (category) {
+    // Don't filter if category is 'all'
+    if (category && category !== 'all') {
       return products.filter(product => {
-        if (productsById[product].categories) {
+        if (productsById[product].categories !== null && productsById[product].categories.details ) {
           return productsById[product].categories.details.name === category
         }
       })
     }
-    return products
+    return products;
   }
 )
 

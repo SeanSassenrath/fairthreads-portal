@@ -23,17 +23,19 @@ export class ProductListSubNav extends Component {
 
   componentDidMount() {
     const { fetchBrandsByProducts } = this.props;
-    let { gender, category } = this.props.match.params;
+    let { gender } = this.props.match.params;
+    let { category } = queryString.parse(this.props.location.search);
     fetchBrandsByProducts(category, gender);
   }
 
   componentDidUpdate(prevProps) {
-    console.log('this.props', this.props)
     const { fetchBrandsByProducts } = this.props;
-    let { gender, category } = this.props.match.params;
+    let { gender } = this.props.match.params;
+    const { category } = queryString.parse(this.props.location.search);
     const prevParams = prevProps.match.params;
+    const prevLocation = queryString.parse(prevProps.location.search)
 
-    if (prevParams.gender !== gender || prevParams.category !== category) {
+    if (prevParams.gender !== gender || prevLocation.category !== category) {
       fetchBrandsByProducts(category, gender);
     }
   }

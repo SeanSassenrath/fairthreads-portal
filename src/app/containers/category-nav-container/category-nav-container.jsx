@@ -49,12 +49,15 @@ class CategoryNavContainer extends Component {
 
   render() {
     const { categories, fetchProducts, type} = this.props;
-    const { gender, category } = this.props.match.params;
+    const { category } = queryString.parse(this.props.location.search);
+    const { gender } = this.props.match.params;
     return (
       <SideNavSection>
         <SideNavMainLinkWithRouter 
           value={gender}
+          id={'all'}
           isActive={category === 'all'}
+          onClick={this.onCategoryFilterChange}
         >
           all
         </SideNavMainLinkWithRouter>
@@ -65,16 +68,19 @@ class CategoryNavContainer extends Component {
           uncategorized
         </SideNavMainLink>
         */}
-        { categories.map((fetchedCategory, i) => (
+        { categories.map((fetchedCategory, i) => {
+          return (
             <SideNavMainLinkWithRouter 
               id={fetchedCategory.details.name}
               fetchProducts={fetchProducts}
               key={i}
               onClick={this.onCategoryFilterChange}
+              isActive={fetchedCategory.details ? category === fetchedCategory.details.name : 'all'}
             >
               {fetchedCategory.details.name}
             </SideNavMainLinkWithRouter>
-        ))}
+          )}
+        )}
         {/*{ categories.categorys.subcategories
           ? categories.categorys.subcategories.map((subcategory, i) => {
             <SideNavSubLink to={`/products/${gender}/${category.details.name}/${subcategory.details.name}`} key={i}>

@@ -152,6 +152,6 @@ export const fetchBrandsByProductsFulfilled = ({response}) => ({
 export const fetchBrandsByProductsEpic = action$ => 
   action$.ofType(FETCH_BRANDS_BY_PRODUCTS)
     .mergeMap(({ category, gender }) =>
-      ajax.getJSON(`http://localhost:9000/api/v1/products/brand-list?category=${category}&gender=${gender}`)
+      ajax.getJSON(`http://localhost:9000/api/v1/products/brand-list?category=${category === 'all' ? '' : category}&gender=${gender}`)
         .map(response => fetchBrandsByProductsFulfilled({ response }))
     );

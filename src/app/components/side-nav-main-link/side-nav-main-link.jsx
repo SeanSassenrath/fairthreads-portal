@@ -12,7 +12,6 @@ class SideNavMainLink extends Component {
         to={to || ''}
         id={id}
         onClick={onClick}
-        activeClassName={styles['active']} 
         className={isActive ? styles['active'] : styles['default']}
       >
         {children}
