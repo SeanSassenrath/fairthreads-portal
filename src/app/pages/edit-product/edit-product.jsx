@@ -18,7 +18,6 @@ class EditProduct extends Component {
     const { gender } = this.props.match.params;
     return (
       <Page>
-        <EditProductSubNavContainer />
         <div className={styles['content-container']}>
           <SideNav>
             <SideNavSection>
@@ -37,9 +36,12 @@ class EditProduct extends Component {
             </SideNavSection>
             <CategoryNavContainer />
           </SideNav>
-          <MainContent>
-            <ProductEditContainer />
-          </MainContent>
+          <div>
+            <EditProductSubNavContainer />
+            <MainContent>
+              <ProductEditContainer />
+            </MainContent>
+          </div>
         </div>
       </Page>
     )
