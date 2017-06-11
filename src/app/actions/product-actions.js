@@ -13,7 +13,6 @@ import {
   UPDATE_PRODUCT_GENDER,
   UPDATE_PRODUCT_IMG_FIT,
   UPDATE_PRODUCT_CATEGORY,
-  UPDATE_PRODUCT_BY_ID_ACTIVE,
   SAVE_UPDATED_PRODUCT,
   SAVE_UPDATED_PRODUCT_FULFILLED,
   SET_PRODUCT,
@@ -81,11 +80,6 @@ export const fetchProductEpic = action$ =>
     );
 
 // UPDATE PRODUCT
-export const updateProductByIdActive = productId => ({
-  type:  UPDATE_PRODUCT_BY_ID_ACTIVE,
-  productId
-})
-
 export const updateProductActive = productId => ({
   type: UPDATE_PRODUCT_ACTIVE,
   productId

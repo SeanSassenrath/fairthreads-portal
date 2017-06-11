@@ -11,7 +11,6 @@ import {
   UPDATE_PRODUCT_GENDER,
   UPDATE_PRODUCT_IMG_FIT,
   UPDATE_PRODUCT_CATEGORY,
-  UPDATE_PRODUCT_BY_ID_ACTIVE,
   SAVE_UPDATED_PRODUCT,
   FETCH_BRANDS_BY_PRODUCTS,
   FETCH_BRANDS_BY_PRODUCTS_FULFILLED,
@@ -35,38 +34,47 @@ const productsById = (state = {}, action) => {
     case FETCH_PRODUCTS:
       return state;
     case FETCH_PRODUCTS_FULFILLED:
+    case FETCH_PRODUCT:
       const nextState = { ...state };
       action.response.forEach(product => {
         nextState[product._id] = product;
       });
       return nextState;
-    case UPDATE_PRODUCT_BY_ID_ACTIVE:
-      return setIn(state, [action.productId, 'metadata', 'active'], !!state[action.productId].metadata.active)
+    case UPDATE_PRODUCT_ACTIVE:
+      return setIn(state, [action.productId, 'metadata', 'active'], !!state[action.productId].metadata.active);
+    case UPDATE_PRODUCT_NAME:
+      return setIn(state, [action.productId, 'details', 'name'], action.name);
+    case UPDATE_PRODUCT_GENDER:
+      return setIn(state, [action.productId, 'details', 'gender'], action.gender);
+    case UPDATE_PRODUCT_IMG_FIT:
+      return setIn(state, [action.productId, 'css', 'objectFit'], action.fit);
+    case UPDATE_PRODUCT_CATEGORY:
+      return setIn(state, [action.productId, 'categories'], action.category);
     default:
       return state;
   }
 };
 
-const product = (state = {}, action) => {
-  switch (action.type) {
-    case FETCH_PRODUCT_FULFILLED:
-      return Object.assign({}, !state.isLoading, action.response);
-    case UPDATE_PRODUCT_ACTIVE:
-      return setIn(state, ['metadata', 'active'], !state.metadata.active)
-    case UPDATE_PRODUCT_NAME:
-      return setIn(state, ['details', 'name'], action.name)
-    case UPDATE_PRODUCT_GENDER:
-      return setIn(state, ['details', 'gender'], action.gender)
-    case UPDATE_PRODUCT_IMG_FIT:
-      return setIn(state, ['css', 'objectFit'], action.fit);
-    case UPDATE_PRODUCT_CATEGORY:
-      return setIn(state, ['categories'], action.category)
-    case SAVE_UPDATED_PRODUCT:
-      return state = {};
-    default:
-      return state;
-  }
-}
+// const product = (state = {}, action) => {
+//   switch (action.type) {
+//     case FETCH_PRODUCT_FULFILLED:
+//       return Object.assign({}, !state.isLoading, action.response);
+//     case UPDATE_PRODUCT_ACTIVE:
+//       return setIn(state, ['metadata', 'active'], !state.metadata.active)
+//     case UPDATE_PRODUCT_NAME:
+//       return setIn(state, ['details', 'name'], action.name)
+//     case UPDATE_PRODUCT_GENDER:
+//       return setIn(state, ['details', 'gender'], action.gender)
+//     case UPDATE_PRODUCT_IMG_FIT:
+//       return setIn(state, ['css', 'objectFit'], action.fit);
+//     case UPDATE_PRODUCT_CATEGORY:
+//       return setIn(state, ['categories'], action.category)
+//     case SAVE_UPDATED_PRODUCT:
+//       return state = {};
+//     default:
+//       return state;
+//   }
+// }
 
 const loading = (state = {'isLoading': false}, action) => {
   switch (action.type) {
@@ -87,14 +95,6 @@ const productList = (state = [], action) => {
   switch (action.type) {
     case FETCH_PRODUCTS_FULFILLED:
       return state.concat(action.response.map(product => product._id));
-    case SAVE_UPDATED_PRODUCT:
-      for(let i = 0; i < state.length; i++) {
-        if (state[i] === action.id) {
-          return state
-            .slice(0, i)
-            .concat(state.slice(i + 1));
-        }
-      }
     default:
       return state;
   }

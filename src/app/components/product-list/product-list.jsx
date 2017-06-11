@@ -14,7 +14,6 @@ export class ProductList extends Component {
   static propTypes = {
     products: PropTypes.array,
     saveUpdatedProduct: PropTypes.func,
-    updateProductByIdActive: PropTypes.func,
     isLoading: PropTypes.bool
   }
 
@@ -56,7 +55,7 @@ export class ProductList extends Component {
   }
 
   updateProductActive(product, e) {
-    const { saveUpdatedProduct, updateProductByIdActive } = this.props;
+    const { saveUpdatedProduct } = this.props;
     e.preventDefault();
     const updatedProduct = product;
     updatedProduct.metadata.active = !product.metadata.active;
@@ -64,11 +63,10 @@ export class ProductList extends Component {
       product: updatedProduct, 
       id: updatedProduct._id,
     });
-    updateProductByIdActive(product._id);
   }
 
   render() {
-    const { products, saveUpdatedProduct, updateProductByIdActive, isLoading } = this.props;
+    const { products, saveUpdatedProduct, isLoading } = this.props;
 
     return (
       <div className={styles['product-list']}>

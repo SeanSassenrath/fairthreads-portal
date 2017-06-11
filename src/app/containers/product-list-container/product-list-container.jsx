@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { getIsLoading, getBrandsByProducts } from '../../reducers/root-reducer';
 import { 
   fetchProducts, 
-  updateProductByIdActive, 
   saveUpdatedProduct, 
   fetchBrandsByProducts
 } from '../../actions/product-actions';
@@ -24,7 +23,6 @@ export const ProductListContainer = withRouter(connect(
   mapStateToProps, {
     fetchProducts, 
     fetchBrandsByProducts,
-    updateProductByIdActive, 
     saveUpdatedProduct 
   })(ProductList)
 );
