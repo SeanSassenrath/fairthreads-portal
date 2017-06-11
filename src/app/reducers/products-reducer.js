@@ -31,9 +31,6 @@ const brands = (state = [], action) => {
 
 const productsById = (state = {}, action) => {
   switch (action.type) {
-    case FETCH_PRODUCTS:
-    case FETCH_PRODUCT:
-      return state;
     case FETCH_PRODUCTS_FULFILLED:
       const nextState = { ...state };
       action.response.forEach(product => {
@@ -43,7 +40,7 @@ const productsById = (state = {}, action) => {
     case FETCH_PRODUCT_FULFILLED:
       return merge(state, {[action.response._id]: action.response});
     case UPDATE_PRODUCT_ACTIVE:
-      return setIn(state, [action.productId, 'metadata', 'active'], !!state[action.productId].metadata.active);
+      return setIn(state, [action.productId, 'metadata', 'active'], !state[action.productId].metadata.active);
     case UPDATE_PRODUCT_NAME:
       return setIn(state, [action.productId, 'details', 'name'], action.name);
     case UPDATE_PRODUCT_GENDER:

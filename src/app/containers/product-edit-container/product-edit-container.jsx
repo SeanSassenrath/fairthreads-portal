@@ -14,7 +14,7 @@ import {
 import { fetchCategories } from '../../actions/category-actions';
 import { ProductEdit } from '../../components/product-edit/product-edit';
 
-export class ProductEditContainer extends Component {
+class ProductEditContainer extends Component {
 
   componentDidMount() {
     if (!this.props.product.id) {
@@ -40,6 +40,7 @@ export class ProductEditContainer extends Component {
   }
 
   render() {
+    console.log('HERE ARE THE PROPS', this.props)
     return (
       <ProductEdit {...this.props} />
     )
@@ -55,7 +56,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-ProductEditContainer = withRouter(
+export default ProductEditContainer = withRouter(
   connect(mapStateToProps, { 
     fetchProduct, 
     updateProductActive,

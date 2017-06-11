@@ -28,13 +28,13 @@ export class ProductEdit extends Component {
   }
 
   setName(event, value) {
-    this.props.updateProductName(value);
+    this.props.updateProductName(value, this.props.product._id);
   }
 
   setGender(event, index, value) {
     const { product, updateProductGender } = this.props;
     if (value !== product.details.gender) {
-      updateProductGender(value);
+      updateProductGender(value, product._id);
     }
     return;
   }
@@ -43,10 +43,10 @@ export class ProductEdit extends Component {
     return this.props.product.css.objectFit === 'cover';
   }
 
-  setObjectFit() {
+  setObjectFit(productId) {
     const { product, updateProductObjectFit } = this.props;
     const objectFit = product.css.objectFit === 'contain' ? 'cover' : 'contain';
-    updateProductObjectFit(objectFit);
+    updateProductObjectFit(objectFit, product._id);
   }
 
   renderCategorySelect() {
@@ -76,7 +76,7 @@ export class ProductEdit extends Component {
     const gender = product.details.gender;
     const categoriesArray = toArray(categories);
     if (value !== product.categories) {
-      updateProductCategory(categoriesArray[index]);
+      updateProductCategory(categoriesArray[index], product._id);
     }
     return;
   }
@@ -103,7 +103,7 @@ export class ProductEdit extends Component {
               <div className={styles['toggle-container']}>
                 <span>Active:</span>
                 <div>
-                  <Toggle toggled={product.metadata.active} onToggle={updateProductActive} tabIndex={2} />
+                  <Toggle toggled={product.metadata.active} onToggle={() => updateProductActive(product._id)} tabIndex={2} />
                 </div>
               </div>
               <div className={styles['toggle-container']}>

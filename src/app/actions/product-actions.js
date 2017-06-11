@@ -85,24 +85,28 @@ export const updateProductActive = productId => ({
   productId
 })
 
-export const updateProductName = name => ({
+export const updateProductName = (name, productId) => ({
   type: UPDATE_PRODUCT_NAME,
-  name
+  name,
+  productId
 })
 
-export const updateProductGender = gender => ({
+export const updateProductGender = (gender, productId) => ({
   type: UPDATE_PRODUCT_GENDER,
-  gender
+  gender,
+  productId
 })
 
-export const updateProductObjectFit = fit => ({
+export const updateProductObjectFit = (fit, productId) => ({
   type: UPDATE_PRODUCT_IMG_FIT,
-  fit
+  fit,
+  productId
 })
 
-export const updateProductCategory = category => ({
+export const updateProductCategory = (category, productId) => ({
   type: UPDATE_PRODUCT_CATEGORY,
-  category
+  category,
+  productId
 })
 
 // SAVE UPDATED PRODUCT

@@ -8,7 +8,7 @@ import { SideNavMainLinkWithRouter } from '../../components/side-nav-main-link/s
 import SideNavSubLink from '../../components/side-nav-sub-link/side-nav-sub-link';
 import Button from '../../components/button/button';
 import CategoryNavContainer from '../../containers/category-nav-container/category-nav-container';
-import { ProductEditContainer } from '../../containers/product-edit-container/product-edit-container';
+import ProductEditContainer from '../../containers/product-edit-container/product-edit-container';
 import MainContent from '../../components/main-content/main-content';
 import styles from './edit-product.css';
 
