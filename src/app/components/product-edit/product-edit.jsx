@@ -161,6 +161,7 @@ export class ProductEdit extends Component {
   }
 
   render() {
+    console.log('product edit props', this.props)
     const { product } = this.props;
     return (
       product.details

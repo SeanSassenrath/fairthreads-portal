@@ -4,9 +4,10 @@ import { withRouter } from 'react-router-dom';
 import { getProductById } from '../../reducers/root-reducer';
 import { ProductEditSubNav } from '../../components/product-edit-sub-nav/product-edit-sub-nav';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const { id } = ownProps.match.params;
   return {
-    product: getProductById(state)
+    product: getProductById(state, id)
   }
 }
 

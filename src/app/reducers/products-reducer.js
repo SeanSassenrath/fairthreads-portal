@@ -144,7 +144,6 @@ const mensCategories = combineReducers({
 
 const products = combineReducers({
   loading,
-  product,
   productsById,
   productList,
   brands,

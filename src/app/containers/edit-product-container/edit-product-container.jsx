@@ -14,9 +14,10 @@ import {
 import { fetchCategories } from '../../actions/category-actions';
 import { ProductEdit } from '../../components/product-edit/product-edit';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const { id } = ownProps.match.params;
   return {
-    product: getProductById(state),
+    product: getProductById(state, id),
     categories: getCategoriesById(state),
     isLoading: getIsLoading(state)
   }

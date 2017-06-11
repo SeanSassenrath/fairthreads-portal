@@ -39,9 +39,10 @@ export const rootReducer = combineReducers({
 // export const getProductsByGenderAndType = (state, gender, type, filter) => (
 //   ProductSelectors.getProductsByGenderAndType(state.products, gender, type, filter)
 // )
-export const getProductById = (state) => (
-  state.products.product
-)
+export const getProductById = (state, id) => {
+  console.log('getProductById', state.products.productsById[id])
+  return state.products.productsById[id]
+}
 export const getBrandsByProducts = (state) => (
   state.products.brands
 )
