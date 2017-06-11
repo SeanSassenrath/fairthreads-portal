@@ -7,7 +7,7 @@ import { ProductEditSubNav } from '../../components/product-edit-sub-nav/product
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   return {
-    product: getProductById(state, id)
+    product: getProductById(state, id) || {}
   }
 }
 

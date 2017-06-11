@@ -27,25 +27,6 @@ export class ProductEdit extends Component {
     autoBind(this);
   }
 
-  // Possibly need to fetch products incase not navigated to
-  componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.fetchProduct(id);
-    // document.getElementById('test').focus();
-  }
-
-  componentDidUpdate({products, match}) {
-    const { fetchProduct, fetchCategories, product } = this.props;
-    const { id, gender } = this.props.match.params;
-    const prevParams = match.params;
-
-    if (product.details !== this.props.product.details) { fetchCategories(gender); }
-
-    if (prevParams.id !== id) {
-      fetchProduct(id);
-    }
-  }
-
   setName(event, value) {
     this.props.updateProductName(value);
   }

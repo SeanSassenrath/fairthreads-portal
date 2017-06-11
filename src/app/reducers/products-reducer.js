@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { setIn, merge, push } from 'immutable-light';
+import { setIn, merge } from 'immutable-light';
 import * as fromList from './create-list';
 import { 
   FETCH_PRODUCTS,
@@ -32,14 +32,16 @@ const brands = (state = [], action) => {
 const productsById = (state = {}, action) => {
   switch (action.type) {
     case FETCH_PRODUCTS:
+    case FETCH_PRODUCT:
       return state;
     case FETCH_PRODUCTS_FULFILLED:
-    case FETCH_PRODUCT:
       const nextState = { ...state };
       action.response.forEach(product => {
         nextState[product._id] = product;
       });
       return nextState;
+    case FETCH_PRODUCT_FULFILLED:
+      return merge(state, {[action.response._id]: action.response});
     case UPDATE_PRODUCT_ACTIVE:
       return setIn(state, [action.productId, 'metadata', 'active'], !!state[action.productId].metadata.active);
     case UPDATE_PRODUCT_NAME:
@@ -54,27 +56,6 @@ const productsById = (state = {}, action) => {
       return state;
   }
 };
-
-// const product = (state = {}, action) => {
-//   switch (action.type) {
-//     case FETCH_PRODUCT_FULFILLED:
-//       return Object.assign({}, !state.isLoading, action.response);
-//     case UPDATE_PRODUCT_ACTIVE:
-//       return setIn(state, ['metadata', 'active'], !state.metadata.active)
-//     case UPDATE_PRODUCT_NAME:
-//       return setIn(state, ['details', 'name'], action.name)
-//     case UPDATE_PRODUCT_GENDER:
-//       return setIn(state, ['details', 'gender'], action.gender)
-//     case UPDATE_PRODUCT_IMG_FIT:
-//       return setIn(state, ['css', 'objectFit'], action.fit);
-//     case UPDATE_PRODUCT_CATEGORY:
-//       return setIn(state, ['categories'], action.category)
-//     case SAVE_UPDATED_PRODUCT:
-//       return state = {};
-//     default:
-//       return state;
-//   }
-// }
 
 const loading = (state = {'isLoading': false}, action) => {
   switch (action.type) {
